@@ -26,9 +26,10 @@
     "config": {
         "bin-dir": "bin"
     },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "v1.1.0-dev"
-        }
+    "scripts": {
+        "post-install-cmd": [
+            "git submodule init",
+            "git submodule update"
+        ]
     }
 }
