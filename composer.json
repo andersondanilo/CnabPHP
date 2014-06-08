@@ -25,5 +25,10 @@
     },
     "config": {
         "bin-dir": "bin"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "v1.1.0"
+        }
     }
 }
