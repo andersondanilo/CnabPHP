@@ -25,11 +25,5 @@
     },
     "config": {
         "bin-dir": "bin"
-    },
-    "scripts": {
-        "post-install-cmd": [
-            "git submodule init",
-            "git submodule update"
-        ]
     }
 }
