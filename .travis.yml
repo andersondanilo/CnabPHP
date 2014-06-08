@@ -1,0 +1,12 @@
+language: php
+script: phpunit --verbose --coverage-text
+
+php:
+  - 5.3
+  - 5.4
+
+before_script:
+  - "composer install -v"
+
+after_script:
+  - "phpunit --testdox"
