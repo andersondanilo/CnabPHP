@@ -21,7 +21,7 @@ Se você já conhece o **Composer**, adicione a dependência abaixo à diretiva 
 
 ## Como Usar
 ### Lendo um arquivo de Retorno
-```
+```php
 $cnabFactory = new Cnab\Factory();
 $arquivo = $cnabFactory->createRetorno('AQUI VAI O CAMINHO DO ARQUIVO DE RETORNO, EX: RET1010.RET');
 $detalhes = $arquivo->listDetalhes();
@@ -31,8 +31,63 @@ foreach($detalhes as $detalhe) {
         $valorRecebido = $detalhe->getValorRecebido();
         $dataPagamento = $detalhe->getDataOcorrencia();
         $carteira      = $detalhe->getCarteira();
+        // você já tem as informações, pode dar baixa no boleto aqui
     }
 }
+```
+### Criando um arquivo de remessa
+```php
+$codigo_banco = Cnab\Banco::CEF;
+$arquivo = new Cnab\Remessa\Cnab400\Arquivo($codigo_banco);
+$arquivo->configure(array(
+	'data_geracao'  => new DateTime(),
+	'data_gravacao' => new DateTime(), 
+	'nome_fantasia' => 'Nome Fantasia da sua empresa', 
+	'razao_social'  => 'Razão social da sua empresa', 
+	'cnpj'          => 'CPNJ da sua empresa',
+	'banco'         => $codigo_banco, //código do banco
+	'logradouro'    => 'Logradouro da Sua empresa',
+	'numero'        => 'Número do endereço',
+	'bairro'        => 'Bairro da sua empresa', 
+    'cidade'        => 'Cidade da sua empresa',
+    'uf'            => 'Sigla da cidade, ex SP',
+    'cep'           => 'CEP do endereço da sua cidade',
+    'agencia'       => 'Agencia da conta',
+    'conta'         => 'Número da conta',
+    'operacao'      => 'Operação',
+    'codigo_cedente'     => 'Código do Cedente',
+    'codigo_cedente_dac' => 'Digito verificador do código do cedente',
+));
+
+// você pode adicionar vários boletos em uma remessa
+$arquivo->insertDetalhe(array(
+	'codigo_ocorrencia' => 1, // 1 = Entrada de título, futuramente poderemos ter uma constante
+	'nosso_numero'      => 'Nosso número do boleto',
+	'numero_documento'  => 'Seu Número / Número do Documento',
+	'carteira'          => 'Carteira do Boleto',
+	'especie'           => Cnab\Especie::CEF_OUTROS, // Você pode consultar as especies Cnab\Especie::CEF_OUTROS, futuramente poderemos ter uma tabela na documentação
+	'valor'             => 100.39, // Valor do boleto
+	'instrucao1'        => 2, // 1 = Protestar com (Prazo) dias, 2 = Devolver após (Prazo) dias, futuramente poderemos ter uma constante
+	'instrucao2'        => 0, // preenchido com zeros
+	'sacado_nome'       => 'Nome do cliente', // O Sacado é o cliente, preste atenção nos campos abaixo
+	'sacado_tipo'       => 'cpf', //campo fixo, escreva 'cpf' (sim as letras cpf) se for pessoa fisica, cnpj se for pessoa juridica
+	'sacado_cpf'        => 'CPF do Cliente',
+	'sacado_logradouro' => 'Logradouro do cliente',
+	'sacado_bairro'     => 'Bairro do cliente',
+	'sacado_cep'        => 'CEP do cliente (somente numeros, sem hífen)',
+	'sacado_cidade'     => 'Cidade do cliente',
+	'sacado_uf'         => 'Sigla do estado do cliente',
+	'data_vencimento'   => new DateTime('Data de vencimento do Boleto, ex: 2014-06-08'),
+	'data_cadastro'     => new DateTime('Data de criação do Boleto, ex: 2014-06-01'),
+	'juros_de_um_dia'     => 0.10, // Valor do juros de 1 dia'
+	'data_desconto'       => new DateTime('Data limite para desconto, ex: 2014-06-01'),
+	'valor_desconto'      => 10.0, // Valor do desconto
+	'prazo'               => 10, // prazo de dias para o cliente pagar após o vencimento
+	'taxa_de_permanencia' => '0', //00 = Acata Comissão por Dia (recomendável), 51 Acata Condições de Cadastramento na CAIXA
+	'mensagem'            => 'Descrição do boleto',
+	'data_multa'          => new DateTime('Data da multa, ex: 2014-06-09'), // data da multa
+	'valor_multa'         => 10.0, // valor da multa
+));
 ```
 
 ## Como Contribuir
