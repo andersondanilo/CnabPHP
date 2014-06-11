@@ -5,7 +5,7 @@ class Factory
 {
 	/**
 	 * Cria um arquivo de remessa
-	 * @return IRemessaArquivo
+	 * @return \Cnab\Remessa\IArquivo
 	 */
 	public function createRemessa($codigo_banco)
 	{
@@ -19,7 +19,7 @@ class Factory
 	/**
 	 * Cria um arquivo de retorno
 	 * @param  string $filename
-	 * @return IRetornoArquivo
+	 * @return \Cnab\Remessa\IArquivo
 	 */
 	public function createRetorno($filename)
     {

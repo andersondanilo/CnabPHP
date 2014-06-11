@@ -29,7 +29,7 @@ class YamlLoad
 
                 if ($current_pos_start > $current_pos_end)
                 {
-                    throw new \DomainException("No campo $current_name a posição inicial deve ser menor ou igual à posição final");
+                    throw new \DomainException("No campo $current_name a posição inicial ($current_pos_start) deve ser menor ou igual à posição final ($current_pos_end)");
                 }
 
                 if ( ($pos_start >= $current_pos_start && $pos_start <= $current_pos_end) ||

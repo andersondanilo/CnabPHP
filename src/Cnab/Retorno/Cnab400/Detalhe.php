@@ -148,7 +148,10 @@ class Detalhe extends \Cnab\Format\Linha implements \Cnab\Retorno\IDetalhe
 	 */
 	public function getDataVencimento()
 	{
-		return $this->data_vencimento ? \DateTime::createFromFormat('dmy', sprintf('%06d', $this->data_vencimento)) : false;
+		$data = $this->data_vencimento ? \DateTime::createFromFormat('dmy', sprintf('%06d', $this->data_vencimento)) : false;
+        if($data)
+            $data->setTime(0,0,0);
+        return $data;
 	}
 	
 	/**
@@ -157,7 +160,10 @@ class Detalhe extends \Cnab\Format\Linha implements \Cnab\Retorno\IDetalhe
 	 */
 	public function getDataCredito()
 	{
-		return $this->data_credito ? \DateTime::createFromFormat('dmy', sprintf('%06d', $this->data_credito)) : false;
+		$data = $this->data_credito ? \DateTime::createFromFormat('dmy', sprintf('%06d', $this->data_credito)) : false;
+        if($data)
+            $data->setTime(0,0,0);
+        return $data;
 	}
 	
 	/**
@@ -177,7 +183,10 @@ class Detalhe extends \Cnab\Format\Linha implements \Cnab\Retorno\IDetalhe
 	 */
 	public function getDataOcorrencia()
 	{
-		return $this->data_de_ocorrencia ? \DateTime::createFromFormat('dmy', sprintf('%06d', $this->data_de_ocorrencia)) : false;
+		$data = $this->data_de_ocorrencia ? \DateTime::createFromFormat('dmy', sprintf('%06d', $this->data_de_ocorrencia)) : false;
+        if($data)
+            $data->setTime(0,0,0);
+        return $data;
 	}
 	
 	/**
@@ -232,8 +241,71 @@ class Detalhe extends \Cnab\Format\Linha implements \Cnab\Retorno\IDetalhe
 	public function getCodigoNome()
 	{
 		$codigo = $this->getCodigo();
-	
-		if(\Cnab\Banco::CEF == $this->_codigo_banco)
+        
+        if(\Cnab\Banco::BRADESCO == $this->_codigo_banco)
+        {
+            if(2 == $codigo)
+                return 'Entrada Confirmada';
+            else if(3 == $codigo)
+                return 'Entrada Rejeitada';
+            else if(6 == $codigo)
+                return 'Liquidação normal';
+            else if(9 == $codigo)
+                return 'Baixado Automat. via Arquivo';
+            else if(10 == $codigo)
+                return 'Baixado conforme instruções da Agência';
+            else if(11 == $codigo)
+                return 'Em Ser - Arquivo de Títulos pendentes';
+            else if(12 == $codigo)
+                return 'Abatimento Concedido';
+            else if(13 == $codigo)
+                return 'Abatimento Cancelado';
+            else if(14 == $codigo)
+                return 'Vencimento Alterado';
+            else if(15 == $codigo)
+                return 'Liquidação em Cartório';
+            else if(16 == $codigo)
+                return 'Título Pago em Cheque – Vinculado';
+            else if(17 == $codigo)
+                return 'Liquidação após baixa ou Título não registrado';
+            else if(18 == $codigo)
+                return 'Acerto de Depositária (sem motivo)';
+            else if(19 == $codigo)
+                return 'Confirmação Receb. Inst. de Protesto';
+            else if(20 == $codigo)
+                return 'Confirmação Recebimento Instrução Sustação de Protesto';
+            else if(21 == $codigo)
+                return 'Acerto do Controle do Participante';
+            else if(22 == $codigo)
+                return 'Título Com Pagamento Cancelado';
+            else if(23 == $codigo)
+                return 'Entrada do Título em Cartório';
+            else if(24 == $codigo)
+                return 'Entrada rejeitada por CEP Irregular';
+            else if(27 == $codigo)
+                return 'Baixa Rejeitada';
+            else if(28 == $codigo)
+                return 'Débito de tarifas/custas';
+            else if(30 == $codigo)
+                return 'Alteração de Outros Dados Rejeitados';
+            else if(32 == $codigo)
+                return 'Instrução Rejeitada';
+            else if(33 == $codigo)
+                return 'Confirmação Pedido Alteração Outros Dados';
+            else if(34 == $codigo)
+                return 'Retirado de Cartório e Manutenção Carteira';
+            else if(35 == $codigo)
+                return 'Desagendamento do débito automático';
+            else if(40 == $codigo)
+                return 'Estorno de pagamento';
+            else if(55 == $codigo)
+                return 'Sustado judicial';
+            else if(68 == $codigo)
+                return 'Acerto dos dados do rateio de Crédito';
+            else if(69 == $codigo)
+                return 'Cancelamento dos dados do rateio';
+        }
+        else if(\Cnab\Banco::CEF == $this->_codigo_banco)
 		{
 			if(01 == $codigo)
 			    return 'Entrada Confirmada';
@@ -427,115 +499,3 @@ class Detalhe extends \Cnab\Format\Linha implements \Cnab\Retorno\IDetalhe
 		}
 	}
 }
-/*
-class BaseFields
-{
-	public $detalhe;
-
-	public function __construct($detalhe)
-	{
-		$this->detalhe = $detalhe;
-	}
-
-	public function decorate()
-	{
-		$this->detalhe->addField('tipo_de_registro',         1,    1, '9(01)',        '1'); // Identificação Do Registro Transação
-		$this->detalhe->addField('codigo_de_inscricao',      2,    3, '9(02)',        false); // Identificação Do Tipo De Inscrição/empresa
-		$this->detalhe->addField('numero_de_inscricao',      4,   17, '9(14)',        false); // Número De Inscrição Da Empresa (cpf/cnpj)		
-
-		$this->detalhe->addField('uso_da_empresa',          38,   62, 'X(25)',        false); // Nota 2 - Identificação Do Título Na Empresa
-
-		$this->detalhe->addField('codigo_de_ocorrencia',   109,  110, '9(02)',        false); // Nota 17 - Identificação Da Ocorrência
-		$this->detalhe->addField('data_de_ocorrencia',     111,  116, '9(06)',        false); // Data De Ocorrência No Banco
-		$this->detalhe->addField('numero_do_documento',    117,  126, 'X(10)',        false); // Nota 18 - Nº Do Documento De Cobrança (dupl, Np Etc)
-
-		$this->detalhe->addField('data_vencimento',        147,  152, '9(06)',        false); // Data De Vencimento Do Título
-		$this->detalhe->addField('valor_do_titulo',        153,  165, '9(11)V9(2)',   false); // Valor Nominal Do Título
-		$this->detalhe->addField('codigo_do_banco',        166,  168, '9(03)',        false); // Número Do Banco Na Câmara De Compensação
-		$this->detalhe->addField('agencia_cobradora',      169,  172, '9(04)',        false); // Nota 9 - Ag. Cobradora, Ag. De Liquidação Ou Baixa
-		$this->detalhe->addField('agencia_cobradora_dac',  173,  173, '9(01)',        false); // Dac Da Agência Cobradora
-		$this->detalhe->addField('especie',                174,  175, '9(02)',        false); // Nota 10 - Espécie Do Título
-		$this->detalhe->addField('valor_tarifa',           176,  188, '9(11)V9(2)',   false); // Valor Da Despesa De Cobrança
-
-		$this->detalhe->addField('valor_iof',              215,  227, '9(11)V9(2)',   false); // Valor Do Iof A Ser Recolhido (notas Seguro)
-		$this->detalhe->addField('valor_abatimento',       228,  240, '9(11)V9(2)',   false); // Nota 19 - Valor Do Abatimento Concedido
-		$this->detalhe->addField('valor_desconto',         241,  253, '9(11)V9(2)',   false); // Nota 19 - Valor Do Desconto Concedido
-		$this->detalhe->addField('valor_principal',        254,  266, '9(11)V9(2)',   false); // Valor Lançado Em Conta Corrente
-
-		$this->detalhe->addField('numero_sequencial',      395,  400, '9(06)',        false); // Número Seqüencial Do Registro No Arquivo
-	}
-}
-
-class ItauFields extends BaseFields
-{
-	public function decorate()
-	{
-		$this->detalhe->addField('agencia',                 18,   21, '9(04)',        false); // Agência Mantenedora Da Conta
-		$this->detalhe->addField('zeros01',                 22,   23, '9(02)',        '00'); // Complemento De Registro
-		$this->detalhe->addField('conta',                   24,   28, '9(05)',        false); // Número Da Conta Corrente Da Empresa
-		$this->detalhe->addField('dac',                     29,   29, '9(01)',        false); // Dígito De Auto Conferência Ag/conta Empresa
-		$this->detalhe->addField('brancos01',               30,   37, 'X(08)',        false); // Complemento De Registro	
-
-
-		$this->detalhe->addField('nosso_numero',            63,   70, '9(08)',        false); // Identificação Do Título No Banco
-		$this->detalhe->addField('brancos02',               71,   82, 'X(12)',        false); // Complemento Do Registro
-		$this->detalhe->addField('carteira',                83,   85, '9(03)',        false); // Nota 5 - Numero Da Carteira
-		$this->detalhe->addField('nosso_numero_dup',        86,   93, '9(08)',        false); // Nota 3 - Identificação Do Título No Banco
-		$this->detalhe->addField('dac_nosso_numero',        94,   94, '9(01)',        false); // Nota 3 - Dac Do Nosso Número
-		$this->detalhe->addField('brancos03',               95,  107, 'X(13)',        false); // Complemento Do Registro
-		$this->detalhe->addField('carteira_cod',           108,  108, 'X(01)',        false); // Nota 5 - Código Da Carteira
-
-		$this->detalhe->addField('nosso_numero_dup2',      127,  134, '9(08)',        false); // Confirmação Do Número Do Título No Banco
-		$this->detalhe->addField('brancos04',              135,  146, 'X(12)',        false); // Complemento Do Registro
-
-		$this->detalhe->addField('brancos05',              189,  214, 'X(26)',        false); // Complemento Do Registro	
-
-		$this->detalhe->addField('valor_mora_multa',       267,  279, '9(11)V9(2)',   false); // Valor De Mora E Multa
-		$this->detalhe->addField('valor_outros_creditos',  280,  292, '9(11)V9(2)',   false); // Valor De Outros Créditos
-		$this->detalhe->addField('boleto_dda',             293,  293, 'X(01)',        false); // Nota 34 - Indicador De Boleto Dda
-		$this->detalhe->addField('brancos06',              294,  295, 'X(02)',        false); // Complemento Do Registro
-		$this->detalhe->addField('data_credito',           296,  301, 'X(06)',        false); // Data De Crédito Desta Liquidação
-		$this->detalhe->addField('instr_cancelada',        302,  305, '9(04)',        false); // Nota 20 - Código Da Instrução Cancelada
-		$this->detalhe->addField('brancos07',              306,  311, 'X(06)',        false); // Complemento De Registro
-		$this->detalhe->addField('zeros02',                312,  324, '9(13)',        false); // Complemento De Registro
-		$this->detalhe->addField('nome_do_sacado',         325,  354, 'X(30)',        false); // Nome Do Sacado
-		$this->detalhe->addField('brancos08',              355,  377, 'X(23)',        false); // Complemento Do Registro
-		$this->detalhe->addField('erros',                  378,  385, 'X(08)',        false); // Nota 20 - Mensagem Informativa Registros Rejeitados Ou Alegação Do Sacado Ou Registro De Mensagem Informativa
-		$this->detalhe->addField('brancos09',              386,  392, 'X(07)',        false); // Complemento Do Registro
-		$this->detalhe->addField('codde_liquidacao',       393,  394, 'X(02)',        false); // Nota 28 - Meio Pelo Qual O Título Foi Liquidado
-
-		return parent::decorate();
-	}
-}
-
-class CefFields extends BaseFields
-{
-	public function decorate()
-	{
-		$this->detalhe->addField('codigo_cedente',            18,  33, 'X(16)',  '');	
-		$this->detalhe->addField('brancos01',                 34,  37, 'X(04)',  ''); // Complemento De Registro			
-
-		$this->detalhe->addField('nosso_numero',           63,   73, '9(11)',       false); // Identificação Do Título No Banco	
-		$this->detalhe->addField('brancos21',              74,   79, 'X(6)',        false); 
-		$this->detalhe->addField('codigo_rejeicao',        80,   82, '9(3)',        false); 
-		$this->detalhe->addField('uso_do_banco',           83,  106, 'X(24)',        false); 
-		$this->detalhe->addField('carteira',              107,  108, '9(2)',        false); 
-
-		$this->detalhe->addField('brancos04',              127,  146, 'X(20)',        false); // Complemento Do Registro
-
-		$this->detalhe->addField('tipo_de_liquidacao', 189,  191, '9(3)',        false);
-		$this->detalhe->addField('forma_de_pagamento', 192,  192, '9(1)',        false);
-		$this->detalhe->addField('float',              193,  194, '9(2)',        false);
-		$this->detalhe->addField('data_debito_tarifa', 195,  200, '9(4)V9(2)',   false);
-		$this->detalhe->addField('brancos05',          201,  214, 'X(14)',       false);
-
-		$this->detalhe->addField('valor_juros',       267,  279, '9(11)V9(2)',   false);
-		$this->detalhe->addField('valor_multa',       280,  292, '9(11)V9(2)',   false);
-		$this->detalhe->addField('moeda',             293,  293, '9(1)',         false);
-		$this->detalhe->addField('data_credito',      294,  299, 'X(06)',        false); // Data De Crédito Desta Liquidação
-		$this->detalhe->addField('brancos06',         300,  394, 'X(95)',        false); // Data De Crédito Desta Liquidação
-
-		return parent::decorate();
-	}
-}
- */

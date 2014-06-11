@@ -110,7 +110,7 @@ class Linha {
         foreach($this->fields as $fieldNome => $field)
         {
             $dump .= $fieldNome . ': ';
-            $dump .= \print_r($field->getValue());
+            $dump .= $field->getValue();
             $dump .= PHP_EOL;
         }
         return $dump;

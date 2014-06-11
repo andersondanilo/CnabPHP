@@ -61,6 +61,17 @@ class Arquivo implements \Cnab\Retorno\IArquivo
 	{
 		return $this->header->getConta();
 	}
+    
+    
+    /**
+     * Retorna o código do cedente / código da empresa / código do convênio (cada banco chama de um nome)
+     * @return String
+     */
+    public function getCodigoCedente()
+    {
+        return $this->header->getCodigoCedente();
+    }
+    
 	
 	/**
 	 * Retorna o digito de auto conferencia da conta
@@ -86,7 +97,10 @@ class Arquivo implements \Cnab\Retorno\IArquivo
 	 */
 	public function getDataGeracao()
 	{
-		return $this->header->data_de_geracao ? \DateTime::createFromFormat('dmy', sprintf('%06d', $this->header->data_de_geracao)) : false;
+		$data = $this->header->data_de_geracao ? \DateTime::createFromFormat('dmy', sprintf('%06d', $this->header->data_de_geracao)) : false;
+        if($data)
+            $data->setTime(0,0,0);
+        return $data;
 	}
     
     /**
@@ -98,7 +112,12 @@ class Arquivo implements \Cnab\Retorno\IArquivo
     public function getDataCredito()
     {
         if($this->header->existField('data_de_credito'))
-            return $this->header->data_de_credito ? \DateTime::createFromFormat('dmy', sprintf('%06d', $this->header->data_de_credito)) : false;
+        {
+            $data = $this->header->data_de_credito ? \DateTime::createFromFormat('dmy', sprintf('%06d', $this->header->data_de_credito)) : false;
+            if($data)
+                $data->setTime(0,0,0);
+            return $data;
+        }
         else
             return null;
     }
