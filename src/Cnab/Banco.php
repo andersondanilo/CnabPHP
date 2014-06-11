@@ -2,31 +2,39 @@
 namespace Cnab;
 class Banco
 {
-    const ITAU = 341;
-    const CEF  = 104;
-    const SANTANDER = 033;
+    const SANTANDER = 33;
+    const CEF       = 104;
+    const BRADESCO  = 237;
+    const ITAU      = 341;
 
     public static function getBanco($codigo)
     {
         if($codigo == self::ITAU)
         {
             return array(
-                'codigo_do_banco' => '341',
-                'nome_do_banco' => 'BANCO ITAU SA',
+                'codigo_do_banco' => self::ITAU,
+                'nome_do_banco'   => 'BANCO ITAU SA',
             );
         }
         else if($codigo == self::CEF)
         {
             return array(
-                'codigo_do_banco' => '104',
-                'nome_do_banco' => 'C ECON FEDERAL',
+                'codigo_do_banco' => self::CEF,
+                'nome_do_banco'   => 'C ECON FEDERAL',
             );
         }
         else if($codigo == self::SANTANDER)
         {
             return array(
-                'codigo_do_banco' => '033',
-                'nome_do_banco' => 'BANCO SANTANDER (BRASIL) S/A'
+                'codigo_do_banco' => self::SANTANDER,
+                'nome_do_banco'   => 'BANCO SANTANDER (BRASIL) S/A'
+            );
+        }
+        else if($codigo == self::BRADESCO)
+        {
+            return array(
+                'codigo_do_banco' => self::BRADESCO,
+                'nome_do_banco'   => 'BRADESCO'
             );
         }
         else

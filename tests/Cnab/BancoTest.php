@@ -10,5 +10,6 @@ class BancoTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(Banco::existBanco(Banco::ITAU));
         $this->assertTrue(Banco::existBanco(Banco::CEF));
         $this->assertTrue(Banco::existBanco(Banco::SANTANDER));
+        $this->assertTrue(Banco::existBanco(Banco::BRADESCO));
     }
 }
