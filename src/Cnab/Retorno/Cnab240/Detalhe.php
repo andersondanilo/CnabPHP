@@ -156,7 +156,7 @@ class Detalhe extends \Cnab\Format\Linha implements \Cnab\Retorno\IDetalhe
 	 */
 	public function getDataCredito()
 	{
-		return $this->segmento_u->data_credito ? \DateTime::createFromFormat('dmy', sprintf('%08d', $this->segmento_u->data_credito)) : false;
+		return $this->segmento_u->data_credito ? \DateTime::createFromFormat('dmY', sprintf('%08d', $this->segmento_u->data_credito)) : false;
 	}
 
 	/**
