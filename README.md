@@ -10,7 +10,7 @@ Projeto para criar arquivos de remessas e processar arquivos de retorno no forma
 
 ## Funcionalidades
 
-* Leitura de arquivos de retorno e remessa nos formatos Cnab 240 e 400
+* Leitura e geração de arquivos de retorno e remessa nos formatos CNAB 240 e 400
 
 | Banco           | Versão da Remessa  | Versão do Retorno |
 |-----------------|--------------------|-------------------|
