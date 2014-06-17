@@ -10,8 +10,14 @@ Projeto para criar arquivos de remessas e processar arquivos de retorno no forma
 
 ## Funcionalidades
 
-* Leitura de arquivos de retorno no formato Cnab 240 (Caixa) e 400 (Caixa)
-* Criação de arquivos de remessa no formato Cnab 400 (Itau, Bradesco)
+* Leitura de arquivos de retorno e remessa nos formatos Cnab 240 e 400
+
+| Banco           | Versão da Remessa  | Versão do Retorno |
+|-----------------|--------------------|-------------------|
+| Banco do Brasil |                    | 400               |
+| Bradesco        |                    | 240               |
+| Caixa           | 240 e 400          | 240 e 400         |
+| Itaú            | 400 (Falta testar) | 400               |
 
 ## Instalação
 ### Composer
