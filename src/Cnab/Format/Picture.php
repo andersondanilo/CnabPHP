@@ -91,8 +91,8 @@ class Picture
 					$tamanho_left  = (int)$m['tamanho1'];
 					$tamanho_right = (int)$m['tamanho2'];
 					$valor_left    = (int)substr($value, 0, $tamanho_left); 
-					$valor_right   = (int)substr($value, $tamanho_left, $tamanho_right);
-					return (double)($valor_left.'.'.$valor_right);
+					$valor_right   = '0.'.substr($value, $tamanho_left, $tamanho_right);
+					return $valor_left + (double)$valor_right;
 				}
 				else if(!$m['tipo2'])
 				{
