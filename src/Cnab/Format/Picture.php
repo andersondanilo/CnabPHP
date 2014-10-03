@@ -21,6 +21,16 @@ class Picture
 		else
 			throw new \InvalidArgumentException("'$format' is not a valid format");
 	}
+
+    public static function parseNumber($value)
+    {
+        $value = preg_replace('/[^0-9.]/', '', $value);
+        $value = preg_replace('/^0+/', '', $value);
+        if($value)
+            return $value;
+        else
+            return '0';
+    }
 	
 	public static function encode($value, $format)
 	{
@@ -62,8 +72,7 @@ class Picture
 				}
 				else if(!$m['tipo2'])
 				{
-					$value = (int)$value;
-					$value = (string)$value;
+					$value = self::parseNumber($value);
 					return \str_pad($value, (int)$m['tamanho1'], '0', STR_PAD_LEFT);
 					
 				}
@@ -90,13 +99,16 @@ class Picture
 				{
 					$tamanho_left  = (int)$m['tamanho1'];
 					$tamanho_right = (int)$m['tamanho2'];
-					$valor_left    = (int)substr($value, 0, $tamanho_left); 
+					$valor_left    = self::parseNumber(substr($value, 0, $tamanho_left)); 
 					$valor_right   = '0.'.substr($value, $tamanho_left, $tamanho_right);
-					return $valor_left + (double)$valor_right;
+                    if((double)$valor_right > 0)
+					    return $valor_left + (double)$valor_right;
+                    else
+                        return self::parseNumber($valor_left);
 				}
 				else if(!$m['tipo2'])
 				{
-					return (int)$value;
+					return self::parseNumber($value);
 				}
 				else
 					throw new \InvalidArgumentException("'$format' is not a valid format");			

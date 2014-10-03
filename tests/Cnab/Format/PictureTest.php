@@ -16,6 +16,9 @@ class PictureTest extends \PHPUnit_Framework_TestCase
         // integer number
         $this->assertEquals(200, Picture::decode('00200', '9(5)'));
         $this->assertEquals(3, Picture::decode('3', '9(1)'));
+        
+        // big integer number
+        $this->assertEquals('123456789123456', Picture::decode('000123456789123456', '9(15)'));
 
         // string text
         $this->assertEquals('  Abc', Picture::decode('  Abc', 'X(5)'));
