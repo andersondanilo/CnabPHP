@@ -284,6 +284,26 @@ class Detalhe extends \Cnab\Format\Linha implements \Cnab\Retorno\IDetalhe
             return 'Desconhecido';
     }
 
+    /**
+     * Retorna o código de liquidação, normalmente usado para 
+     * saber onde o cliente efetuou o pagamento
+     * @return String
+     */
+    public function getCodigoLiquidacao() {
+        // @TODO: Resgatar o código de liquidação
+        return null;
+    }
+
+    /**
+     * Retorna a descrição do código de liquidação, normalmente usado para 
+     * saber onde o cliente efetuou o pagamento
+     * @return String
+     */
+    public function getDescricaoLiquidacao() {
+        // @TODO: Resgator descrição do código de liquidação
+        return null;
+    }
+
     public function dump()
     {
         $dump  = PHP_EOL;

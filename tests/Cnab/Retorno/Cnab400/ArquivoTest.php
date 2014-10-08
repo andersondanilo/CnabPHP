@@ -24,4 +24,22 @@ class ArquivoTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(15, $detalhe->getNumeroDocumento());
         $this->assertEquals(new \DateTime('2012-04-11 00:00:00'), $detalhe->getDataOcorrencia());
     }
+
+    public function testArquivoItauCnab400PodeSerLido()
+    {
+        $arquivo = new Arquivo(\Cnab\Banco::ITAU, 'tests/fixtures/cnab400/retorno-cnab400-itau.ret');
+        $this->assertNotNull($arquivo);
+        $this->assertNotNull($arquivo->header);
+        $this->assertNotNull($arquivo->trailer);
+
+        $this->assertEquals(\Cnab\Banco::ITAU, $arquivo->getCodigoBanco());
+
+        $detalhes = $arquivo->listDetalhes();
+
+        $this->assertEquals(4, count($detalhes));
+        $detalhe = $detalhes[2];
+
+        $this->assertEquals('BL', $detalhe->getCodigoLiquidacao());
+        $this->assertNotEmpty($detalhe->getDescricaoLiquidacao());
+    }
 }

@@ -333,7 +333,7 @@ generic:
     pos: [386, 392]
     picture: 'X(07)'
 
-  codde_liquidacao:
+  codigo_liquidacao:
     #Nota 28 - Meio Pelo Qual O Título Foi Liquidado
     pos: [393, 394]
     picture: 'X(02)'

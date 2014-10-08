@@ -498,4 +498,60 @@ class Detalhe extends \Cnab\Format\Linha implements \Cnab\Retorno\IDetalhe
 				return 'Código Inexistente';
 		}
 	}
+
+	/**
+     * Retorna o código de liquidação, normalmente usado para 
+     * saber onde o cliente efetuou o pagamento
+     * @return String
+     */
+    public function getCodigoLiquidacao() {
+        if($this->existField('codigo_liquidacao'))
+        	return $this->codigo_liquidacao;
+        return null;
+    }
+
+    /**
+     * Retorna a descrição do código de liquidação, normalmente usado para 
+     * saber onde o cliente efetuou o pagamento
+     * @return String
+     */
+    public function getDescricaoLiquidacao() {
+        // @TODO: Usar YAML (cnab_yaml) para criar tabela de descrição
+        $codigoLiquidacao = $this->getCodigoLiquidacao();
+        $tabela = array();
+
+        if(\Cnab\Banco::ITAU == $this->_codigo_banco) {
+        	$tabela = array(
+        		'AA' => 'CAIXA ELETRÔNICO BANCO ITAÚ',
+				'AC' => 'PAGAMENTO EM CARTÓRIO AUTOMATIZADO',
+				'AO' => 'ACERTO ONLINE',
+				'BC' => 'BANCOS CORRESPONDENTES',
+				'BF' => 'ITAÚ BANKFONE',
+				'BL' => 'ITAÚ BANKLINE',
+				'B0' => 'OUTROS BANCOS – RECEBIMENTO OFF-LINE',
+				'B1' => 'OUTROS BANCOS – PELO CÓDIGO DE BARRAS',
+				'B2' => 'OUTROS BANCOS – PELA LINHA DIGITÁVEL',
+				'B3' => 'OUTROS BANCOS – PELO AUTO ATENDIMENTO',
+				'B4' => 'OUTROS BANCOS – RECEBIMENTO EM CASA LOTÉRICA',
+				'B5' => 'OUTROS BANCOS – CORRESPONDENTE',
+				'B6' => 'OUTROS BANCOS – TELEFONE',
+				'B7' => 'OUTROS BANCOS – ARQUIVO ELETRÔNICO (Pagamento Efetuado por meio de troca de arquivos)',
+				'CC' => 'AGÊNCIA ITAÚ – COM CHEQUE DE OUTRO BANCO ou (CHEQUE ITAÚ)*',
+				'CI' => 'CORRESPONDENTE ITAÚ',
+				'CK' => 'SISPAG – SISTEMA DE CONTAS A PAGAR ITAÚ',
+				'CP' => 'AGÊNCIA ITAÚ – POR DÉBITO EM CONTA CORRENTE, CHEQUE ITAÚ* OU DINHEIRO',
+				'DG' => 'AGÊNCIA ITAÚ – CAPTURADO EM OFF-LINE',
+				'LC' => 'PAGAMENTO EM CARTÓRIO DE PROTESTO COM CHEQUE A COMPENSAR',
+				'EA' => 'TERMINAL DE CAIXA',
+				'Q0' => 'AGENDAMENTO – PAGAMENTO AGENDADO VIA BANKLINE OU OUTRO CANAL ELETRÔNICO E LIQUIDADO NA DATA INDICADA',
+				'RA' => 'DIGITAÇÃO – REALIMENTAÇÃO AUTOMÁTICA',
+				'ST' => 'PAGAMENTO VIA SELTEC**',
+    		);
+        }
+
+        if(array_key_exists($codigoLiquidacao, $tabela))
+        	return $tabela[$codigoLiquidacao];
+
+        return null;
+    }
 }

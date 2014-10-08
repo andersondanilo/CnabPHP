@@ -134,4 +134,18 @@ interface IDetalhe
 	 * @return Boolean
 	 */
 	public function isBaixaRejeitada();
+
+	/**
+	 * Retorna o código de liquidação, normalmente usado para 
+	 * saber onde o cliente efetuou o pagamento
+	 * @return String
+	 */
+	public function getCodigoLiquidacao();
+
+	/**
+	 * Retorna a descrição do código de liquidação, normalmente usado para 
+	 * saber onde o cliente efetuou o pagamento
+	 * @return String
+	 */
+	public function getDescricaoLiquidacao();
 }
