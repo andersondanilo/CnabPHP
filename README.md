@@ -12,12 +12,12 @@ Projeto para criar arquivos de remessas e processar arquivos de retorno no forma
 
 * Leitura e geração de arquivos de retorno e remessa nos formatos CNAB 240 e 400
 
-| Banco           | Versão da Remessa  | Versão do Retorno |
-|-----------------|--------------------|-------------------|
-| Banco do Brasil |                    | 400               |
-| Bradesco        |                    | 240               |
-| Caixa           | 240 e 400          | 240 e 400         |
-| Itaú            | 400 (Falta testar) | 400               |
+| Banco           | Versão da Remessa  | Versão do Retorno  |
+|-----------------|--------------------|--------------------|
+| Bradesco        |                    | 240                |
+| Caixa           | 240 e 400          | 240 e 400          |
+| Itaú            | 400 (Falta testar) | 400                |
+| Santander       | Em desenvolvimento | Em desenvolvimento |
 
 ## Instalação
 ### Composer
