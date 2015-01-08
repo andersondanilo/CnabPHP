@@ -17,7 +17,7 @@ Projeto para criar arquivos de remessas e processar arquivos de retorno no forma
 | Bradesco        |                    | 240                |
 | Caixa           | 240 e 400          | 240 e 400          |
 | Itaú            | 400 (Falta testar) | 400                |
-| Santander       | Em desenvolvimento | Em desenvolvimento |
+| Santander       |                    | 240                |
 
 ## Instalação
 ### Composer
