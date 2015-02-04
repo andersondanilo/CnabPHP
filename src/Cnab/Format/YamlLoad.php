@@ -56,13 +56,8 @@ class YamlLoad
         return true;
     }
 
-    public function load(Linha $cnabLinha, $filename)
+    public function loadArray(Linha $cnabLinha, $array)
     {
-        if(!file_exists($filename))
-            throw new \Exception('Arquivo não encontrado '.$filename);
-
-        $array = spyc_load_file($filename);
-
         $this->validateArray($array);
 
         $keys = array('generic');
@@ -84,5 +79,39 @@ class YamlLoad
                 }
             }
         }
+    }
+
+    public function loadYaml($filename) {
+        if (file_exists($filename))
+            return spyc_load_file($filename);
+        else
+            return null;
+    }
+
+    public function loadFormat($cnab, $filename) {
+        $banco = sprintf('%03d', $this->codigo_banco);
+        $filenamePadrao = CNAB_FORMAT_PATH.'/'.$cnab.'/generic/'.$filename.'.yml';
+        $filenameEspecifico = CNAB_FORMAT_PATH.'/'.$cnab.'/'.$banco.'/'.$filename.'.yml';
+
+        if(!file_exists($filenamePadrao) && !file_exists($filenameEspecifico))
+            throw new \Exception('Arquivo não encontrado '. $filename);
+
+        $arrayPadrao = $this->loadYaml($filenamePadrao);
+        $arrayEspecifico = $this->loadYaml($filenameEspecifico);
+
+        $arrayFormat = array();
+
+        if ($arrayPadrao)
+            $arrayFormat['generic'] = $arrayPadrao;
+
+        if ($arrayEspecifico)
+            $arrayFormat[$banco] = $arrayEspecifico;
+
+        return $arrayFormat;
+    }
+
+    public function load(Linha $cnabLinha, $cnab, $filename) {
+        $arrayFormat = $this->loadFormat($cnab, $filename);
+        $this->loadArray($cnabLinha, $arrayFormat);
     }
 }

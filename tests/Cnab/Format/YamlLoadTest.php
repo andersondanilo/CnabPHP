@@ -2,6 +2,7 @@
 namespace Cnab\Tests\Format;
 
 use Cnab\Format\YamlLoad;
+use Cnab\Format\Linha;
 
 define('CNAB_FIXTURE_PATH', dirname(__FILE__).'/../../fixtures/yaml');
 
@@ -110,5 +111,36 @@ class YamlLoadTest extends \PHPUnit_Framework_TestCase
 
         $yamlLoad = new YamlLoad(0);
         $this->assertTrue($yamlLoad->validateArray($array));
+    }
+
+    public function testBuscaFormatoGenericoEEspecifico() {
+        $yamlLoad = $this->getMockBuilder('\Cnab\Format\YamlLoad')
+                         ->setMethods(array('loadYaml'))
+                         ->setConstructorArgs(array(33))
+                         ->getMock();
+
+        $testFormat = array(
+            'codigo_banco' => array(
+                'pos' => array(1, 3),
+                'picture' => '9(3)',
+            )
+        );
+
+        $yamlLoad->expects($this->at(0))
+                 ->method('loadYaml')
+                 ->with(
+                    $this->equalTo(CNAB_FORMAT_PATH.'/cnab240/generic/header_lote.yml')
+                )
+                ->will($this->returnValue($testFormat));
+
+        $yamlLoad->expects($this->at(1))
+                 ->method('loadYaml')
+                 ->with(
+                    $this->equalTo(CNAB_FORMAT_PATH.'/cnab240/033/header_lote.yml')
+                )
+                ->will($this->returnValue($testFormat));
+
+        $linha = new Linha;
+        $yamlLoad->load($linha, 'cnab240', 'header_lote');
     }
 }

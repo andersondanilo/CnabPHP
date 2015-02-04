@@ -1,0 +1,25 @@
+codigo_ocorrencia_sacado:
+  pos: [154, 157]
+  picture: '9(4)'
+
+data_ocorrencia_sacado:
+  pos: [158, 165]
+  picture: '9(8)'
+
+valor_ocorrencia_sacado:
+  pos: [166, 180]
+  picture: '9(13)V9(2)'
+
+complemento_ocorrencia_sacado:
+  pos: [181, 210]
+  picture: 'X(30)'
+
+codigo_banco_compensacao:
+  # Somente para troca de arquivos entre bancos 
+  pos: [211, 213]
+  picture: '9(3)'
+
+uso_exclusivo_febraban_02:
+  pos: [214, 240]
+  picture: 'X(27)'
+  default: ''

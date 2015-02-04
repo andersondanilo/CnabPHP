@@ -1,0 +1,143 @@
+# 341 = Itaú
+
+agencia:
+  #Agência Mantenedora Da Conta
+  pos: [18, 21]
+  picture: '9(04)'
+
+zeros01:
+  #Complemento De Registro
+  pos: [22, 23]
+  picture: '9(02)'
+  default: '00'
+
+conta:
+  #Número Da Conta Corrente Da Empresa
+  pos: [24, 28]
+  picture: '9(05)'
+
+dac:
+  #Dígito De Auto Conferência Ag/conta Empresa
+  pos: [29, 29]
+  picture: '9(01)'
+
+brancos01:
+  #Complemento De Registro  
+  pos: [30, 37]
+  picture: 'X(08)'
+
+nosso_numero:
+  #Identificação Do Título No Banco
+  pos: [63, 70]
+  picture: '9(08)'
+
+brancos02:
+  #Complemento Do Registro
+  pos: [71, 82]
+  picture: 'X(12)'
+
+carteira:
+  #Nota 5 - Numero Da Carteira
+  pos: [83, 85]
+  picture: '9(03)'
+
+nosso_numero_dup:
+  #Nota 3 - Identificação Do Título No Banco
+  pos: [86, 93]
+  picture: '9(08)'
+
+dac_nosso_numero:
+  #Nota 3 - Dac Do Nosso Número
+  pos: [94, 94]
+  picture: '9(01)'
+
+brancos03:
+  #Complemento Do Registro
+  pos: [95, 107]
+  picture: 'X(13)'
+
+carteira_cod:
+  #Nota 5 - Código Da Carteira
+  pos: [108, 108]
+  picture: 'X(01)'
+
+nosso_numero_dup2:
+  #Confirmação Do Número Do Título No Banco
+  pos: [127, 134]
+  picture: '9(08)'
+
+brancos04:
+  #Complemento Do Registro
+  pos: [135, 146]
+  picture: 'X(12)'
+
+brancos05:
+  #Complemento Do Registro  
+  pos: [189, 214]
+  picture: 'X(26)'
+
+valor_mora_multa:
+  #Valor De Mora E Multa
+  pos: [267, 279]
+  picture: '9(11)V9(2)'
+
+valor_outros_creditos:
+  #Valor De Outros Créditos
+  pos: [280, 292]
+  picture: '9(11)V9(2)'
+
+boleto_dda:
+  #Nota 34 - Indicador De Boleto Dda
+  pos: [293, 293]
+  picture: 'X(01)'
+
+brancos06:
+  #Complemento Do Registro
+  pos: [294, 295]
+  picture: 'X(02)'
+
+data_credito:
+  #Data De Crédito Desta Liquidação
+  pos: [296, 301]
+  picture: 'X(06)'
+  date_format: '%d%m%y'
+
+instr_cancelada:
+  #Nota 20 - Código Da Instrução Cancelada
+  pos: [302, 305]
+  picture: '9(04)'
+
+brancos07:
+  #Complemento De Registro
+  pos: [306, 311]
+  picture: 'X(06)'
+
+zeros02:
+  #Complemento De Registro
+  pos: [312, 324]
+  picture: '9(13)'
+
+nome_do_sacado:
+  #Nome Do Sacado
+  pos: [325, 354]
+  picture: 'X(30)'
+
+brancos08:
+  #Complemento Do Registro
+  pos: [355, 377]
+  picture: 'X(23)'
+
+erros:
+  #Nota 20 - Mensagem Informativa Registros Rejeitados Ou Alegação Do Sacado Ou Registro De Mensagem Informativa
+  pos: [378, 385]
+  picture: 'X(08)'
+
+brancos09:
+  #Complemento Do Registro
+  pos: [386, 392]
+  picture: 'X(07)'
+
+codigo_liquidacao:
+  #Nota 28 - Meio Pelo Qual O Título Foi Liquidado
+  pos: [393, 394]
+  picture: 'X(02)'

@@ -9,7 +9,7 @@ class Header extends \Cnab\Format\Linha
 	{
 	    $this->_codigo_banco = $codigo_banco;
         $yamlLoad = new \Cnab\Format\YamlLoad($codigo_banco);
-        $yamlLoad->load($this, CNAB_FORMAT_PATH.'/cnab400/retorno/header_arquivo.yml');
+        $yamlLoad->load($this, 'cnab400', 'retorno/header_arquivo');
         
 	}
 

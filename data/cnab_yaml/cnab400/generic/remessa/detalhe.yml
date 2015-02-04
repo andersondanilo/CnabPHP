@@ -1,0 +1,206 @@
+# Baseado na documentação do itau
+
+tipo_registro:
+  pos: [1, 1]
+  picture: '9(01)'
+  default:  '1'
+
+codigo_inscricao:
+  pos: [2, 3]
+  picture: '9(02)'
+
+numero_inscricao:
+  pos: [4, 17]
+  picture: '9(14)'
+
+agencia:
+  pos: [18, 21]
+  picture: '9(04)'
+
+zeros01:
+  pos: [22, 23]
+  picture: '9(02)'
+  default:  '0'
+
+conta:
+  pos: [24, 28]
+  picture: '9(05)'
+
+conta_dv:
+  pos: [29, 29]
+  picture: '9(01)'
+
+brancos01:
+  pos: [30, 33]
+  picture: 'X(04)'
+  default:  ''
+
+codigo_instrucao:
+  pos: [34, 37]
+  picture: '9(04)'
+
+uso_empresa:
+  pos: [38, 62]
+  picture: 'X(25)'
+
+nosso_numero:
+  pos: [63, 70]
+  picture: '9(08)'
+
+qtde_moeda:
+  pos: [71, 83]
+  picture: '9(08)V9(5)'
+
+numero_carteira:
+  pos: [84, 86]
+  picture: '9(03)'
+
+uso_banco:
+  pos: [87, 107]
+  picture: 'X(21)'
+
+codigo_carteira:
+  pos: [108, 108]
+  picture: 'X(01)'
+
+codigo_ocorrencia:
+  pos: [109, 110]
+  picture: '9(02)'
+  default:  '1'
+
+numero_documento:
+  pos: [111, 120]
+  picture: 'X(10)'
+
+vencimento:
+  pos: [121, 126]
+  picture: '9(06)'
+
+valor_titulo:
+  pos: [127, 139]
+  picture: '9(11)V9(2)'
+
+codigo_banco:
+  pos: [140, 142]
+  picture: '9(03)'
+  default:  '341'
+
+agencia_cobradora:
+  pos: [143, 147]
+  picture: '9(05)'
+  default:  '0'
+
+especie:
+  pos: [148, 149]
+  picture: 'X(02)'
+
+aceite:
+  pos: [150, 150]
+  picture: 'X(01)'
+
+data_emissao:
+  pos: [151, 156]
+  picture: '9(06)'
+  date_format: '%d%m%y'
+
+instrucao1:
+  pos: [157, 158]
+  picture: 'X(02)'
+  default:  '05'
+
+instrucao2:
+  pos: [159, 160]
+  picture: 'X(02)'
+  default:  '20'
+
+juros_um_dia:
+  pos: [161, 173]
+  picture: '9(11)V9(2)'
+  default:  '0'
+
+desconto_ate:
+  pos: [174, 179]
+  picture: '9(06)'
+  default:  '0'
+  date_format: '%d%m%y'
+
+valor_desconto:
+  pos: [180, 192]
+  picture: '9(11)V9(2)'
+  default:  '0'
+
+valor_iof:
+  pos: [193, 205]
+  picture: '9(11)V9(2)'
+  default:  '0'
+
+abatimento:
+  pos: [206, 218]
+  picture: '9(11)V9(2)'
+  default:  '0'
+
+sacado_codigo_inscricao:
+  pos: [219, 220]
+  picture: '9(02)'
+
+sacado_numero_inscricao:
+  pos: [221, 234]
+  picture: '9(14)'
+
+nome:
+  pos: [235, 264]
+  picture: 'X(30)'
+
+brancos02:
+  pos: [265, 274]
+  picture: 'X(10)'
+  default:  ''
+
+logradouro:
+  pos: [275, 314]
+  picture: 'X(40)'
+
+bairro:
+  pos: [315, 326]
+  picture: 'X(12)'
+
+cep:
+  pos: [327, 334]
+  picture: '9(08)'
+
+cidade:
+  pos: [335, 349]
+  picture: 'X(15)'
+
+estado:
+  pos: [350, 351]
+  picture: 'X(02)'
+
+sacador:
+  pos: [352, 381]
+  picture: 'X(30)'
+
+brancos03:
+  pos: [382, 385]
+  picture: 'X(04)'
+  default:  ''
+
+data_mora:
+  pos: [386, 391]
+  picture: '9(06)'
+  default:  '0'
+  date_format: '%d%m%y'
+
+prazo:
+  pos: [392, 393]
+  picture: '9(02)'
+  default:  '0'
+
+brancos04:
+  pos: [394, 394]
+  picture: 'X(01)'
+  default:  ''
+
+numero_sequencial:
+  pos: [395, 400]
+  picture: '9(06)'

@@ -10,7 +10,7 @@ class Detalhe extends \Cnab\Format\Linha implements \Cnab\Retorno\IDetalhe
 		$this->_codigo_banco = $codigo_banco;
 
 		$yamlLoad = new \Cnab\Format\YamlLoad($codigo_banco);
-        $yamlLoad->load($this, CNAB_FORMAT_PATH.'/cnab400/retorno/detalhe.yml');
+        $yamlLoad->load($this, 'cnab400', 'retorno/detalhe');
 	}
 	
 	/**

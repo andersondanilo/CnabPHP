@@ -1,0 +1,127 @@
+# 237 = Bradesco
+# Pag 43,  021 - 037 (len 17)
+# 0CCCAAAACCCCC
+
+zeros01:
+  pos: [18, 20]
+  picture: '9(3)'
+  default: 0
+
+zeros02:
+  pos: [21, 21]
+  picture: '9(1)'
+  default: 0
+
+carteira:
+  pos: [22, 24]
+  picture: '9(3)'
+
+agencia:
+  pos: [25, 29]
+  picture: '9(5)'
+
+conta:
+  pos: [30, 36]
+  picture: '9(7)'
+
+conta_dac:
+  pos: [37, 37]
+  picture: '9(1)'
+
+zeros03:
+  pos: [63, 70]
+  picture: '9(8)'
+
+nosso_numero:
+  pos: [71, 82]
+  picture: '9(12)'
+
+uso_banco01:
+  pos: [83, 92]
+  picture: 'X(10)'
+
+uso_banco02:
+  pos: [93, 104]
+  picture: '9(12)'
+
+indicador_rateio:
+  pos: [105, 105]
+  picture: 'X(1)'
+
+zeros04:
+  pos: [106, 107]
+  picture: '9(2)'
+
+carteira_cod:
+  pos: [108, 108]
+  picture: 'X(1)'
+
+nosso_numero_dup:
+  # Esta duplicado, é a mesma coisa que nosso_numero
+  pos: [127, 146]
+  picture: '9(20)'
+
+valor_outras_despesas:
+  pos: [189, 201]
+  picture: '9(11)V9(2)'
+
+valor_outras_despesas:
+  pos: [202, 214]
+  picture: '9(11)V9(2)'
+
+valor_mora_multa:
+  pos: [267, 279]
+  picture: '9(11)V9(2)'
+
+valor_outros_creditos:
+  pos: [280, 292]
+  picture: '9(11)V9(2)'
+
+brancos01:
+  pos: [293, 294]
+  picture: 'X(2)'
+
+motivo_ocorrencia:
+  # Motivo do Código de Ocorrência 19 (Confirmação de Instrução de Protesto)
+  # A – Aceito, D – Desprezado, Vide Obs. Pág. 50
+  pos: [295, 295]
+  picture: 'X(1)'
+
+data_credito:
+  pos: [296, 301]
+  picture: '9(6)'
+  date_format: '%d%m%y'
+
+origem_pagamento:
+  # Vide OBS Pág
+  pos: [302, 304]
+  picture: '9(3)'
+
+brancos02:
+  pos: [305, 314]
+  picture: 'X(10)'
+
+codigo_banco:
+  pos: [315, 318]
+  picture: '9(4)'
+
+motivo_rejeicao:
+  # Motivo Vide Obs. Pág. 50
+  pos: [319, 328]
+  picture: '9(10)'
+
+brancos03:
+  pos: [329, 368]
+  picture: 'X(40)'
+
+numero_cartorio:
+  pos: [369, 370]
+  picture: '9(2)'
+
+numero_protocolo:
+  pos: [371, 380]
+  picture: 'X(10)'
+
+brancos04:
+  pos: [381, 394]
+  picture: 'X(14)'
