@@ -1,5 +1,5 @@
 # Registro Detalhe - Segmento U (Obrigatório - Retorno)
-# Baseado na documentação da caixa cef
+# Baseado na documentação da febraban versão 08.8
 
 codigo_banco:
   pos: [1, 3]
@@ -69,10 +69,34 @@ data_credito:
   pos: [146, 153]
   picture: '9(8)'
 
-data_debito_tarifa:
-  pos: [154, 161]
-  picture: '9(8)'
+# foi usado este nome para não confundir com código de ocorrência (que é o mesmo que código de movimento no CNAB 400)
+ocorrencia_sacado_codigo:
+  pos: [154, 157]
+  picture: 'X(4)'
 
+ocorrencia_sacado_data:
+  pos: [158, 165]
+  picture: 'X(8)'
+
+ocorrencia_sacado_valor:
+  pos: [166, 180]
+  picture: '9(13)V9(2)'
+
+ocorrencia_sacado_complemento:
+  pos: [181, 210]
+  picture: 'X(30)'
+
+# Cód. Banco Correspondente Compens.
+codigo_banco_correspondente:
+  pos: [211, 213]
+  picture: '9(3)'
+
+# Nosso No Banco Correspondente
+nosso_numero_banco_correspondente:
+  pos: [214, 233]
+  picture: '9(20)'
+
+# Uso Exclusivo FEBRABAN/CNAB
 uso_exclusivo_febraban_02:
-  pos: [162, 240]
-  picture: '9(79)'
+  pos: [234, 240]
+  picture: '9(7)'
