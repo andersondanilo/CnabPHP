@@ -7,7 +7,7 @@ class ArquivoTest extends \PHPUnit_Framework_TestCase
 {
     public function testArquivoSantanderPodeSerLido()
     {
-        $arquivo = new Arquivo(33, 'tests/fixtures/cnab240/RETORNO_SANTANDER.TXT');
+        $arquivo = new Arquivo(33, 'tests/fixtures/cnab240/retorno_santander.ret');
         $this->assertNotNull($arquivo);
         $this->assertNotNull($arquivo->header);
         $this->assertNotNull($arquivo->lotes);
@@ -22,5 +22,27 @@ class ArquivoTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(1040, $detalhe->segmento_t->nosso_numero);
         $this->assertEquals(10, $detalhe->segmento_t->valor_titulo);
+    }
+
+    public function testArquivoBancoDoBrasilPodeSerLido() {
+        $arquivo = new Arquivo(1, 'tests/fixtures/cnab240/retorno_bb.ret');
+        $this->assertNotNull($arquivo);
+        $this->assertNotNull($arquivo->header);
+        $this->assertNotNull($arquivo->lotes);
+        $this->assertNotNull($arquivo->trailer);
+
+        $this->assertEquals(7536, $arquivo->getConta());
+        $this->assertEquals(7, $arquivo->getContaDac());
+        $this->assertEquals(1, $arquivo->getCodigoBanco());
+        $this->assertEquals(
+            \DateTime::createFromFormat('d/m/Y', '21/03/2011'),
+            $arquivo->getDataGeracao()
+        );
+
+        $detalhe = $arquivo->listDetalhes();
+        $detalhe = $detalhe[0];
+
+        //$this->assertEquals(50000, $detalhe->segmento_t->nosso_numero);
+        //$this->assertEquals(98.80, $detalhe->segmento_t->valor_titulo);
     }
 }

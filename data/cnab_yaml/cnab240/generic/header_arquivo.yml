@@ -123,6 +123,7 @@ agencia_mais_cedente_dv:
   # Subtrair onze pelo resto da divisão: 11 – 3 = 8
   # O Dígito Verificador calculado para o Código de Cedente acima é 8
   # Obs.: se o resultado da subtração for maior que 9 (nove) o dígito será 0 (zero)
+  # No Banco do Brasil, é o Dígito verificador da Ag/Conta
   pos: [72, 72]
   picture: '9(1)'
 

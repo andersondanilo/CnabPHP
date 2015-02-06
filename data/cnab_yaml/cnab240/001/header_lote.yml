@@ -1,0 +1,77 @@
+numero_inscricao:
+  # Informar o número de inscrição da Empresa (CNPJ) ou Pessoa Física (CPF).
+  pos: [19, 32]
+  picture: '9(14)'
+
+codigo_convenio:
+  pos: [33, 52]
+  picture: 'X(20)'
+
+agencia:
+  pos: [53, 57]
+  picture: '9(5)'
+
+agencia_dv:
+  # Dígito Verificador da Agência mantendedora da conta, fornecido pela CAIXA.
+  pos: [58, 58]
+  picture: '9(1)'
+
+conta:
+  pos: [59, 70]
+  picture: '9(12)'
+
+conta_dv:
+  pos: [71, 71]
+  picture: '9(1)'
+
+agencia_mais_cedente_dv:
+  pos: [72, 72]
+  picture: '9(1)'
+
+nome_empresa:
+  pos: [73, 102]
+  picture: 'X(30)'
+
+mensagem_1:
+  pos: [103, 142]
+  picture: 'X(40)'
+  default: ''
+
+logradouro_empresa:
+  pos: [143, 172]
+  picture: 'X(30)'
+  default: ''
+
+numero_empresa:
+  pos: [173, 177]
+  picture: 'X(5)'
+
+complemento_empresa:
+  pos: [178, 192]
+  picture: 'X(15)'
+
+cidade_empresa:
+  pos: [193, 212]
+  picture: 'X(20)'
+
+cep_empresa:
+  pos: [213, 217]
+  picture: '9(5)'
+
+complemento_cep_empresa:
+  pos: [218, 220]
+  picture: '9(3)'
+
+estado_empresa:
+  pos: [221, 222]
+  picture: 'X(2)'
+
+cnab:
+  pos: [223, 230]
+  picture: 'X(8)'
+  default: ''
+
+ocorrencias:
+  pos: [231, 240]
+  picture: 'X(10)'
+  default: ''
