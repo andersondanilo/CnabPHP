@@ -1,3 +1,6 @@
+# Com base na documentação do bradesco
+# disponível em: http://www.bb.com.br/docs/pub/emp/empl/dwn/CbrVer04BB.pdf
+
 codigo_convenio:
   # Código de convênio no Banco
   # O código de convênio é composto pelo número do contrato do cliente junto
@@ -7,8 +10,25 @@ codigo_convenio:
   # O contrato deve estar cadastrado no PAG (Pagamentos a terceiros) no 
   # serviço 30 (Pagamentos de títulos do Banco do Brasil) e no serviço 31
   # (Pagamentos de títulos de outros bancos).
-  pos: [33, 52]
-  picture: 'X(20)'
+  pos: [33, 41]
+  picture: '9(9)'
+
+cobranca_cedente:
+  # Informar 0014 para cobrança cedente
+  pos: [42, 45]
+  picture: '9(4)'
+
+carteira:
+  pos: [46, 47]
+  picture: '9(2)'
+
+variacao_carteira:
+  pos: [48, 50]
+  picture: '9(3)'
+
+uso_exclusivo_bb_01:
+  pos: [51, 52]
+  picture: 'X(2)'
 
 conta:
   pos: [59, 70]
