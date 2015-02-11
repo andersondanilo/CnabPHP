@@ -15,6 +15,7 @@
         "phpunit/php-code-coverage": "1.2.*"
     },
     "require": {
+        "andersondanilo/cnab_yaml": "dev-master",
         "php": ">=5.3.0",
         "mustangostang/spyc": "0.5.*"
     },

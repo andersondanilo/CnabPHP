@@ -1,7 +1,7 @@
 <?php
 namespace Cnab\Format;
 
-define('CNAB_FORMAT_PATH', dirname(__FILE__).'/../../../data/cnab_yaml');
+define('CNAB_FORMAT_PATH', dirname(__FILE__).'/../../../vendor/andersondanilo/cnab_yaml');
 
 class YamlLoad
 {
