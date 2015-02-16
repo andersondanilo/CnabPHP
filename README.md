@@ -99,7 +99,7 @@ $arquivo->insertDetalhe(array(
 ```
 
 ## Como Contribuir
-Você pode contribuir com testes (unitários ou manuais), ou adaptando o formato para outro banco através do projeto cnab_yaml (https://github.com/andersondanilo/cnab_yaml) (que é utilidado pelo cnab_php)
+Você pode contribuir com testes (unitários ou manuais), ou adaptando o formato para outro banco através do projeto cnab_yaml (https://github.com/andersondanilo/cnab_yaml) (que é utilidado pelo cnab_php).  [Leia a wiki](https://github.com/andersondanilo/CnabPHP/wiki)
 
 ## Licença
 Este projeto esta sobre a licença MIT
