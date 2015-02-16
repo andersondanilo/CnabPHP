@@ -27,7 +27,7 @@ class Lote
         {
             $segmento = new SegmentoT($this->codigo_banco);
             $segmento->loadFromString($linha);
-            $this->lastDetalhe = new Detalhe($this->codigo_banco);
+            $this->lastDetalhe = new Detalhe($this->codigo_banco, $this->arquivo);
             $this->detalhes[] = $this->lastDetalhe;
             $this->lastDetalhe->segmento_t = $segmento;
         }

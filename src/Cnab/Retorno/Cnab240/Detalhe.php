@@ -4,14 +4,16 @@ namespace Cnab\Retorno\Cnab240;
 class Detalhe extends \Cnab\Format\Linha implements \Cnab\Retorno\IDetalhe
 {
     public $codigo_banco;
+    public $arquivo;
 
     public $segmento_t;
     public $segmento_u;
     public $segmento_w;
 
-	public function __construct($codigo_banco)
+	public function __construct($codigo_banco, \Cnab\Retorno\Cnab240\Arquivo $arquivo)
 	{
 		$this->codigo_banco = $codigo_banco;
+        $this->arquivo = $arquivo;
 	}
 	
 	/**
@@ -138,7 +140,17 @@ class Detalhe extends \Cnab\Format\Linha implements \Cnab\Retorno\IDetalhe
 	 */
 	public function getNossoNumero()
 	{
-		return $this->segmento_t->nosso_numero;
+        $nossoNumero = $this->segmento_t->nosso_numero;
+
+        if ($this->codigo_banco == 1) {
+            $nossoNumero = preg_replace(
+                '/^'.strval($this->arquivo->getCodigoConvenio()).'/',
+                '',
+                $nossoNumero
+            );
+        }
+
+        return $nossoNumero;
 	}
 
 	/**

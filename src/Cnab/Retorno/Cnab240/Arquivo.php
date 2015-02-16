@@ -145,4 +145,8 @@ class Arquivo implements \Cnab\Retorno\IArquivo
         $header_lote = $lote->header;
         return $header_lote->data_credito ? \DateTime::createFromFormat('dmY', sprintf('%08d', $header_lote->data_credito)) : false;
     }
+
+    public function getCodigoConvenio() {
+        return $this->header->getCodigoConvenio();
+    }
 }

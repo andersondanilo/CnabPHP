@@ -34,6 +34,8 @@ class ArquivoTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(7536, $arquivo->getConta());
         $this->assertEquals(7, $arquivo->getContaDac());
         $this->assertEquals(1, $arquivo->getCodigoBanco());
+        $this->assertEquals(3294860, $arquivo->getCodigoConvenio());
+
         $this->assertEquals(
             \DateTime::createFromFormat('d/m/Y', '21/03/2011'),
             $arquivo->getDataGeracao()
@@ -42,7 +44,9 @@ class ArquivoTest extends \PHPUnit_Framework_TestCase
         $detalhe = $arquivo->listDetalhes();
         $detalhe = $detalhe[0];
 
-        //$this->assertEquals(50000, $detalhe->segmento_t->nosso_numero);
-        //$this->assertEquals(98.80, $detalhe->segmento_t->valor_titulo);
+        $this->assertEquals(40.00, $detalhe->getValorTitulo());
+        $this->assertEquals(196, $detalhe->getNossoNumero());
     }
+
+    
 }
