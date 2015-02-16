@@ -14,6 +14,7 @@ Projeto para criar arquivos de remessas e processar arquivos de retorno no forma
 
 | Banco           | Versão da Remessa  | Versão do Retorno  |
 |-----------------|--------------------|--------------------|
+| Banco do Brasil |                    | 240                |
 | Bradesco        |                    | 240                |
 | Caixa           | 240 e 400          | 240 e 400          |
 | Itaú            | 400 (Falta testar) | 400                |
@@ -23,7 +24,7 @@ Projeto para criar arquivos de remessas e processar arquivos de retorno no forma
 ### Composer
 Se você já conhece o **Composer**, adicione a dependência abaixo à diretiva *"require"* no seu **composer.json**:
 ```
-"andersondanilo/cnab_php": "1.1.*"
+"andersondanilo/cnab_php": "1.2.*"
 ```
 
 ## Como Usar
