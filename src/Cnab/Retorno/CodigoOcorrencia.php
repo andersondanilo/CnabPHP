@@ -1,8 +1,6 @@
 <?php
 namespace Cnab\Retorno;
 
-if(!defined('CNAB_FORMAT_PATH'))
-    define('CNAB_FORMAT_PATH', dirname(__FILE__).'/../../../data/cnab_yaml');
 
 class CodigoOcorrencia
 {

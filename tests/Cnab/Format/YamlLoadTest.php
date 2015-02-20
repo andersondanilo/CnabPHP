@@ -129,14 +129,14 @@ class YamlLoadTest extends \PHPUnit_Framework_TestCase
         $yamlLoad->expects($this->at(0))
                  ->method('loadYaml')
                  ->with(
-                    $this->equalTo(CNAB_FORMAT_PATH.'/cnab240/generic/header_lote.yml')
+                    $this->equalTo($yamlLoad->formatPath.'/cnab240/generic/header_lote.yml')
                 )
                 ->will($this->returnValue($testFormat));
 
         $yamlLoad->expects($this->at(1))
                  ->method('loadYaml')
                  ->with(
-                    $this->equalTo(CNAB_FORMAT_PATH.'/cnab240/033/header_lote.yml')
+                    $this->equalTo($yamlLoad->formatPath.'/cnab240/033/header_lote.yml')
                 )
                 ->will($this->returnValue($testFormat));
 

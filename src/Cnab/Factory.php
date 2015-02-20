@@ -3,6 +3,29 @@ namespace Cnab;
 
 class Factory
 {
+    private static $cnabFormatPath = null;
+
+    public static function getCnabFormatPath() {
+        if (self::$cnabFormatPath === null) {
+            $optionA = dirname(__FILE__).'/../../../cnab_yaml';
+            $optionB = dirname(__FILE__).'/../../vendor/andersondanilo/cnab_yaml';
+
+            if (file_exists($optionA)) {
+                self::setCnabFormatPath($optionA);
+            } else if (file_exists($optionB)) {
+                self::setCnabFormatPath($optionB);
+            } else {
+                throw new \Exception("cnab_yaml não está instalado ou não foi configurado");
+            }
+        }
+
+        return self::$cnabFormatPath;
+    }
+
+    public static function setCnabFormatPath($value) {
+        self::$cnabFormatPath = $value;
+    }
+
 	/**
 	 * Cria um arquivo de remessa
 	 * @return \Cnab\Remessa\IArquivo

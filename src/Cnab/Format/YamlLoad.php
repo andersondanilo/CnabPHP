@@ -1,15 +1,17 @@
 <?php
 namespace Cnab\Format;
 
-define('CNAB_FORMAT_PATH', dirname(__FILE__).'/../../../vendor/andersondanilo/cnab_yaml');
+use Cnab\Factory;
 
 class YamlLoad
 {
     public $codigo_banco = null;
+    public $formatPath;
 
     public function __construct($codigo_banco)
     {
         $this->codigo_banco = $codigo_banco;
+        $this->formatPath = Factory::getCnabFormatPath();
     }
 
     public function validateCollision($fields)
@@ -90,8 +92,8 @@ class YamlLoad
 
     public function loadFormat($cnab, $filename) {
         $banco = sprintf('%03d', $this->codigo_banco);
-        $filenamePadrao = CNAB_FORMAT_PATH.'/'.$cnab.'/generic/'.$filename.'.yml';
-        $filenameEspecifico = CNAB_FORMAT_PATH.'/'.$cnab.'/'.$banco.'/'.$filename.'.yml';
+        $filenamePadrao = $this->formatPath.'/'.$cnab.'/generic/'.$filename.'.yml';
+        $filenameEspecifico = $this->formatPath.'/'.$cnab.'/'.$banco.'/'.$filename.'.yml';
 
         if(!file_exists($filenamePadrao) && !file_exists($filenameEspecifico))
             throw new \Exception('Arquivo não encontrado '. $filename);
