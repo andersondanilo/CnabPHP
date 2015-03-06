@@ -47,12 +47,12 @@ class Arquivo implements \Cnab\Remessa\IArquivo
         {
         	if(array_key_exists($campo, $params))
         	{
-                if(strpos($campo, 'data_') === 0 && !($params[$campo] instanceof DateTime))
-                    throw new Exception("config '$campo' need to be instance of DateTime");
+                if(strpos($campo, 'data_') === 0 && !($params[$campo] instanceof \DateTime))
+                    throw new \Exception("config '$campo' need to be instance of DateTime");
                 $this->configuracao[$campo] = $params[$campo];
            	}
             else
-                throw new Exception('Configuração "'.$campo.'" need to be set');
+                throw new \Exception('Configuração "'.$campo.'" need to be set');
         }
             
         foreach($campos as $key)
@@ -66,8 +66,8 @@ class Arquivo implements \Cnab\Remessa\IArquivo
 
         $this->header = new Header($this);
 
-        $this->header->codigo_do_banco = $this->banco['codigo_do_banco'];
-        $this->header->nome_do_banco = $this->banco['nome_do_banco'];
+        $this->header->codigo_banco = $this->banco['codigo_do_banco'];
+        $this->header->nome_banco = $this->banco['nome_do_banco'];
 
         if($this->codigo_banco == \Cnab\Banco::CEF)
         {
@@ -77,11 +77,11 @@ class Arquivo implements \Cnab\Remessa\IArquivo
         {
             $this->header->agencia = $this->configuracao['agencia'];
             $this->header->conta = $this->configuracao['conta'];
-            $this->header->dac = $this->configuracao['conta_dac'];
+            $this->header->conta_dv = $this->configuracao['conta_dac'];
         }
         
-        $this->header->nome_da_empresa = $this->configuracao['nome_fantasia'];
-        $this->header->data_de_geracao = $this->configuracao['data_geracao']->format('dmy');
+        $this->header->nome_empresa = $this->configuracao['nome_fantasia'];
+        $this->header->data_geracao = $this->configuracao['data_geracao']->format('dmy');
     }
        
     public function insertDetalhe(array $boleto, $tipo='remessa')
@@ -93,12 +93,12 @@ class Arquivo implements \Cnab\Remessa\IArquivo
     
         if($tipo == 'remessa')
         {
-            $detalhe->codigo_de_ocorrencia =  !empty($boleto['codigo_de_ocorrencia']) ? $boleto['codigo_de_ocorrencia'] : '1';
+            $detalhe->codigo_ocorrencia =  !empty($boleto['codigo_de_ocorrencia']) ? $boleto['codigo_de_ocorrencia'] : '1';
             
-            $detalhe->codigo_de_inscricao =   2;
-            $detalhe->numero_de_inscricao =   $this->prepareText($this->configuracao['cnpj'], '.-/');
+            $detalhe->codigo_inscricao =   2;
+            $detalhe->numero_inscricao =   $this->prepareText($this->configuracao['cnpj'], '.-/');
 
-            if(Cnab_Banco::CEF == $this->codigo_banco)
+            if(\Cnab\Banco::CEF == $this->codigo_banco)
             {
                 $detalhe->codigo_cedente = $this->header->codigo_cedente;
                 $detalhe->taxa_de_permanencia = $boleto['taxa_de_permanencia'];
@@ -111,11 +111,12 @@ class Arquivo implements \Cnab\Remessa\IArquivo
             {
                 $detalhe->agencia   =   $this->header->agencia;
                 $detalhe->conta     =   $this->header->conta;
-                $detalhe->conta_dac =   $this->header->dac;    
+                $detalhe->conta_dv  =   $this->header->conta_dv;    
                 $detalhe->codigo_instrucao =   '0';
-                $detalhe->qtde_de_moeda =   '0'; # Este campo deverá ser preenchido com zeros caso a moeda seja o Real.
-                $detalhe->codigo_da_carteira =   'I';
-                $detalhe->uso_do_banco =   '';
+                $detalhe->qtde_moeda =   '0'; # Este campo deverá ser preenchido com zeros caso a moeda seja o Real.
+                $detalhe->codigo_carteira =   'I';
+                $detalhe->uso_banco =   '';
+                $detalhe->data_mora = $boleto['data_multa'];
             }
             
 
@@ -125,38 +126,37 @@ class Arquivo implements \Cnab\Remessa\IArquivo
                ocorrência 35 – Cancelamento de Instrução e 38 – Cedente não concorda com alegação do sacado. Para
                os demais códigos de ocorrência este campo deverá ser preenchido com zeros.
             */
-            $detalhe->uso_da_empresa =   $boleto['nosso_numero'];
+            $detalhe->uso_empresa =   $boleto['nosso_numero'];
             $detalhe->nosso_numero =   $boleto['nosso_numero'];
             
-            $detalhe->numero_da_carteira =   $boleto['carteira'];
-            $detalhe->numero_do_documento =   $boleto['numero_documento'];
+            $detalhe->numero_carteira =   $boleto['carteira'];
+            $detalhe->numero_documento =   $boleto['numero_documento'];
             $detalhe->vencimento =  $dateVencimento->format('dmy');
-            $detalhe->valor_do_titulo =   $boleto['valor'];
-            $detalhe->aceite =   'N';
+            $detalhe->valor_titulo =   $boleto['valor'];
+            $detalhe->aceite =  $boleto['aceite'] ?: 'N';
             $detalhe->instrucao1 = $boleto['instrucao1'];
             $detalhe->instrucao2 = $boleto['instrucao2'];
             $detalhe->especie = $boleto['especie'];
-            $detalhe->data_de_emissao =  $dateCadastro->format('dmy');
+            $detalhe->data_emissao =  $dateCadastro->format('dmy');
             
             $sacado_tipo = @$boleto['sacado_tipo'] or $sacado_tipo = 'cpf';
             
             if($sacado_tipo == 'cnpj')
             {
-                $detalhe->sacado_codigo_de_inscricao =   '2';
+                $detalhe->sacado_codigo_inscricao =   '2';
                 /**
                  * @todo Trocar espécie
                  */
-                $detalhe->sacado_numero_de_inscricao =   $this->prepareText($boleto['sacado_cnpj'], '.-/');
+                $detalhe->sacado_numero_inscricao =   $this->prepareText($boleto['sacado_cnpj'], '.-/');
                 $detalhe->nome =   $this->prepareText($boleto['sacado_razao_social']);
             }
             else
             {
-                $detalhe->sacado_codigo_de_inscricao =   '1';
+                $detalhe->sacado_codigo_inscricao =   '1';
                 /**
                  * @todo Trocar espécie
                  */
-                //$detalhe->especie =   '4'; # Mensalidade Escolar
-                $detalhe->sacado_numero_de_inscricao =   $this->prepareText($boleto['sacado_cpf'], '.-/');
+                $detalhe->sacado_numero_inscricao =   $this->prepareText($boleto['sacado_cpf'], '.-/');
                 $detalhe->nome =   $this->prepareText($boleto['sacado_nome']);
             }
             $detalhe->logradouro =   $this->prepareText($boleto['sacado_logradouro']);
@@ -166,15 +166,15 @@ class Arquivo implements \Cnab\Remessa\IArquivo
             $detalhe->estado =   $boleto['sacado_uf'];
             $detalhe->sacador =   $this->prepareText($this->configuracao['nome_fantasia']);
 
-            $detalhe->juros_de_um_dia = $boleto['juros_de_um_dia'];
-            $detalhe->data_desconto = $boleto['data_desconto'];
+            $detalhe->juros_um_dia = $boleto['juros_de_um_dia'];
+            $detalhe->desconto_ate = $boleto['data_desconto'];
             $detalhe->valor_desconto = $boleto['valor_desconto'];
             $detalhe->prazo = $boleto['prazo'];
         }
         else if($tipo == 'baixa')
         {
-            $detalhe->codigo_de_inscricao =   '0';
-            $detalhe->numero_de_inscricao =   '0';
+            $detalhe->codigo_inscricao =   '0';
+            $detalhe->numero_inscricao =   '0';
             $detalhe->agencia =   $this->header->agencia;
             $detalhe->conta =   $this->header->conta;
             $detalhe->conta_dac =   $this->header->dac;
@@ -184,22 +184,22 @@ class Arquivo implements \Cnab\Remessa\IArquivo
                ocorrência 35 – Cancelamento de Instrução e 38 – Cedente não concorda com alegação do sacado. Para
                os demais códigos de ocorrência este campo deverá ser preenchido com zeros.
             */
-            $detalhe->codigo_de_ocorrencia =  $boleto['codigo_de_ocorrencia'];
-            $detalhe->uso_da_empresa =   $boleto['nosso_numero'];
+            $detalhe->codigo_ocorrencia =  $boleto['codigo_de_ocorrencia'];
+            $detalhe->uso_empresa =   $boleto['nosso_numero'];
             $detalhe->nosso_numero =   $boleto['nosso_numero'];
-            $detalhe->qtde_de_moeda =   '0'; # Este campo deverá ser preenchido com zeros caso a moeda seja o Real.
-            $detalhe->numero_da_carteira =   $boleto['carteira'];
-            $detalhe->codigo_da_carteira =   'I';
-            $detalhe->uso_do_banco =   '';
-            $detalhe->numero_do_documento =   $boleto['numero_documento'];
+            $detalhe->qtde_moeda =   '0'; # Este campo deverá ser preenchido com zeros caso a moeda seja o Real.
+            $detalhe->numero_carteira =   $boleto['carteira'];
+            $detalhe->codigo_carteira =   'I';
+            $detalhe->uso_banco =   '';
+            $detalhe->numero_documento =   $boleto['numero_documento'];
             $detalhe->vencimento =   '0';
-            $detalhe->valor_do_titulo =   $boleto['valor'];
+            $detalhe->valor_titulo =   $boleto['valor'];
             $detalhe->aceite =   ' ';
-            $detalhe->data_de_emissao =  '0';
-            $detalhe->sacado_codigo_de_inscricao =   '2';
-            $detalhe->especie =   ' '; # Conta de Prestação de Serviços
-            $detalhe->sacado_numero_de_inscricao =   '0';
-            $detalhe->juros_de_um_dia = $boleto['juros_de_um_dia'];
+            $detalhe->data_emissao =  '0';
+            $detalhe->sacado_codigo_inscricao =   '2';
+            $detalhe->especie =   ' ';
+            $detalhe->sacado_numero_inscricao =   '0';
+            $detalhe->juros_um_dia = $boleto['juros_de_um_dia'];
             $detalhe->data_juros = $boleto['data_juros'];
             
             $detalhe->nome =   ' ';
@@ -215,7 +215,7 @@ class Arquivo implements \Cnab\Remessa\IArquivo
             throw new Exception('Tipo de $detalhe desconhecido');
         }
         
-        $detalhe->codigo_do_banco = $this->banco['codigo_do_banco'];
+        $detalhe->codigo_banco = $this->banco['codigo_do_banco'];
 
         $this->detalhes[] = $detalhe;
         $detalhe->numero_sequencial =  count($this->detalhes) + 1;
