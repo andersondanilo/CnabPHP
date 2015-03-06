@@ -37,9 +37,39 @@ class ArquivoTest extends \PHPUnit_Framework_TestCase
         $detalhes = $arquivo->listDetalhes();
 
         $this->assertEquals(4, count($detalhes));
-        $detalhe = $detalhes[2];
+        $detalhe = $detalhes[0];
 
-        $this->assertEquals('BL', $detalhe->getCodigoLiquidacao());
+        $this->assertEquals(12345, $arquivo->getConta());
+        $this->assertEquals(0, $arquivo->getContaDac());
+        $this->assertEquals(341, $arquivo->getCodigoBanco());
+        $this->assertEquals(new \DateTime('2013-08-22 00:00:00'), $arquivo->getDataGeracao());
+        $this->assertEquals(new \DateTime('2013-06-21 00:00:00'), $arquivo->getDataCredito());
+
+        $this->assertEquals(6, $detalhe->getCodigo());
+        $this->assertEquals(209.97, $detalhe->getValorRecebido());
+        $this->assertEquals(389.75, $detalhe->getValorTitulo());
+        $this->assertEquals(3.33, $detalhe->getValorTarifa());
+        $this->assertEquals(0.1, $detalhe->getValorIOF());
+        $this->assertEquals(176.45, $detalhe->getValorDesconto());
+        $this->assertEquals(0.19, $detalhe->getValorAbatimento());
+        $this->assertEquals(0.18, $detalhe->getValorOutrosCreditos());
+        $this->assertEquals(123123.12, $detalhe->getValorMoraMulta());
+        $this->assertEquals('1A', $detalhe->getNumeroDocumento());
+        $this->assertEquals(109, $detalhe->getCarteira());
+        $this->assertEquals('0177', $detalhe->getAgencia());
+        $this->assertEquals(231327, $detalhe->getNossoNumero());
+        $this->assertEquals(null, $detalhe->getDataVencimento());
+        $this->assertEquals(new \DateTime('2013-06-21 00:00:00'), $detalhe->getDataCredito());
+        $this->assertEquals(new \DateTime('2013-06-20 00:00:00'), $detalhe->getDataOcorrencia());
+        $this->assertEquals(3027, $detalhe->getAgenciaCobradora());
+        $this->assertEquals(2, $detalhe->getAgenciaCobradoraDac());
+        $this->assertEquals(2, $detalhe->getNumeroSequencial());
+        $this->assertEquals('LIQUIDAÇÃO NORMAL', $detalhe->getCodigoNome());
+        $this->assertEquals(false, $detalhe->isBaixa());
+        $this->assertEquals(false, $detalhe->isBaixaRejeitada());
+        $this->assertEquals('B2', $detalhe->getCodigoLiquidacao());
+        $this->assertEquals('OUTROS BANCOS – PELA LINHA DIGITÁVEL', $detalhe->getDescricaoLiquidacao());
+
         $this->assertNotEmpty($detalhe->getDescricaoLiquidacao());
     }
 }

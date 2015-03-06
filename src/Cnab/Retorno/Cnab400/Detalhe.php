@@ -130,7 +130,7 @@ class Detalhe extends \Cnab\Format\Linha implements \Cnab\Retorno\IDetalhe
 	 */
 	public function getNumeroDocumento()
 	{
-		return $this->numero_do_documento;
+		return trim($this->numero_do_documento);
 	}
 	
 	/** 
@@ -377,7 +377,7 @@ class Detalhe extends \Cnab\Format\Linha implements \Cnab\Retorno\IDetalhe
 			else if($codigo == 5)  
 				return 'ALTERAÇÃO DE DADOS – BAIXA';
 			else if($codigo == 6) 
-				return 'LIQUIDAÇÃO NORMAL ';
+				return 'LIQUIDAÇÃO NORMAL';
 			else if($codigo == 7)
 				return 'LIQUIDAÇÃO PARCIAL – COBRANÇA INTELIGENTE (B2B)';
 			else if($codigo == 8) 
