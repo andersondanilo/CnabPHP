@@ -90,6 +90,7 @@ class Arquivo implements \Cnab\Remessa\IArquivo
         $dateCadastro   = $boleto['data_cadastro']   instanceof \DateTime ? $boleto['data_cadastro']   : new \DateTime($boleto['data_cadastro']);
         
         $detalhe = new Detalhe($this);
+        $complementos = array();
     
         if($tipo == 'remessa')
         {
@@ -118,9 +119,24 @@ class Arquivo implements \Cnab\Remessa\IArquivo
                 $detalhe->uso_banco =   '';
                 $detalhe->data_mora = $boleto['data_multa'];
             }
-            
 
-            
+            if(isset($boleto['multas']) && is_array($boleto['multas']))
+            {
+                foreach($boleto['multas'] as $multa)
+                {
+                    $detalheMulta = new DetalheMulta();
+                    if($multa['tipo_multa'] == 'porcentagem')
+                        $detalheMulta->codigo_multa = 2;
+                    else if($multa['tipo_multa'] == 'valor')
+                        $detalheMulta->codigo_multa = 1;
+                    else
+                        throw new Exception('tipo de multa inválido, deve ser "porcentagem" ou "valor"');
+                    $detalheMulta->data_multa = $multa['data_multa'];
+                    $detalheMulta->valor_multa = $multa['valor_multa'];
+                    $complementos[] = $detalheMulta;
+                }
+            }
+
             /*
                Deve ser preenchido na remessa somente quando utilizados, na posição 109-110, os códigos de
                ocorrência 35 – Cancelamento de Instrução e 38 – Cedente não concorda com alegação do sacado. Para
@@ -218,6 +234,10 @@ class Arquivo implements \Cnab\Remessa\IArquivo
         $detalhe->codigo_banco = $this->banco['codigo_do_banco'];
 
         $this->detalhes[] = $detalhe;
+
+        foreach($complementos as $complemento)
+            $this->detalhes[] = $complemento;
+
         $detalhe->numero_sequencial =  count($this->detalhes) + 1;
     }
 	
