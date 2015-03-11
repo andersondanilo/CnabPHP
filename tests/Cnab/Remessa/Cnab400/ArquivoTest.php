@@ -56,15 +56,30 @@ class ArquivoTest extends \PHPUnit_Framework_TestCase
             'mensagem'            => 'Descrição do boleto',
             'data_multa'          => new \DateTime('2015-02-07'), // data da multa
             'valor_multa'         => 10.0, // valor da multa
+
+            'multas' => array(
+                array(
+                    'tipo_multa' => 'porcentagem',
+                    'data_multa' => new \DateTime('2015-03-03'),
+                    'valor_multa' => 0.2
+                ),
+                array(
+                    'tipo_multa' => 'valor',
+                    'data_multa' => new \DateTime('2015-04-03'),
+                    'valor_multa' => 1.5
+                ),
+            )
         ));
 
         $texto = $arquivo->getText();
         $lines = explode("\r\n", trim($texto, "\r\n"));
 
-        $this->assertEquals(3, count($lines));
+        $this->assertEquals(5, count($lines));
         $headerText = $lines[0];
         $detalheText = $lines[1];
-        $trailerText = $lines[2];
+        $compl1Text = $lines[2];
+        $compl2Text = $lines[3];
+        $trailerText = $lines[4];
 
         $asserts = array(
             'header' => array(
@@ -133,10 +148,26 @@ class ArquivoTest extends \PHPUnit_Framework_TestCase
                 '394:394' => ' ',
                 '395:400' => sprintf('%06d', 2)
             ),
+            'compl1' => array(
+                '1:1' => '2',
+                '2:2' => '2',
+                '3:10' => '03032015',
+                '11:23' => '0000000000020',
+                '24:394' => str_repeat(' ', 371),
+                '395:400' => '000003'
+            ),
+            'compl2' => array(
+                '1:1' => '2',
+                '2:2' => '1',
+                '3:10' => '03042015',
+                '11:23' => '0000000000150',
+                '24:394' => str_repeat(' ', 371),
+                '395:400' => '000004'
+            ),
             'trailer' => array(
                 '001:001' => '9',
                 '002:394' => str_pad(' ', 393),
-                '395:400' => sprintf('%06d', 3)
+                '395:400' => sprintf('%06d', 5)
             )
         );
 

@@ -124,7 +124,7 @@ class Arquivo implements \Cnab\Remessa\IArquivo
             {
                 foreach($boleto['multas'] as $multa)
                 {
-                    $detalheMulta = new DetalheMulta();
+                    $detalheMulta = new DetalheMulta($this);
                     if($multa['tipo_multa'] == 'porcentagem')
                         $detalheMulta->codigo_multa = 2;
                     else if($multa['tipo_multa'] == 'valor')
@@ -237,8 +237,6 @@ class Arquivo implements \Cnab\Remessa\IArquivo
 
         foreach($complementos as $complemento)
             $this->detalhes[] = $complemento;
-
-        $detalhe->numero_sequencial =  count($this->detalhes) + 1;
     }
 	
     public function listDetalhes()
@@ -312,6 +310,10 @@ class Arquivo implements \Cnab\Remessa\IArquivo
 
 	public function getText()
 	{
+        $numero_sequencial = 1;
+
+        $this->header->numero_sequencial = $numero_sequencial++;
+
         // valida os dados
         if(!$this->header->validate())
             throw new \InvalidArgumentException($this->header->last_error);
@@ -320,12 +322,13 @@ class Arquivo implements \Cnab\Remessa\IArquivo
 		$this->trailer = new Trailer($this);
 		foreach($this->detalhes as $detalhe)
 		{
+            $detalhe->numero_sequencial = $numero_sequencial++;
             if(!$detalhe->validate())
-                throw new InvalidArgumentException($detalhe->last_error);
+                throw new \InvalidArgumentException($detalhe->last_error);
 
 			$dados .= $detalhe->getEncoded() . self::QUEBRA_LINHA;
 		}
-		$this->trailer->numero_sequencial = count($this->detalhes) + 2;
+		$this->trailer->numero_sequencial = $numero_sequencial++;
 
         if(!$this->trailer->validate())
             throw new \InvalidArgumentException($this->trailer->last_error);
