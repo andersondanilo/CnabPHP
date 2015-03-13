@@ -335,4 +335,14 @@ class Detalhe extends \Cnab\Format\Linha implements \Cnab\Retorno\IDetalhe
 
         return $dump;
     }
+
+    public function isDDA()
+    {
+        // @TODO: implementar funçao isDDA no Cnab240
+    }
+
+    public function getAlegacaoPagador()
+    {
+        // @TODO: implementar funçao getAlegacaoPagador no Cnab240
+    }
 }

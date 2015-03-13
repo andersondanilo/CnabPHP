@@ -554,4 +554,62 @@ class Detalhe extends \Cnab\Format\Linha implements \Cnab\Retorno\IDetalhe
 
         return null;
     }
+
+    public function isDDA()
+    {
+    	if($this->existField('boleto_dda'))
+        	return $this->boleto_dda ? true : false;
+        return false;
+    }
+
+    public function getAlegacaoPagador()
+    {
+        // @TODO: implementar funçao getAlegacaoPagador nos outros bancos
+        if($this->_codigo_banco == 341) {
+ 			if($this->getCodigo() == 25) {
+ 				$alegacoes = str_split($this->erros, 4);
+
+ 				$tabelaAlegacao = array(
+					'1313' => 'SOLICITA A PRORROGAÇÃO DO VENCIMENTO',
+					'1321' => 'SOLICITA A DISPENSA DOS JUROS DE MORA',
+					'1339' => 'NÃO RECEBEU A MERCADORIA',
+					'1347' => 'A MERCADORIA CHEGOU ATRASADA',
+					'1354' => 'A MERCADORIA CHEGOU AVARIADA',
+					'1362' => 'A MERCADORIA CHEGOU INCOMPLETA',
+					'1370' => 'A MERCADORIA NÃO CONFERE COM O PEDIDO',
+					'1388' => 'A MERCADORIA ESTÁ À DISPOSIÇÃO',
+					'1396' => 'DEVOLVEU A MERCADORIA',
+					'1404' => 'NÃO RECEBEU A FATURA',
+					'1412' => 'A FATURA ESTÁ EM DESACORDO COM A NOTA FISCAL',
+					'1420' => 'O PEDIDO DE COMPRA FOI CANCELADO',
+					'1438' => 'A DUPLICATA FOI CANCELADA',
+					'1446' => 'QUE NADA DEVE OU COMPROU',
+					'1453' => 'QUE MANTÉM ENTENDIMENTOS COM O SACADOR',
+					'1461' => 'PAGARÁ O TÍTULO EM:',
+					'1479' => 'PAGOU O TÍTULO DIRETAMENTE AO BENEFICIÁRIO EM:',
+					'1487' => 'QUE PAGARÁ O TÍTULO DIRETAMENTE AO BENEFICIÁRIO EM:',
+					'1495' => 'QUE O VENCIMENTO CORRETO É:',
+					'1503' => 'VALOR QUE TEM DESCONTO OU ABATIMENTO DE:',
+					'1719' => 'PAGADOR NÃO FOI LOCALIZADO; CONFIRMAR ENDEREÇO',
+					'1727' => 'PAGADOR ESTÁ EM REGIME DE CONCORDATA',
+					'1735' => 'PAGADOR ESTÁ EM REGIME DE FALÊNCIA',
+					'1750' => 'PAGADOR SE RECUSA A PAGAR JUROS BANCÁRIOS',
+					'1768' => 'PAGADOR SE RECUSA A PAGAR COMISSÃO DE PERMANÊNCIA',
+					'1776' => 'NÃO FOI POSSÍVEL A ENTREGA DO BOLETO AO PAGADOR',
+					'1784' => 'BOLETO NÃO ENTREGUE, MUDOU-SE / DESCONHECIDO',
+					'1792' => 'BOLETO NÃO ENTREGUE, CEP ERRADO / INCOMPLETO',
+					'1800' => 'BOLETO NÃO ENTREGUE, NÚMERO NÃO EXISTE/ENDEREÇO INCOMPLETO',
+					'1818' => 'BOLETO NÃO RETIRADO PELO PAGADOR. REENVIADO PELO CORREIO PARA CARTEIRAS COM EMISSÃO PELO',
+					'1826' => 'ENDEREÇO DE E-MAIL INVÁLIDO/COBRANÇA MENSAGEM. BOLETO ENVIADO PELO CORREIO',
+					'1834' => 'BOLETO DDA, DIVIDA RECONHECIDA PELO PAGADOR',
+					'1842' => 'BOLETO DDA, DIVIDA NÃO RECONHECIDA PELO PAGADOR',
+				);
+
+				foreach($alegacoes as $alegacao) {
+					if(array_key_exists($alegacao, $tabelaAlegacao))
+						return $tabelaAlegacao[$alegacao];
+				}
+ 			}
+        }
+    }
 }

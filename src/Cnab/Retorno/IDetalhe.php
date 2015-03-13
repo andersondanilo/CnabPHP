@@ -129,6 +129,7 @@ interface IDetalhe
 	 */
 	public function isBaixa();
 	
+
 	/**
 	 * Retorno se é uma baixa rejeitada
 	 * @return Boolean
@@ -148,4 +149,15 @@ interface IDetalhe
 	 * @return String
 	 */
 	public function getDescricaoLiquidacao();
+
+	/**
+	 * Retorna de o boleto foi pago através do Débito Direto Autorizado
+	 * @return bool
+	 */
+	public function isDDA();
+
+	/**
+	 * Retorna a alegação do pagador (para erros)
+	 */
+	public function getAlegacaoPagador();
 }

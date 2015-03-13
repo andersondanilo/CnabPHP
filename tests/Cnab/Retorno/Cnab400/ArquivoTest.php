@@ -68,8 +68,16 @@ class ArquivoTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(false, $detalhe->isBaixa());
         $this->assertEquals(false, $detalhe->isBaixaRejeitada());
         $this->assertEquals('B2', $detalhe->getCodigoLiquidacao());
+        $this->assertEquals(false, $detalhe->isDDA());
+        $this->assertEquals(null, $detalhe->getAlegacaoPagador());
         $this->assertEquals('OUTROS BANCOS – PELA LINHA DIGITÁVEL', $detalhe->getDescricaoLiquidacao());
 
         $this->assertNotEmpty($detalhe->getDescricaoLiquidacao());
+
+        // teste boleto dda e alegacao sacado
+        $detalhe = $detalhes[1];
+
+        $this->assertEquals(true, $detalhe->isDDA());
+        $this->assertEquals('BOLETO DDA, DIVIDA NÃO RECONHECIDA PELO PAGADOR', $detalhe->getAlegacaoPagador());
     }
 }
