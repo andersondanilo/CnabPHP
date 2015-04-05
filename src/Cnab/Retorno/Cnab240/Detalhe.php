@@ -150,6 +150,11 @@ class Detalhe extends \Cnab\Format\Linha implements \Cnab\Retorno\IDetalhe
             );
         }
 
+        if($this->codigo_banco == \Cnab\Banco::SANTANDER) {
+            // retira o dv
+            $nossoNumero = substr($nossoNumero, 0, -1);
+        }
+
         return $nossoNumero;
 	}
 

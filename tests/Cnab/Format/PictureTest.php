@@ -16,6 +16,7 @@ class PictureTest extends \PHPUnit_Framework_TestCase
         // integer number
         $this->assertEquals(200, Picture::decode('00200', '9(5)'));
         $this->assertEquals(3, Picture::decode('3', '9(1)'));
+        $this->assertEquals(70.46, Picture::decode('07046', '9(3)V9(2)'));
         
         // big integer number
         $this->assertEquals('123456789123456', Picture::decode('000123456789123456', '9(15)'));
@@ -32,6 +33,12 @@ class PictureTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('20050', Picture::encode(200.50, '9(3)V9(2)'));
         $this->assertEquals('00250', Picture::encode(2.5, '9(3)V9(2)'));
         $this->assertEquals('00205', Picture::encode(2.05, '9(3)V9(2)'));
+        $this->assertEquals('07046', Picture::encode(70.45999999999999, '9(3)V9(2)'));
+
+        $linha = new \Cnab\Format\Linha;
+        $field = new \Cnab\Format\Field($linha, 'valor_titulo', '9(3)V9(2)', 0, 4);
+        $field->set(70.45999999999999);
+        $this->assertEquals('07046', $field->getEncoded());
 
         // integer number
         $this->assertEquals('0200', Picture::encode(200, '9(4)'));

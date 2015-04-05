@@ -76,7 +76,7 @@ interface IDetalhe
 	public function getAgencia();
 	
 	/** 
-	 * Retorna o nosso número do boleto
+	 * Retorna o nosso número do boleto (sem o digito)
 	 * @return String
 	 */
 	public function getNossoNumero();
