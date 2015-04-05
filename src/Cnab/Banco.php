@@ -2,6 +2,7 @@
 namespace Cnab;
 class Banco
 {
+    const BANCO_DO_BRASIL = 1;
     const SANTANDER = 33;
     const CEF       = 104;
     const BRADESCO  = 237;
@@ -9,7 +10,13 @@ class Banco
 
     public static function getBanco($codigo)
     {
-        if($codigo == self::ITAU)
+        if($codigo == self::BANCO_DO_BRASIL)
+        {
+            return array(
+                'codigo_do_banco' => self::BANCO_DO_BRASIL,
+                'nome_do_banco'   => 'BANCO DO BRASIL SA',
+            );
+        } else if($codigo == self::ITAU)
         {
             return array(
                 'codigo_do_banco' => self::ITAU,
