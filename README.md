@@ -24,7 +24,7 @@ Projeto para criar arquivos de remessas e processar arquivos de retorno no forma
 ### Composer
 Se você já conhece o **Composer**, adicione a dependência abaixo à diretiva *"require"* no seu **composer.json**:
 ```
-"andersondanilo/cnab_php": "1.2.*"
+"andersondanilo/cnab_php": "1.3.*"
 ```
 
 ## Como Usar
