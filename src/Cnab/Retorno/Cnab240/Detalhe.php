@@ -78,6 +78,15 @@ class Detalhe extends \Cnab\Format\Linha implements \Cnab\Retorno\IDetalhe
 	}
 
 	/**
+	 * Retorna o valor do pago
+	 * @return Double
+	 */
+	public function getValorPago()
+	{
+		return $this->segmento_u->valor_pago;
+	}
+
+	/**
 	 * Retorna o valor da tarifa
 	 * @return Double
 	 */
@@ -111,6 +120,15 @@ class Detalhe extends \Cnab\Format\Linha implements \Cnab\Retorno\IDetalhe
 	public function getValorAbatimento()
 	{
 		return $this->segmento_u->valor_abatimento;
+	}
+
+	/**
+	 * Retorna o valor de outras despesas
+	 * @return Double
+	 */
+	public function getValorOutrasDespesas()
+	{
+	    return $this->segmento_u->valor_outras_despesas;
 	}
 
 	/**
@@ -228,6 +246,15 @@ class Detalhe extends \Cnab\Format\Linha implements \Cnab\Retorno\IDetalhe
 	public function getAgencia()
 	{
 		return $this->segmento_t->agencia_mantenedora;
+	}
+
+	/**
+	 * Retorna o número da agencia do boleto
+	 * @return String
+	 */
+	public function getAgenciaDv()
+	{
+		return $this->segmento_t->agencia_dv;
 	}
 	
 	/**
