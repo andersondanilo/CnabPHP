@@ -58,7 +58,8 @@ class Identifier
 
                 if($layout_versao == '040' || $layout_versao == '050')
                 {
-                    $layout_versao = 'SIGCB';
+                    // Layout SIGCB
+                    $layout_versao = 'sigcb';
                 }
                 else
                 {
