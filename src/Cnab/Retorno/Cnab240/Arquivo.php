@@ -1,5 +1,6 @@
 <?php
 namespace Cnab\Retorno\Cnab240;
+use Cnab\Factory;
 
 class Arquivo implements \Cnab\Retorno\IArquivo
 {
@@ -16,6 +17,10 @@ class Arquivo implements \Cnab\Retorno\IArquivo
 	public function __construct($codigo_banco, $filename)
 	{
 		$this->filename = $filename;
+        
+        $layout_versao = Factory::getLayoutVersao($this->filename);
+        Factory::setLayoutVersao($layout_versao);
+
 
 		if(!file_exists($this->filename))
 			throw new \Exception("Arquivo não encontrado: {$this->filename}");

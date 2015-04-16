@@ -4,6 +4,7 @@ namespace Cnab;
 class Factory
 {
     private static $cnabFormatPath = null;
+    private static $layout_versao = null;
 
     public static function getCnabFormatPath() {
         if (self::$cnabFormatPath === null) {
@@ -24,6 +25,23 @@ class Factory
 
     public static function setCnabFormatPath($value) {
         self::$cnabFormatPath = $value;
+    }
+
+    public static function getLayoutVersao($filename = null)
+    {
+        if(self::$layout_versao === null && $filename != null)
+        {
+            $identifier = new Format\Identifier;
+            $format = $identifier->identifyFile($filename);
+
+            self::$layout_versao = $format['layout_versao'];
+        }
+
+        return self::$layout_versao;
+    }
+
+    public static function setLayoutVersao($value) {
+        self::$layout_versao = $value;
     }
 
 	/**

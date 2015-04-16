@@ -6,9 +6,10 @@ use Cnab\Factory;
 class YamlLoad
 {
     public $codigo_banco = null;
+    public $layout_versao = null;
     public $formatPath;
 
-    public function __construct($codigo_banco)
+    public function __construct($codigo_banco, $layout_versao = null)
     {
         $this->codigo_banco = $codigo_banco;
         $this->formatPath = Factory::getCnabFormatPath();
@@ -94,6 +95,12 @@ class YamlLoad
         $banco = sprintf('%03d', $this->codigo_banco);
         $filenamePadrao = $this->formatPath.'/'.$cnab.'/generic/'.$filename.'.yml';
         $filenameEspecifico = $this->formatPath.'/'.$cnab.'/'.$banco.'/'.$filename.'.yml';
+
+        if($this->layout_versao != null)
+        {
+            // Usado quando o banco possuir mais de uma versao de Layout
+            $filenameEspecifico = $this->formatPath.'/'.$cnab.'/'.$banco.'/'.$this->layout_versao.'/'.$filename.'.yml';
+        }
 
         if(!file_exists($filenamePadrao) && !file_exists($filenameEspecifico))
             throw new \Exception('Arquivo não encontrado '. $filename);
