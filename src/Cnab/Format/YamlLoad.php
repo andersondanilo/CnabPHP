@@ -100,7 +100,7 @@ class YamlLoad
         if($layout_versao != null)
         {
             // Usado quando o banco possuir mais de uma versao de Layout
-            $filenameEspecifico = $this->formatPath.'/'.$cnab.'/'.$banco.'/'.$layout_versao.'_'.$filename.'.yml';
+            $filenameEspecifico = $this->formatPath.'/'.$cnab.'/'.$banco.'/'.$layout_versao.'/'.$filename.'.yml';
         }
 
         if(!file_exists($filenamePadrao) && !file_exists($filenameEspecifico))
@@ -120,7 +120,8 @@ class YamlLoad
         return $arrayFormat;
     }
 
-    public function load(Linha $cnabLinha, $cnab, $filename) {
+    public function load(Linha $cnabLinha, $cnab, $filename)
+    {
         $arrayFormat = $this->loadFormat($cnab, $filename);
         $this->loadArray($cnabLinha, $arrayFormat);
     }
