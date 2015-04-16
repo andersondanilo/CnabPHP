@@ -11,13 +11,14 @@ class Arquivo implements \Cnab\Retorno\IArquivo
 	public $trailer  = false;
 
 	public $codigo_banco;
+    public $layout_versao;
 
 	private $filename;
 
 	public function __construct($codigo_banco, $filename)
 	{
 		$this->filename = $filename;
-        $layout_versao = Factory::getLayoutVersao($this->filename);
+        $this->layout_versao = Factory::getLayoutVersao($this->filename);
 
 		if(!file_exists($this->filename))
 			throw new \Exception("Arquivo não encontrado: {$this->filename}");
