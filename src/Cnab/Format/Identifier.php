@@ -37,6 +37,8 @@ class Identifier
             $codigo_banco = \substr($lines[0], 76, 3);
             $codigo_tipo  = \substr($lines[0],  1, 1);
             $tipo = null;
+            $layout_versao = null;
+
             if($codigo_tipo == '1')
                 $tipo = 'remessa';
             else if ($codigo_tipo == '2')
@@ -47,6 +49,25 @@ class Identifier
             $codigo_banco = \substr($lines[0], 0, 3);
             $codigo_tipo  = \substr($lines[0],  142, 1);
             $tipo = null;
+            $layout_versao = null;
+
+            // Pega a Versao do Layout da CEF 
+            if(\Cnab\Banco::CEF == $codigo_banco)
+            {
+                $layout_versao = \substr($lines[0], 163, 3);
+
+                if($layout_versao == '040' || $layout_versao == '050')
+                {
+                    // Layout SIGCB
+                    $layout_versao = 'sigcb';
+                }
+                else
+                {
+                    // Layout SICOB
+                    $layout_versao = null;
+                }
+            }
+
             if(\strtoupper($codigo_tipo) == '1')
                 $tipo = 'remessa';
             elseif (\strtoupper($codigo_tipo) == '2')
@@ -59,6 +80,7 @@ class Identifier
             'banco' => $codigo_banco,
             'tipo'  => $tipo,
             'bytes' => $bytes,
+            'layout_versao' => $layout_versao,
         );
 
         return $result;
