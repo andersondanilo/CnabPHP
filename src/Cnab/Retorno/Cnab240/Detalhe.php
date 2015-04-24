@@ -15,6 +15,41 @@ class Detalhe extends \Cnab\Format\Linha implements \Cnab\Retorno\IDetalhe
 		$this->codigo_banco = $codigo_banco;
         $this->arquivo = $arquivo;
 	}
+
+	/**
+	 * Procura pelo dado solicitado nos segmentos 'T', 'U' e 'W' (nesta sequencia)
+	 * Retorna o valor do mesmo não tratado (para tratar dados especificos usar as outras funções criadas)
+	 * O nome deve começar com 'get' e pode ser usado o nome igual encontrado com '_' ou em CamelCase
+	 *
+	 * Ex: Para retornar o dado de $this->segmento_u->valor_pago usar: getValorPago ou get_valor_pago
+	 *
+	 * @author Sandro Boçon
+	 * @return mixed
+	 */
+	public function __call($name, $arguments)
+	{
+		if (substr($name, 0, 3) == 'get') {
+			// Transforma CamelCase para separação com '_', se necessário
+			$name = strtolower(preg_replace("/([A-Z])/", "_\\1", $name));
+
+			// Retira o 'get_'
+			$name = str_replace('get_', '', $name);
+
+			$find = array('t', 'u', 'w');
+			foreach ($find as $segmento) {
+				$segmento = 'segmento_'.$segmento;
+
+				if (method_exists($this->{$segmento}, 'existField')
+					and $this->{$segmento}->existField($name)) {
+					return $this->{$segmento}->{$name};
+				}
+			}
+		}
+
+		throw new \InvalidArgumentException("'$name' dont exists on segments 'T', 'U' or 'W'");
+		
+		return null;
+	}
 	
 	/**
 	 * Retorno se é para dar baixa no boleto
@@ -69,75 +104,12 @@ class Detalhe extends \Cnab\Format\Linha implements \Cnab\Retorno\IDetalhe
 	}
 
 	/**
-	 * Retorna o valor do título
-	 * @return Double
-	 */
-	public function getValorTitulo()
-	{
-		return $this->segmento_t->valor_titulo;
-	}
-
-	/**
-	 * Retorna o valor do pago
-	 * @return Double
-	 */
-	public function getValorPago()
-	{
-		return $this->segmento_u->valor_pago;
-	}
-
-	/**
-	 * Retorna o valor da tarifa
-	 * @return Double
-	 */
-	public function getValorTarifa()
-	{
-		return $this->segmento_t->valor_tarifa;
-	}
-
-	/**
 	 * Retorna o valor do Imposto sobre operações financeiras
 	 * @return Double
 	 */
 	public function getValorIOF()
 	{
 		return $this->segmento_u->valor_iof;
-	}
-
-	/**
-	 * Retorna o valor dos descontos concedido (antes da emissão)
-	 * @return Double;
-	 */
-	public function getValorDesconto()
-	{
-		return $this->segmento_u->valor_desconto;
-	}
-
-	/**
-	 * Retorna o valor dos abatimentos concedidos (depois da emissão)
-	 * @return Double
-	 */
-	public function getValorAbatimento()
-	{
-		return $this->segmento_u->valor_abatimento;
-	}
-
-	/**
-	 * Retorna o valor de outras despesas
-	 * @return Double
-	 */
-	public function getValorOutrasDespesas()
-	{
-	    return $this->segmento_u->valor_outras_despesas;
-	}
-
-	/**
-	 * Retorna o valor de outros creditos
-	 * @return Double
-	 */
-	public function getValorOutrosCreditos()
-	{
-	    return $this->segmento_u->valor_outros_creditos;
 	}
 
 	/**
@@ -236,7 +208,6 @@ class Detalhe extends \Cnab\Format\Linha implements \Cnab\Retorno\IDetalhe
     		return $this->segmento_t->carteira;
         else
             return null;
-            
 	}
 
 	/**
@@ -248,33 +219,6 @@ class Detalhe extends \Cnab\Format\Linha implements \Cnab\Retorno\IDetalhe
 		return $this->segmento_t->agencia_mantenedora;
 	}
 
-	/**
-	 * Retorna o número da agencia do boleto
-	 * @return String
-	 */
-	public function getAgenciaDv()
-	{
-		return $this->segmento_t->agencia_dv;
-	}
-	
-	/**
-	 * Retorna a agencia cobradora
-	 * @return string
-	 */
-	public function getAgenciaCobradora()
-	{
-		return $this->segmento_t->agencia_cobradora;
-	}
-	
-	/**
-	 * Retorna a o dac da agencia cobradora
-	 * @return string
-	 */
-	public function getAgenciaCobradoraDac()
-	{
-		return $this->segmento_t->agencia_cobradora_dac;
-	}
-	
 	/**
 	 * Retorna o numero sequencial
 	 * @return Integer;

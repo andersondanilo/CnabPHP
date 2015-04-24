@@ -19,13 +19,13 @@ interface IDetalhe
 	 * Retorna o valor da tarifa
 	 * @return Double
 	 */
-	public function getValorTitulo();
+	// public function getValorTitulo();
 	
 	/**
 	 * Retorna o valor da tarifa
 	 * @return Double
 	 */
-	public function getValorTarifa();
+	// public function getValorTarifa();
 
 	/**
 	 * Retorna o valor do Imposto sobre operações financeiras
@@ -37,19 +37,19 @@ interface IDetalhe
 	 * Retorna o valor dos descontos concedido (antes da emissão)
 	 * @return Double;
 	 */
-	public function getValorDesconto();
+	// public function getValorDesconto();
 	
 	/**
 	 * Retornna o valor dos abatimentos concedidos (depois da emissão)
 	 * @return Double
 	 */
-	public function getValorAbatimento();
+	// public function getValorAbatimento();
 	
 	/**
 	 * Retorna o valor de outros creditos 
 	 * @return Double
 	 */
-	public function getValorOutrosCreditos();
+	// public function getValorOutrosCreditos();
 	
 	/**
 	 * Retorna o valor de juros e mora
@@ -103,13 +103,13 @@ interface IDetalhe
 	 * Retorna a agencia cobradora
 	 * @return string
 	 */
-	public function getAgenciaCobradora();
+	// public function getAgenciaCobradora();
 	
 	/**
 	 * Retorna a o dac da agencia cobradora
 	 * @return string
 	 */
-	public function getAgenciaCobradoraDac();
+	// public function getAgenciaCobradoraDac();
 	
 	/**
 	 * Retorna o numero sequencial
