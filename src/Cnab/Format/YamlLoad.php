@@ -97,7 +97,7 @@ class YamlLoad
 
         $layout_versao = Factory::getLayoutVersao();
 
-        if($layout_versao != null)
+        if($layout_versao != null && $this->codigo_banco == 104)
         {
             // Usado quando o banco possuir mais de uma versao de Layout
             $filenameEspecifico = $this->formatPath.'/'.$cnab.'/'.$banco.'/'.$layout_versao.'/'.$filename.'.yml';

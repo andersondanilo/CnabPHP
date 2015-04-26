@@ -32,12 +32,13 @@ class Identifier
         else
             return null;
 
+        $layout_versao = null;
+
         if($bytes == 400)
         {
             $codigo_banco = \substr($lines[0], 76, 3);
             $codigo_tipo  = \substr($lines[0],  1, 1);
             $tipo = null;
-            $layout_versao = null;
 
             if($codigo_tipo == '1')
                 $tipo = 'remessa';
@@ -49,7 +50,6 @@ class Identifier
             $codigo_banco = \substr($lines[0], 0, 3);
             $codigo_tipo  = \substr($lines[0],  142, 1);
             $tipo = null;
-            $layout_versao = null;
 
             // Pega a Versao do Layout da CEF 
             if(\Cnab\Banco::CEF == $codigo_banco)

@@ -52,8 +52,6 @@ class Factory
 	{
 		if(empty($codigo_banco))
 			throw new \InvalidArgumentException('$codigo_banco cannot be empty');
-		// por enquanto só suporta o Cnab400
-		require_once dirname(__FILE__).'/remessa/cnab400/Arquivo.php';
 		return new Remessa\Cnab400\Arquivo($codigo_banco);
 	}
 

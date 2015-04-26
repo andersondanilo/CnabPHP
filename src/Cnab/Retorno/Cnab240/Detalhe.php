@@ -168,7 +168,7 @@ class Detalhe extends \Cnab\Format\Linha implements \Cnab\Retorno\IDetalhe
             );
         }
 
-        if($this->codigo_banco == \Cnab\Banco::SANTANDER) {
+        if(in_array($this->codigo_banco, array(\Cnab\Banco::SANTANDER))) {
             // retira o dv
             $nossoNumero = substr($nossoNumero, 0, -1);
         }
@@ -182,7 +182,10 @@ class Detalhe extends \Cnab\Format\Linha implements \Cnab\Retorno\IDetalhe
 	 */
 	public function getDataVencimento()
 	{
-		return $this->segmento_t->data_vencimento ? \DateTime::createFromFormat('dmY', sprintf('%08d', $this->segmento_t->data_vencimento)) : false;
+		$data = $this->segmento_t->data_vencimento ? \DateTime::createFromFormat('dmY', sprintf('%08d', $this->segmento_t->data_vencimento)) : false;
+        if($data)
+            $data->setTime(0,0,0);
+        return $data;        
 	}
 
 	/**
@@ -191,7 +194,10 @@ class Detalhe extends \Cnab\Format\Linha implements \Cnab\Retorno\IDetalhe
 	 */
 	public function getDataCredito()
 	{
-		return $this->segmento_u->data_credito ? \DateTime::createFromFormat('dmY', sprintf('%08d', $this->segmento_u->data_credito)) : false;
+		$data = $this->segmento_u->data_credito ? \DateTime::createFromFormat('dmY', sprintf('%08d', $this->segmento_u->data_credito)) : false;
+        if($data)
+            $data->setTime(0,0,0);
+        return $data;
 	}
 
 	/**
@@ -208,7 +214,10 @@ class Detalhe extends \Cnab\Format\Linha implements \Cnab\Retorno\IDetalhe
 	 */
 	public function getDataOcorrencia()
 	{
-		return $this->segmento_u->data_ocorrencia ? \DateTime::createFromFormat('dmY', sprintf('%08d', $this->segmento_u->data_ocorrencia)) : false;
+		$data = $this->segmento_u->data_ocorrencia ? \DateTime::createFromFormat('dmY', sprintf('%08d', $this->segmento_u->data_ocorrencia)) : false;
+        if($data)
+            $data->setTime(0,0,0);
+        return $data;
 	}
 
 	/**
