@@ -149,7 +149,7 @@ class Arquivo implements \Cnab\Remessa\IArquivo
             $detalhe->numero_documento =   $boleto['numero_documento'];
             $detalhe->vencimento =  $dateVencimento->format('dmy');
             $detalhe->valor_titulo =   $boleto['valor'];
-            $detalhe->aceite =  $boleto['aceite'] ?: 'N';
+            $detalhe->aceite =  empty($boleto['aceite']) ? 'N' : $boleto['aceite'];
             $detalhe->instrucao1 = $boleto['instrucao1'];
             $detalhe->instrucao2 = $boleto['instrucao2'];
             $detalhe->especie = $boleto['especie'];

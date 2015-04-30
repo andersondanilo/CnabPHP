@@ -63,15 +63,20 @@ class Linha {
 			$dados = "";
 			$fields = $this->fields;
 			usort($fields, 'self::cmpSortFields');
+            $lastField = null;
 			foreach($fields as $field)
 			{
+                if($lastField && $field->pos_start != $lastField->pos_end + 1)
+                    throw new \Exception("gap between {$lastField->nome} and {$field->nome}");
 				$dados .= $field->getEncoded();
 				if($field->pos_end > $max_pos_end)
 					$max_pos_end = $field->pos_end; 
+                $lastField = $field;
 			}
 			
-			if(strlen($dados) <> $max_pos_end)
-				throw new \Exception("length of dados is " . \strlen($dados) . " and max pos_end is $max_pos_end");
+			if(strlen($dados) <> $max_pos_end) {
+				throw new \Exception("line length is " . \strlen($dados) . " and max pos_end is $max_pos_end");
+            }
 			
 			return $dados;
 		}

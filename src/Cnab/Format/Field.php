@@ -3,7 +3,7 @@ namespace Cnab\Format;
 
 class Field {
 	private $cnabLinha;
-	private $nome;
+	public $nome;
 	public  $format;
 	private $valor_decoded;
 	private $valor_encoded = null;
