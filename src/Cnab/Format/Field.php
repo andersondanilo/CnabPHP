@@ -11,12 +11,14 @@ class Field {
 	public $pos_start;
 	public $pos_end;
 	public $length;
+	public $options;
 	
-	public function __construct(Linha $linha, $nome, $format, $pos_start, $pos_end)
+	public function __construct(Linha $linha, $nome, $format, $pos_start, $pos_end, $options)
 	{
 		if(!Picture::validarFormato($format))
 			throw new \InvalidArgumentException("'$format' is not a valid format on $nome");
-			
+		
+		$this->options = $options;
 		$this->nome         = $nome;
 		$this->cnabLinha    = $linha;
 		$this->format       = $format;
@@ -40,11 +42,12 @@ class Field {
 		
 		try 
 		{
-			$this->valor_encoded = Picture::encode($valor, $this->format);	
+			$this->valor_encoded = Picture::encode($valor, $this->format, $this->options);	
 		}
 		catch(\Exception $e)
 		{
-			echo "Error in field '$this->nome': " . $e->getMessage();
+			trigger_error("Error in field '$this->nome': " . $e->getMessage(), E_USER_NOTICE);
+			throw $e; // para exibir o backtrace
 		}
 		
 		$len = strlen($this->valor_encoded);

@@ -32,7 +32,7 @@ class Picture
             return '0';
     }
 	
-	public static function encode($value, $format)
+	public static function encode($value, $format, $options)
 	{
 		$m = array();
 		if(\preg_match(self::REGEX_VALID_FORMAT, $format, $m))
@@ -45,14 +45,16 @@ class Picture
 			}
 			else if($m['tipo1'] == '9')
 			{
-				if((int)$m['tamanho1'] == 8 && $value instanceof \DateTime)
-				{
-					$value = $value->format('dmY');
-				}
+				if($value instanceof \DateTime) {
+					if(@$options['date_format']) {
+						$value = strftime($options['date_format'], $value->getTimestamp());
+					} else {
+						if((int)$m['tamanho1'] == 8)
+							$value = $value->format('dmY');
 
-				if((int)$m['tamanho1'] == 6 && $value instanceof \DateTime)
-				{
-					$value = $value->format('dmy');
+						if((int)$m['tamanho1'] == 6)
+							$value = $value->format('dmy');
+					}
 				}
 				
 				if(!is_numeric($value))
@@ -84,7 +86,7 @@ class Picture
 			throw new \InvalidArgumentException("'$format' is not a valid format");
 	}
 	
-	public static function decode($value, $format)
+	public static function decode($value, $format, $options)
 	{
 		$m = array();
 		if(preg_match(self::REGEX_VALID_FORMAT, $format, $m))

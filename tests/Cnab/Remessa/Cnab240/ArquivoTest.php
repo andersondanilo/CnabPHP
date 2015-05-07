@@ -1,30 +1,32 @@
 <?php
-namespace Cnab\Tests\Remessa\Cnab400;
+namespace Cnab\Tests\Remessa\Cnab240;
 
-use Cnab\Retorno\Cnab400\Arquivo;
 
 class ArquivoTest extends \PHPUnit_Framework_TestCase 
 {
-    public function testArquivoItauCnab400PodeSerCriado()
+    public function testArquivoCaixaCnab240SigcbPodeSerCriado()
     {
-        $codigo_banco = \Cnab\Banco::ITAU;
-        $arquivo = new \Cnab\Remessa\Cnab400\Arquivo($codigo_banco);
+        $codigoBanco = \Cnab\Banco::CEF;
+        $cnabFactory = new \Cnab\Factory;
+        $arquivo = $cnabFactory->createRemessa($codigoBanco, 'cnab240', 'sigcb');
         $arquivo->configure(array(
             'data_geracao'  => new \DateTime('2015-02-01'),
             'data_gravacao' => new \DateTime('2015-02-01'), 
             'nome_fantasia' => 'Nome Fantasia da sua empresa', 
             'razao_social'  => 'Razão social da sua empresa', 
             'cnpj'          => '11222333444455',
-            'banco'         => $codigo_banco, //código do banco
+            'banco'         => $codigoBanco, //código do banco
             'logradouro'    => 'Logradouro da Sua empresa',
             'numero'        => 'Número do endereço',
             'bairro'        => 'Bairro da sua empresa', 
             'cidade'        => 'Cidade da sua empresa',
             'uf'            => 'SP',
             'cep'           => '00000111',
+
             'agencia'       => '1234',
-            'conta'         => '123',
-            'conta_dac'         => '1',
+            'agencia_dv'    => '3',
+            'codigo_cedente' => '123123',
+            'numero_sequencial_arquivo' => 1,
         ));
 
         // você pode adicionar vários boletos em uma remessa
@@ -34,7 +36,9 @@ class ArquivoTest extends \PHPUnit_Framework_TestCase
             'numero_documento'  => '12345678',
             'carteira'          => '111',
             'especie'           => \Cnab\Especie::ITAU_DIVERSOS, // Você pode consultar as especies Cnab\Especie::CEF_OUTROS, futuramente poderemos ter uma tabela na documentação
-            'aceite'            => 'Z', // "S" ou "N"
+            'aceite'            => 'N', // "S" ou "N"
+            'registrado'        => false,
+            'modalidade_carteira' => '21',
             'valor'             => 100.39, // Valor do boleto
             'instrucao1'        => '', // 1 = Protestar com (Prazo) dias, 2 = Devolver após (Prazo) dias, futuramente poderemos ter uma constante
             'instrucao2'        => '', // preenchido com zeros
@@ -174,10 +178,10 @@ class ArquivoTest extends \PHPUnit_Framework_TestCase
         foreach($asserts as $tipo => $campos) {
             $vname = "{$tipo}Text";
             foreach($campos as $pos => $value) {
-                $pos = explode(':', $pos);
-                $start = $pos[0] - 1;
-                $end = ($pos[1] - $pos[0]) + 1;
-                $this->assertEquals($value, substr($$vname, $start, $end));
+                $aux = explode(':', $pos);
+                $start = $aux[0] - 1;
+                $end = ($aux[1] - $aux[0]) + 1;
+                $this->assertEquals($value, substr($$vname, $start, $end), "Campo $pos do $tipo");
             }
         }
     }

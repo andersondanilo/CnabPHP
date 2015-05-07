@@ -7,7 +7,8 @@ class ArquivoTest extends \PHPUnit_Framework_TestCase
 {
     public function testArquivoBradescoCnab400PodeSerLido()
     {
-        $arquivo = new Arquivo(\Cnab\Banco::BRADESCO, 'tests/fixtures/cnab400/retorno-cb030400-bradesco.ret');
+        $factory = new \Cnab\Factory;
+        $arquivo = $factory->createRetorno('tests/fixtures/cnab400/retorno-cb030400-bradesco.ret');
         $this->assertNotNull($arquivo);
         $this->assertNotNull($arquivo->header);
         $this->assertNotNull($arquivo->trailer);
@@ -27,7 +28,8 @@ class ArquivoTest extends \PHPUnit_Framework_TestCase
 
     public function testArquivoItauCnab400PodeSerLido()
     {
-        $arquivo = new Arquivo(\Cnab\Banco::ITAU, 'tests/fixtures/cnab400/retorno-cnab400-itau.ret');
+        $factory = new \Cnab\Factory;
+        $arquivo = $factory->createRetorno('tests/fixtures/cnab400/retorno-cnab400-itau.ret');
         $this->assertNotNull($arquivo);
         $this->assertNotNull($arquivo->header);
         $this->assertNotNull($arquivo->trailer);

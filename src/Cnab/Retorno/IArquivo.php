@@ -3,9 +3,7 @@
 namespace Cnab\Retorno;
 
 interface IArquivo
-{	
-	public function __construct($codigo_banco, $filename);	
-	
+{
 	/**
 	 * Retorna todos os detatles
 	 * @return iRetornoDetalhe[]

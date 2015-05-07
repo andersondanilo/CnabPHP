@@ -7,7 +7,8 @@ class ArquivoTest extends \PHPUnit_Framework_TestCase
 {
     public function testArquivoSantanderPodeSerLido()
     {
-        $arquivo = new Arquivo(33, 'tests/fixtures/cnab240/retorno_santander.ret');
+        $factory = new \Cnab\Factory;
+        $arquivo = $factory->createRetorno('tests/fixtures/cnab240/retorno_santander.ret');
         $this->assertNotNull($arquivo);
         $this->assertNotNull($arquivo->header);
         $this->assertNotNull($arquivo->lotes);
@@ -25,7 +26,8 @@ class ArquivoTest extends \PHPUnit_Framework_TestCase
     }
 
     public function testArquivoBancoDoBrasilPodeSerLido() {
-        $arquivo = new Arquivo(1, 'tests/fixtures/cnab240/retorno_bb.ret');
+        $factory = new \Cnab\Factory;
+        $arquivo = $factory->createRetorno('tests/fixtures/cnab240/retorno_bb.ret');
         $this->assertNotNull($arquivo);
         $this->assertNotNull($arquivo->header);
         $this->assertNotNull($arquivo->lotes);
@@ -49,7 +51,8 @@ class ArquivoTest extends \PHPUnit_Framework_TestCase
     }
 
     public function testArquivoCaixaPodeSerLido() {
-        $arquivo = new Arquivo(104, 'tests/fixtures/cnab240/retorno_cnab240_caixa.ret');
+        $factory = new \Cnab\Factory;
+        $arquivo = $factory->createRetorno('tests/fixtures/cnab240/retorno_cnab240_caixa.ret');
         $this->assertNotNull($arquivo);
         $this->assertNotNull($arquivo->header);
         $this->assertNotNull($arquivo->lotes);

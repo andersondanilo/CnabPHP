@@ -5,11 +5,11 @@ class Detalhe extends \Cnab\Format\Linha implements \Cnab\Retorno\IDetalhe
 {
 	public $_codigo_banco;
     
-	public function __construct($codigo_banco)
+	public function __construct(\Cnab\Retorno\IArquivo $arquivo)
 	{
-		$this->_codigo_banco = $codigo_banco;
+		$this->_codigo_banco = $arquivo->codigo_banco;
 
-		$yamlLoad = new \Cnab\Format\YamlLoad($codigo_banco);
+		$yamlLoad = new \Cnab\Format\YamlLoad($arquivo->codigo_banco, $arquivo->layoutVersao);
         $yamlLoad->load($this, 'cnab400', 'retorno/detalhe');
 	}
 	

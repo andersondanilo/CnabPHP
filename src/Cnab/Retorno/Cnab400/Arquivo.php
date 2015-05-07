@@ -8,14 +8,16 @@ class Arquivo implements \Cnab\Retorno\IArquivo
 	public $header   = false;
 	public $detalhes = array();
 	public $trailer  = false;
+    public $layoutVersao; // ex: sicoob, sigcb
 
 	public $codigo_banco;
 
 	private $filename;
 	
-	public function __construct($codigo_banco, $filename)
+	public function __construct($codigo_banco, $filename, $layoutVersao=null)
 	{
 		$this->filename = $filename;
+        $this->layoutVersao = $layoutVersao;
 
 		if(!file_exists($this->filename))
 			throw new Exception("Arquivo não encontrado: {$this->filename}");
@@ -27,8 +29,8 @@ class Arquivo implements \Cnab\Retorno\IArquivo
 		$linhas = explode("\r\n", $this->content);
 		if(count($linhas) < 2)
 			$linhas = explode("\n", $this->content);
-		$this->header  = new Header($this->codigo_banco);
-		$this->trailer = new Trailer($this->codigo_banco);
+		$this->header  = new Header($this);
+		$this->trailer = new Trailer($this);
 		
 		foreach($linhas as $linha)
 		{
@@ -39,7 +41,7 @@ class Arquivo implements \Cnab\Retorno\IArquivo
 			}
 			else if($tipo_registro == '1')
 			{
-				$detalhe = new Detalhe($this->codigo_banco);
+				$detalhe = new Detalhe($this);
 				$detalhe->loadFromString($linha);
 				$this->detalhes[] = $detalhe;
 			}

@@ -10,7 +10,7 @@ class Linha {
 		if(\array_key_exists($key, $this->fields))
 			$this->fields[$key]->set($valor);
 		else
-			throw new \InvalidArgumentException("'$key' dont exists");
+			throw new \InvalidArgumentException("field '$key' dont exists");
 	}
 	
 	public function __get($key)
@@ -18,7 +18,7 @@ class Linha {
 		if(\array_key_exists($key, $this->fields))
 			return $this->fields[$key]->getValue();
 		else
-			throw new \InvalidArgumentException("'$key' dont exists");
+			throw new \InvalidArgumentException("field '$key' dont exists");
 	}
 	
 	public static function cmpSortFields(Field $field1, Field $field2)
@@ -26,7 +26,7 @@ class Linha {
 		return $field1->pos_start > $field2->pos_start ? 1 : -1;
 	}
 	
-	public function addField($nome, $pos_start, $pos_end, $format, $default)
+	public function addField($nome, $pos_start, $pos_end, $format, $default, $options)
 	{		
 		foreach($this->fields as $key => $field)
 		{
@@ -42,7 +42,7 @@ class Linha {
             }
 		}
 		
-		$this->fields[$nome] = new Field($this, $nome, $format, $pos_start, $pos_end);
+		$this->fields[$nome] = new Field($this, $nome, $format, $pos_start, $pos_end, $options);
 		if($default !== false)
 			$this->fields[$nome]->set($default);
 	}

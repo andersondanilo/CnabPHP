@@ -7,10 +7,12 @@ class YamlLoad
 {
     public $codigo_banco = null;
     public $formatPath;
+    public $layoutVersao;
 
-    public function __construct($codigo_banco)
+    public function __construct($codigo_banco, $layoutVersao=null)
     {
         $this->codigo_banco = $codigo_banco;
+        $this->layoutVersao = $layoutVersao;
         $this->formatPath = Factory::getCnabFormatPath();
     }
 
@@ -76,8 +78,9 @@ class YamlLoad
                     $start   = $info['pos'][0];
                     $end     = $info['pos'][1];
                     $default = isset($info['default']) ? $info['default'] : false;
+                    $options = $info;
 
-                    $cnabLinha->addField($name, $start, $end, $picture, $default);
+                    $cnabLinha->addField($name, $start, $end, $picture, $default, $options);
                 }
             }
         }
@@ -95,12 +98,10 @@ class YamlLoad
         $filenamePadrao = $this->formatPath.'/'.$cnab.'/generic/'.$filename.'.yml';
         $filenameEspecifico = $this->formatPath.'/'.$cnab.'/'.$banco.'/'.$filename.'.yml';
 
-        $layout_versao = Factory::getLayoutVersao();
-
-        if($layout_versao != null && $this->codigo_banco == 104)
+        if($this->layoutVersao != null && $this->codigo_banco == 104)
         {
             // Usado quando o banco possuir mais de uma versao de Layout
-            $filenameEspecifico = $this->formatPath.'/'.$cnab.'/'.$banco.'/'.$layout_versao.'/'.$filename.'.yml';
+            $filenameEspecifico = $this->formatPath.'/'.$cnab.'/'.$banco.'/'.$this->layoutVersao.'/'.$filename.'.yml';
         }
 
         if(!file_exists($filenamePadrao) && !file_exists($filenameEspecifico))

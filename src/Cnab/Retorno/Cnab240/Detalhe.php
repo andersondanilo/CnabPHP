@@ -10,9 +10,9 @@ class Detalhe extends \Cnab\Format\Linha implements \Cnab\Retorno\IDetalhe
     public $segmento_u;
     public $segmento_w;
 
-	public function __construct($codigo_banco, \Cnab\Retorno\Cnab240\Arquivo $arquivo)
+	public function __construct(\Cnab\Retorno\IArquivo $arquivo)
 	{
-		$this->codigo_banco = $codigo_banco;
+		$this->codigo_banco = $arquivo->codigo_banco;
         $this->arquivo = $arquivo;
 	}
 	

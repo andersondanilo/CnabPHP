@@ -11,14 +11,14 @@ class Arquivo implements \Cnab\Retorno\IArquivo
 	public $trailer  = false;
 
 	public $codigo_banco;
-    public $layout_versao;
+    public $layoutVersao;
 
 	private $filename;
 
-	public function __construct($codigo_banco, $filename)
+	public function __construct($codigo_banco, $filename, $layoutVersao=null)
 	{
 		$this->filename = $filename;
-        $this->layout_versao = Factory::getLayoutVersao($this->filename);
+        $this->layoutVersao = $layoutVersao;
 
 		if(!file_exists($this->filename))
 			throw new \Exception("Arquivo não encontrado: {$this->filename}");
@@ -30,8 +30,8 @@ class Arquivo implements \Cnab\Retorno\IArquivo
 		$linhas = explode("\r\n", $this->content);
 		if(count($linhas) < 2)
 			$linhas = explode("\n", $this->content);
-		$this->header  = new HeaderArquivo($this->codigo_banco);
-        $this->trailer = new TrailerArquivo($this->codigo_banco);
+		$this->header  = new HeaderArquivo($this);
+        $this->trailer = new TrailerArquivo($this);
 
         $lastLote = null;
 
@@ -51,7 +51,7 @@ class Arquivo implements \Cnab\Retorno\IArquivo
                 if($lastLote)
                     $this->lotes[] = $lastLote;
                 $lastLote = new Lote($this);
-                $lastLote->header = new HeaderLote($this->codigo_banco);
+                $lastLote->header = new HeaderLote($this);
                 $lastLote->header->loadFromString($linha);
 			}
             else if($tipo_registro == '2')
@@ -71,7 +71,7 @@ class Arquivo implements \Cnab\Retorno\IArquivo
             else if($tipo_registro == '5')
             {
                 // registro trailer do lote
-                $lastLote->trailer = new TrailerLote($this->codigo_banco);
+                $lastLote->trailer = new TrailerLote($this);
                 $lastLote->trailer->loadFromString($linha);
                 $this->lotes[] = $lastLote;
                 $lastLote = null;

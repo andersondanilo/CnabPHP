@@ -10,12 +10,14 @@ class Arquivo implements \Cnab\Remessa\IArquivo
 	private $_data_geracao;
     public  $banco;
     public  $codigo_banco; 
-	public $configuracao = array();
+	public  $configuracao = array();
+    public  $layout_versao;
 	const   QUEBRA_LINHA = "\r\n";
 
-	public function __construct($codigo_banco)
+	public function __construct($codigo_banco, $layout_versao=null)
 	{
         $this->codigo_banco = $codigo_banco;
+        $this->layout_versao = $layout_versao;
         $this->banco  = \Cnab\Banco::getBanco($this->codigo_banco);
 		//$this->data_gravacao = date('dmY');
 	}

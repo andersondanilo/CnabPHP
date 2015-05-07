@@ -25,22 +25,22 @@ class Lote
         $segmento = null;
         if('T' == $codigo_segmento)
         {
-            $segmento = new SegmentoT($this->codigo_banco);
+            $segmento = new SegmentoT($this->arquivo);
             $segmento->loadFromString($linha);
-            $this->lastDetalhe = new Detalhe($this->codigo_banco, $this->arquivo);
+            $this->lastDetalhe = new Detalhe($this->arquivo);
             $this->detalhes[] = $this->lastDetalhe;
             $this->lastDetalhe->segmento_t = $segmento;
         }
         else if('U' == $codigo_segmento)
         {
-            $segmento = new SegmentoU($this->codigo_banco);
+            $segmento = new SegmentoU($this->arquivo);
             $segmento->loadFromString($linha);
             if($this->lastDetalhe)
                 $this->lastDetalhe->segmento_u = $segmento;
         }
         else if('W' == $codigo_segmento)
         {
-            $segmento = new SegmentoW($this->codigo_banco);
+            $segmento = new SegmentoW($this->arquivo);
             $segmento->loadFromString($linha);
             if($this->lastDetalhe)
                 $this->lastDetalhe->segmento_w = $segmento;
