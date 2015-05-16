@@ -25,4 +25,6 @@ class Especie
 	const CEF_NOTA_DE_SEGURO = 5;
 	const CEF_LETRA_DE_CAMBIO = 6;
 	const CEF_OUTROS = 9;
+
+	const CNAB240_OUTROS = 99; 
 }

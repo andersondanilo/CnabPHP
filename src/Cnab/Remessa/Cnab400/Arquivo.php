@@ -120,21 +120,17 @@ class Arquivo implements \Cnab\Remessa\IArquivo
                 $detalhe->codigo_carteira =   'I';
                 $detalhe->uso_banco =   '';
                 $detalhe->data_mora = $boleto['data_multa'];
-            }
 
-            if(isset($boleto['multas']) && is_array($boleto['multas']))
-            {
-                foreach($boleto['multas'] as $multa)
-                {
+                if($boleto['valor_multa'] > 0) {
                     $detalheMulta = new DetalheMulta($this);
-                    if($multa['tipo_multa'] == 'porcentagem')
+                    if(@$boleto['tipo_multa'] == 'porcentagem')
                         $detalheMulta->codigo_multa = 2;
-                    else if($multa['tipo_multa'] == 'valor')
+                    else if(!@$boleto['tipo_multa'] || $boleto['tipo_multa'] == 'valor')
                         $detalheMulta->codigo_multa = 1;
                     else
                         throw new Exception('tipo de multa inválido, deve ser "porcentagem" ou "valor"');
-                    $detalheMulta->data_multa = $multa['data_multa'];
-                    $detalheMulta->valor_multa = $multa['valor_multa'];
+                    $detalheMulta->data_multa = $boleto['data_multa'];
+                    $detalheMulta->valor_multa = $boleto['valor_multa'];
                     $complementos[] = $detalheMulta;
                 }
             }

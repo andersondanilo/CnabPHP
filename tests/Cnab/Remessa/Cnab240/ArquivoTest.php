@@ -10,7 +10,7 @@ class ArquivoTest extends \PHPUnit_Framework_TestCase
         $cnabFactory = new \Cnab\Factory;
         $arquivo = $cnabFactory->createRemessa($codigoBanco, 'cnab240', 'sigcb');
         $arquivo->configure(array(
-            'data_geracao'  => new \DateTime('2015-02-01'),
+            'data_geracao'  => new \DateTime('2015-02-01 01:02:03'),
             'data_gravacao' => new \DateTime('2015-02-01'), 
             'nome_fantasia' => 'Nome Fantasia da sua empresa', 
             'razao_social'  => 'Razão social da sua empresa', 
@@ -35,7 +35,7 @@ class ArquivoTest extends \PHPUnit_Framework_TestCase
             'nosso_numero'      => '12345679',
             'numero_documento'  => '12345678',
             'carteira'          => '111',
-            'especie'           => \Cnab\Especie::ITAU_DIVERSOS, // Você pode consultar as especies Cnab\Especie::CEF_OUTROS, futuramente poderemos ter uma tabela na documentação
+            'especie'           => \Cnab\Especie::CNAB240_OUTROS, // Você pode consultar as especies Cnab\Especie::CEF_OUTROS, futuramente poderemos ter uma tabela na documentação
             'aceite'            => 'N', // "S" ou "N"
             'registrado'        => false,
             'modalidade_carteira' => '21',
@@ -59,120 +59,187 @@ class ArquivoTest extends \PHPUnit_Framework_TestCase
             'taxa_de_permanencia' => '0', //00 = Acata Comissão por Dia (recomendável), 51 Acata Condições de Cadastramento na CAIXA
             'mensagem'            => 'Descrição do boleto',
             'data_multa'          => new \DateTime('2015-02-07'), // data da multa
-            'valor_multa'         => 10.0, // valor da multa
-
-            'multas' => array(
-                array(
-                    'tipo_multa' => 'porcentagem',
-                    'data_multa' => new \DateTime('2015-03-03'),
-                    'valor_multa' => 0.2
-                ),
-                array(
-                    'tipo_multa' => 'valor',
-                    'data_multa' => new \DateTime('2015-04-03'),
-                    'valor_multa' => 1.5
-                ),
-            )
+            'valor_multa'         => 11.2, // valor da multa
         ));
 
         $texto = $arquivo->getText();
         $lines = explode("\r\n", trim($texto, "\r\n"));
 
-        $this->assertEquals(5, count($lines));
-        $headerText = $lines[0];
-        $detalheText = $lines[1];
-        $compl1Text = $lines[2];
-        $compl2Text = $lines[3];
-        $trailerText = $lines[4];
+        $this->assertEquals(7, count($lines));
+
+        $headerArquivoText = $lines[0];
+        $headerLoteText = $lines[1];
+        $segmentoPText = $lines[2];
+        $segmentoQText = $lines[3];
+        $segmentoRText = $lines[4];
+        $trailerLoteText = $lines[5];
+        $trailerArquivoText = $lines[6];
 
         $asserts = array(
-            'header' => array(
-                '1:1' => '0',
-                '2:2' => '1',
-                '3:9' => 'REMESSA',
-                '10:11' => '01',
-                '12:26' => 'COBRANCA       ',
-                '27:30' => '1234',
-                '31:32' => '00',
-                '33:37' => '00123',
-                '38:38' => '1',
-                '39:46' => '        ',
-                '47:76' => str_pad('Nome Fantasia da sua empresa', 30),
-                '77:79' => '341',
-                '80:94' => str_pad('BANCO ITAU SA', 15),
-                '95:100' => '010215',
-                '101:394' => str_pad(' ', 294),
-                '395:400' => sprintf('%06d', 1)
+            'headerArquivo' => array(
+                '1:3' => '104', // codigo_banco 
+                '4:7' => '0000', // lote_servico 
+                '8:8' => '0', // tipo_registro 
+                '9:17' => '         ', // uso_exclusivo_febraban_01 
+                '18:18' => '2', // codigo_inscricao 
+                '19:32' => '11222333444455', // numero_inscricao 
+                '33:52' => '00000000000000000000', // uso_exclusivo_caixa_01 
+                '53:57' => '01234', // agencia 
+                '58:58' => '3', // agencia_dv 
+                '59:64' => '123123', // codigo_cedente 
+                '65:71' => '0000000', // uso_exclusivo_caixa_02 
+                '72:72' => '0', // uso_exclusivo_caixa_03 
+                '73:102' => 'Nome Fantasia da sua empresa  ', // nome_empresa 
+                '103:132' => 'C ECON FEDERAL                ', // nome_banco 
+                '133:142' => '          ', // uso_exclusivo_febraban_02 
+                '143:143' => '1', // codigo_remessa_retorno 
+                '144:151' => '01022015', // data_geracao 
+                '152:157' => '010203', // hora_geracao 
+                '158:163' => '000001', // numero_sequencial_arquivo 
+                '164:166' => '050', // versao_layout_arquivo 
+                '167:171' => '00000', // densidade_gravacao_arquivo 
+                '172:191' => '                    ', // uso_reservado_banco 
+                '192:211' => 'REMESSA-PRODUCAO    ', // uso_reservado_empresa 
+                '212:215' => '    ', // versao_aplicativo_caixa 
+                '216:240' => '                         ', // uso_exclusivo_febraban_03 
             ),
-            'detalhe' => array(
-                '1:1' => '1',
-                '2:3' => '02', // empresa
-                '4:17' => '11222333444455', // empresa
-                '18:21' => '1234',
-                '22:23' => '00',
-                '24:28' => '00123',
-                '29:29' => '1',
-                '30:33' => '    ',
-                '34:37' => '0000',
-                '38:62' => str_pad('12345679', 25),
-                '63:70' => '12345679',
-                '71:83' => sprintf('%013d', 0),
-                '84:86' => '0111',
-                '87:107' => str_pad(' ', 21),
-                '108:108' => 'I',
-                '109:110' => '01',
-                '111:120' => str_pad('12345678', 10),
-                '121:126' => '030215',
-                '127:139' => '0000000010039',
-                '140:142' => '341',
-                '143:147' => '00000',
-                '148:149' => '99',
-                '150:150' => 'Z',
-                '151:156' => '140115',
-                '157:158' => '  ',
-                '159:160' => '  ',
-                '161:173' => sprintf('%013d', 10),
-                '174:179' => '090215',
-                '180:192' => '0000000001000',
-                '193:205' => sprintf('%013d', 0),
-                '206:218' => sprintf('%013d', 0),
-                '219:220' => '02', // 01 = CPF, 02 = CNPJ
-                '221:234' => '21222333444455',
-                '235:264' => str_pad('NOME DO CLIENTE', 30),
-                '265:274' => str_pad(' ', 10),
-                '275:314' => str_pad('LOGRADOURO DO CLIENTE', 40),
-                '315:326' => 'BAIRRO DO CL',
-                '327:334' => '00000111',
-                '335:349' => str_pad('CIDADE DO CLIEN', 15),
-                '350:351' => 'BA',
-                '352:381' => str_pad('NOME FANTASIA DA SUA EMPRESA', 30),
-                '382:385' => '    ',
-                '386:391' => '070215',
-                '392:393' => '10',
-                '394:394' => ' ',
-                '395:400' => sprintf('%06d', 2)
+            'headerLote' => array(
+                '1:3' => '104', // codigo_banco 
+                '4:7' => '0001', // lote_servico 
+                '8:8' => '1', // tipo_registro 
+                '9:9' => 'R', // tipo_operacao 
+                '10:11' => '02', // tipo_servico 
+                '12:13' => '00', // forma_lancamento 
+                '14:16' => '030', // versao_layout_lote 
+                '17:17' => ' ', // uso_exclusivo_febraban_01 
+                '18:18' => '2', // codigo_inscricao 
+                '19:33' => '011222333444455', // numero_inscricao 
+                '34:39' => '123123', // codigo_convenio 
+                '40:53' => '              ', // uso_exclusivo_banco 
+                '54:58' => '01234', // agencia 
+                '59:59' => '3', // agencia_dv 
+                '60:65' => '123123', // codigo_cedente 
+                '66:72' => '0000000', // codigo_modelo 
+                '73:73' => '0', // uso_exclusivo_banco_02 
+                '74:103' => 'Nome Fantasia da sua empresa  ', // nome_empresa 
+                '104:143' => '                                        ', // mensagem_1 
+                '144:183' => '                                        ', // mensagem_2 
+                '184:191' => '00000001', // numero_sequencial_arquivo 
+                '192:199' => '01022015', // data_geracao 
+                '200:207' => '00000000', // data_credito 
+                '208:240' => '                                 ', // uso_exclusivo_febraban_02 
             ),
-            'compl1' => array(
-                '1:1' => '2',
-                '2:2' => '2',
-                '3:10' => '03032015',
-                '11:23' => '0000000000020',
-                '24:394' => str_repeat(' ', 371),
-                '395:400' => '000003'
+            'segmentoP' => array(
+                '1:3' => '104', // codigo_banco 
+                '4:7' => '0001', // lote_servico 
+                '8:8' => '3', // tipo_registro 
+                '9:13' => '00001', // numero_sequencial_lote 
+                '14:14' => 'P', // codigo_segmento 
+                '15:15' => ' ', // uso_exclusivo_febraban_01 
+                '16:17' => '01', // codigo_ocorrencia 
+                '18:22' => '01234', // agencia 
+                '23:23' => '3', // agencia_dv 
+                '24:29' => '123123', // codigo_cedente 
+                '30:37' => '00000000', // uso_exclusivo_caixa_01 
+                '38:40' => '000', // uso_exclusivo_caixa_02 
+                '41:42' => '21', // modalidade_carteira 
+                '43:57' => '000000012345679', // nosso_numero 
+                '58:58' => '1', // codigo_carteira 
+                '59:59' => '2', // forma_cadastramento 
+                '60:60' => '2', // tipo_documento 
+                '61:61' => '2', // identificacao_emissao 
+                '62:62' => '2', // identificacao_distribuicao 
+                '63:73' => '12345678   ', // numero_documento 
+                '74:77' => '    ', // uso_exclusivo_banco_02 
+                '78:85' => '03022015', // vencimento 
+                '86:100' => '000000000010039', // valor_titulo 
+                '101:105' => '00000', // agencia_cobradora 
+                '106:106' => '0', // agencia_cobradora_dv 
+                '107:108' => '99', // especie 
+                '109:109' => 'N', // aceite 
+                '110:117' => '14012015', // data_emissao 
+                '118:118' => '1', // codigo_juros_mora 
+                '119:126' => '03022015', // data_juros_mora 
+                '127:141' => '000000000000010', // valor_juros_mora 
+                '142:142' => '1', // codigo_desconto_1 
+                '143:150' => '09022015', // data_desconto_1 
+                '151:165' => '000000000001000', // valor_desconto_1 
+                '166:180' => '000000000000000', // valor_iof 
+                '181:195' => '000000000000000', // valor_abatimento 
+                '196:220' => '12345678                 ', // uso_empresa 
+                '221:221' => '3', // codigo_protesto 
+                '222:223' => '00', // prazo_protesto 
+                '224:224' => '1', // codigo_baixa 
+                '225:227' => '030', // prazo_baixa 
+                '228:229' => '09', // codigo_moeda 
+                '230:239' => '0000000000', // uso_exclusivo_banco_03 
+                '240:240' => ' ', // uso_exclusivo_febraban_02 
             ),
-            'compl2' => array(
-                '1:1' => '2',
-                '2:2' => '1',
-                '3:10' => '03042015',
-                '11:23' => '0000000000150',
-                '24:394' => str_repeat(' ', 371),
-                '395:400' => '000004'
+            'segmentoQ' => array(
+                '1:3' => '104', // codigo_banco 
+                '4:7' => '0001', // lote_servico 
+                '8:8' => '3', // tipo_registro 
+                '9:13' => '00002', // numero_sequencial_lote 
+                '14:14' => 'Q', // codigo_segmento 
+                '15:15' => ' ', // uso_exclusivo_febraban_01 
+                '16:17' => '01', // codigo_ocorrencia 
+                '18:18' => '2', // sacado_codigo_inscricao 
+                '19:33' => '021222333444455', // sacado_numero_inscricao 
+                '34:73' => 'NOME DO CLIENTE                         ', // nome 
+                '74:113' => 'LOGRADOURO DO CLIENTE                   ', // logradouro 
+                '114:128' => 'BAIRRO DO CLIEN', // bairro 
+                '129:136' => '00000111', // cep 
+                '137:151' => 'CIDADE DO CLIEN', // cidade 
+                '152:153' => 'BA', // estado 
+                '154:154' => '2', // sacador_codigo_inscricao 
+                '155:169' => '011222333444455', // sacador_numero_inscricao 
+                '170:209' => 'Nome Fantasia da sua empresa            ', // sacador_nome 
+                '210:212' => '   ', // uso_exclusivo_febraban_02 
+                '213:232' => '                    ', // uso_exclusivo_febraban_03 
+                '233:240' => '        ', // uso_exclusivo_febraban_04 
             ),
-            'trailer' => array(
-                '001:001' => '9',
-                '002:394' => str_pad(' ', 393),
-                '395:400' => sprintf('%06d', 5)
-            )
+            'segmentoR' => array(
+                '1:3' => '104', // codigo_banco 
+                '4:7' => '0001', // lote_servico 
+                '8:8' => '3', // tipo_registro 
+                '9:13' => '00003', // numero_sequencial_lote 
+                '14:14' => 'Q', // codigo_segmento 
+                '15:15' => ' ', // uso_exclusivo_febraban_01 
+                '16:17' => '01', // codigo_ocorrencia 
+                '18:65' => '                                                ', // uso_exclusivo_febraban_02 
+                '66:66' => '1', // codigo_multa 
+                '67:74' => '07022015', // data_multa 
+                '75:89' => '000000000001120', // valor_multa 
+                '90:99' => '          ', // informacao_sacado 
+                '100:139' => '                                        ', // mensagem_3 
+                '140:179' => '                                        ', // mensagem_4 
+                '180:240' => '                                                             ', // uso_exclusivo_febraban_03 
+            ),
+            'trailerLote' => array(
+                '1:3' => '104', // codigo_banco 
+                '4:7' => '0001', // lote_servico 
+                '8:8' => '5', // tipo_registro 
+                '18:23' => '000005', // qtde_registro_lote 
+                '24:29' => '000001', // qtde_titulo_cobranca_simples 
+                '30:46' => '00000000000010039', // valor_total_titulo_simples 
+                '93:123' => '                               ', // uso_exclusivo_febraban_02 
+                '124:240' => '                                                                                                                     ', // uso_exclusivo_febraban_03 
+                '47:52' => '000000', // qtde_titulo_cobranca_caucionada 
+                '53:69' => '00000000000000000', // valor_total_titulo_caucionada 
+                '9:17' => '         ', // uso_exclusivo_febraban_01 
+                '70:75' => '000000', // qtde_titulo_cobranca_descontada 
+                '76:92' => '00000000000000000', // valor_total_titulo_descontada 
+            ),
+            'trailerArquivo' => array(
+                '1:3' => '104', // codigo_banco 
+                '4:7' => '9999', // lote_servico 
+                '8:8' => '9', // tipo_registro 
+                '9:17' => '         ', // uso_exclusivo_febraban01 
+                '18:23' => '000001', // qtde_lotes 
+                '24:29' => '000007', // qtde_registros 
+                '30:35' => '      ', // uso_exclusivo_febraban02 
+                '36:240' => '                                                                                                                                                                                                             ', // uso_exclusivo_febraban_03 
+            ),
         );
 
         foreach($asserts as $tipo => $campos) {
@@ -181,7 +248,7 @@ class ArquivoTest extends \PHPUnit_Framework_TestCase
                 $aux = explode(':', $pos);
                 $start = $aux[0] - 1;
                 $end = ($aux[1] - $aux[0]) + 1;
-                $this->assertEquals($value, substr($$vname, $start, $end), "Campo $pos do $tipo");
+                $this->assertEquals($value, substr($$vname, $start, $end), "[ ] Campo $pos do $tipo");
             }
         }
     }

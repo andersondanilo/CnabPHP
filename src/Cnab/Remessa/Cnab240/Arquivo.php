@@ -92,6 +92,8 @@ class Arquivo implements \Cnab\Remessa\IArquivo
         $this->headerLote->nome_empresa = $this->headerArquivo->nome_empresa;
         $this->headerLote->numero_sequencial_arquivo = $this->headerArquivo->numero_sequencial_arquivo;
         $this->headerLote->data_geracao = $this->headerArquivo->data_geracao;
+        if($this->codigo_banco = \Cnab\Banco::CEF)
+            $this->headerLote->tipo_servico = 2;
 
         $this->trailerLote->codigo_banco = $this->headerArquivo->codigo_banco;
         $this->trailerLote->lote_servico = $this->headerLote->lote_servico;
@@ -116,6 +118,8 @@ class Arquivo implements \Cnab\Remessa\IArquivo
         $detalhe->segmento_p->codigo_carteira = 1; // 1 = Cobrança Simples
         $detalhe->segmento_p->modalidade_carteira = $boleto['modalidade_carteira']; // 21 = (título Sem Registro emissão CAIXA)
         $detalhe->segmento_p->forma_cadastramento = $boleto['registrado'] ? 1 : 2; // 1 = Com, 2 = Sem Registro
+        if($boleto['registrado'] && $this->codigo_banco = \Cnab\Banco::CEF)
+            $this->headerLote->tipo_servico = 1;
         $detalhe->segmento_p->numero_documento = $boleto['numero_documento'];
         $detalhe->segmento_p->vencimento = $dateVencimento;
         $detalhe->segmento_p->valor_titulo = $boleto['valor'];
@@ -169,9 +173,9 @@ class Arquivo implements \Cnab\Remessa\IArquivo
         $detalhe->segmento_q->cidade = $this->prepareText($boleto['sacado_cidade']);
         $detalhe->segmento_q->estado = $boleto['sacado_uf'];
         // se o titulo for de terceiro, o sacador é o terceiro
-        $detalhe->segmento_q->sacador_codigo_inscricao = $detalhe->segmento_q->sacado_codigo_inscricao;
-        $detalhe->segmento_q->sacador_numero_inscricao = $detalhe->segmento_q->sacado_codigo_inscricao;
-        $detalhe->segmento_q->sacador_nome = $detalhe->segmento_q->sacado_codigo_inscricao;
+        $detalhe->segmento_q->sacador_codigo_inscricao = $this->headerArquivo->codigo_inscricao;
+        $detalhe->segmento_q->sacador_numero_inscricao = $this->headerArquivo->numero_inscricao;
+        $detalhe->segmento_q->sacador_nome = $this->headerArquivo->nome_empresa;
 
 
         // SEGMENTO R -------------------------------
@@ -259,6 +263,8 @@ class Arquivo implements \Cnab\Remessa\IArquivo
             throw new \InvalidArgumentException($this->headerArquivo->last_error);
 
         $dados = $this->headerArquivo->getEncoded() . self::QUEBRA_LINHA;
+        $dados .= $this->headerLote->getEncoded() . self::QUEBRA_LINHA;
+
         foreach($this->detalhes as $detalhe)
         {
             $qtde_titulo_cobranca_simples++;
@@ -292,6 +298,7 @@ class Arquivo implements \Cnab\Remessa\IArquivo
         if(!$this->trailerArquivo->validate())
             throw new \InvalidArgumentException($this->trailerArquivo->last_error);
 
+        $dados .= $this->trailerLote->getEncoded() . self::QUEBRA_LINHA;
         $dados .= $this->trailerArquivo->getEncoded() . self::QUEBRA_LINHA;
         return $dados;
     }
