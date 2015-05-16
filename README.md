@@ -4,6 +4,9 @@ CnabPHP
 [![Build Status](https://secure.travis-ci.org/andersondanilo/CnabPHP.png?branch=master)](http://travis-ci.org/andersondanilo/CnabPHP)
 [![Latest Stable Version](https://poser.pugx.org/andersondanilo/cnab_php/v/stable.svg)](https://packagist.org/packages/andersondanilo/cnab_php)
 [![Latest Unstable Version](https://poser.pugx.org/andersondanilo/cnab_php/v/unstable.svg)](https://packagist.org/packages/andersondanilo/cnab_php)
+[![Code Climate](https://codeclimate.com/github/andersondanilo/CnabPHP/badges/gpa.svg)](https://codeclimate.com/github/andersondanilo/CnabPHP)
+[![Test Coverage](https://codeclimate.com/github/andersondanilo/CnabPHP/badges/coverage.svg)](https://codeclimate.com/github/andersondanilo/CnabPHP/coverage)
+
 
 Projeto para criar arquivos de remessas e processar arquivos de retorno no formato CNAB, utilizado nos bancos geralmente para boleto bancário.
 
@@ -96,6 +99,9 @@ $arquivo->insertDetalhe(array(
 	'data_multa'          => new DateTime('Data da multa, ex: 2014-06-09'), // data da multa
 	'valor_multa'         => 10.0, // valor da multa
 ));
+
+// para salvar
+$arquivo->save('meunomedearquivo');
 ```
 
 ## Como Contribuir

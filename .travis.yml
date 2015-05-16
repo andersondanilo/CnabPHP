@@ -4,9 +4,19 @@ script: phpunit --verbose --coverage-text
 php:
   - 5.3
   - 5.4
+  - 5.5
 
 before_script:
   - "composer install -v"
 
 after_script:
   - "phpunit --testdox"
+
+after_script:
+  - "phpunit --testdox"
+  - "phpunit --coverage-clover build/logs/clover.xml"
+  - "vendor/bin/test-reporter --stdout > codeclimate.json; curl -X POST -d @codeclimate.json -H 'Content-Type: application/json' -H 'User-Agent: Code Climate (PHP Test Reporter v0.1.1)' https://codeclimate.com/test_reports"
+
+addons:
+  code_climate:
+    repo_token: 62106545f2b8d419b073155b0af4bd0b9b3233707007fd8950f453c103ad834d

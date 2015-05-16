@@ -12,7 +12,8 @@
     ],
     "require-dev": {
         "phpunit/phpunit": "3.7.*",
-        "phpunit/php-code-coverage": "1.2.*"
+        "phpunit/php-code-coverage": "1.2.*",
+        "codeclimate/php-test-reporter": "dev-master"
     },
     "require": {
         "andersondanilo/cnab_yaml": "~1.2",
