@@ -51,7 +51,7 @@ class Linha {
 	{
 		foreach($this->fields as $field)
 		{
-			$field->set(Picture::decode(\substr($text, $field->pos_start - 1, $field->length), $field->format));
+			$field->set(Picture::decode(\substr($text, $field->pos_start - 1, $field->length), $field->format, $field->options));
 		}
 	}
 	
