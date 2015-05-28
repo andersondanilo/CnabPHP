@@ -58,7 +58,7 @@ class Arquivo implements \Cnab\Remessa\IArquivo
             if(!array_key_exists($key, $params))
                 throw new Exception('Configuração "'.$key.'" dont exists');
         }
-            
+
         $this->data_geracao  = $this->configuracao['data_geracao'];
         $this->data_gravacao = $this->configuracao['data_gravacao'];
 
@@ -104,8 +104,8 @@ class Arquivo implements \Cnab\Remessa\IArquivo
     public function insertDetalhe(array $boleto, $tipo='remessa')
     {
         $dateVencimento = $boleto['data_vencimento'] instanceof \DateTime ? $boleto['data_vencimento'] : new \DateTime($boleto['data_vencimento']);
-        $dateCadastro = $boleto['data_cadastro']   instanceof \DateTime ? $boleto['data_cadastro']   : new \DateTime($boleto['data_cadastro']);
-        
+        $dateCadastro = $boleto['data_cadastro'] instanceof \DateTime ? $boleto['data_cadastro'] : new \DateTime($boleto['data_cadastro']);
+
         $detalhe = new Detalhe($this);
 
         // SEGMENTO P -------------------------------
@@ -116,7 +116,9 @@ class Arquivo implements \Cnab\Remessa\IArquivo
         $detalhe->segmento_p->codigo_cedente = $this->headerArquivo->codigo_cedente;
         $detalhe->segmento_p->nosso_numero = $boleto['nosso_numero'];
         $detalhe->segmento_p->codigo_carteira = 1; // 1 = Cobrança Simples
-        $detalhe->segmento_p->modalidade_carteira = $boleto['modalidade_carteira']; // 21 = (título Sem Registro emissão CAIXA)
+        if ($this->layoutVersao === 'sigcb' && $this->codigo_banco = \Cnab\Banco::CEF) {
+            $detalhe->segmento_p->modalidade_carteira = $boleto['modalidade_carteira']; // 21 = (título Sem Registro emissão CAIXA)
+        }
         $detalhe->segmento_p->forma_cadastramento = $boleto['registrado'] ? 1 : 2; // 1 = Com, 2 = Sem Registro
         if($boleto['registrado'] && $this->codigo_banco = \Cnab\Banco::CEF)
             $this->headerLote->tipo_servico = 1;
@@ -311,6 +313,9 @@ class Arquivo implements \Cnab\Remessa\IArquivo
     public function save($filename)
     {        
         $text = $this->getText();
+
         file_put_contents($filename, $text);
+
+        return $filename;
     }
 }
