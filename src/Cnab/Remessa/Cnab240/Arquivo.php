@@ -92,7 +92,7 @@ class Arquivo implements \Cnab\Remessa\IArquivo
         $this->headerLote->nome_empresa = $this->headerArquivo->nome_empresa;
         $this->headerLote->numero_sequencial_arquivo = $this->headerArquivo->numero_sequencial_arquivo;
         $this->headerLote->data_geracao = $this->headerArquivo->data_geracao;
-        if($this->codigo_banco = \Cnab\Banco::CEF)
+        if($this->codigo_banco == \Cnab\Banco::CEF)
             $this->headerLote->tipo_servico = 2;
 
         $this->trailerLote->codigo_banco = $this->headerArquivo->codigo_banco;
@@ -116,11 +116,11 @@ class Arquivo implements \Cnab\Remessa\IArquivo
         $detalhe->segmento_p->codigo_cedente = $this->headerArquivo->codigo_cedente;
         $detalhe->segmento_p->nosso_numero = $boleto['nosso_numero'];
         $detalhe->segmento_p->codigo_carteira = 1; // 1 = Cobrança Simples
-        if ($this->layoutVersao === 'sigcb' && $this->codigo_banco = \Cnab\Banco::CEF) {
+        if ($this->layoutVersao === 'sigcb' && $this->codigo_banco == \Cnab\Banco::CEF) {
             $detalhe->segmento_p->modalidade_carteira = $boleto['modalidade_carteira']; // 21 = (título Sem Registro emissão CAIXA)
         }
         $detalhe->segmento_p->forma_cadastramento = $boleto['registrado'] ? 1 : 2; // 1 = Com, 2 = Sem Registro
-        if($boleto['registrado'] && $this->codigo_banco = \Cnab\Banco::CEF)
+        if($boleto['registrado'] && $this->codigo_banco == \Cnab\Banco::CEF)
             $this->headerLote->tipo_servico = 1;
         $detalhe->segmento_p->numero_documento = $boleto['numero_documento'];
         $detalhe->segmento_p->vencimento = $dateVencimento;
