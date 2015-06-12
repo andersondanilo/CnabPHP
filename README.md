@@ -64,6 +64,8 @@ $arquivo->configure(array(
     'uf'            => 'Sigla da cidade, ex SP',
     'cep'           => 'CEP do endereço da sua cidade',
     'agencia'       => 'Agencia da conta',
+    'agencia_dv'	=> 'Dígito verificador da agencia da conta',
+    'numero_sequencial_arquivo'	=> 'Número sequencial do lote do arquivo',
     'conta'         => 'Número da conta',
     'operacao'      => 'Operação',
     'codigo_cedente'     => 'Código do Cedente',
