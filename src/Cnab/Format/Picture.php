@@ -60,7 +60,7 @@ class Picture
 				if(!is_numeric($value))
 					throw new \Exception("value '$value' dont is a number, need format $format");
 					
-				$value = (string)(round($value, 2));
+				$value = self::parseNumber($value);
 				$exp   = explode('.', $value);
 				if(!isset($exp[1]))
 					$exp[1] = 0;
@@ -69,6 +69,11 @@ class Picture
 					$tamanho_left  = (int)$m['tamanho1'];
 					$tamanho_right = (int)$m['tamanho2'];
 					$valor_left    = \str_pad($exp[0], $tamanho_left, '0', STR_PAD_LEFT);
+					if(strlen($exp[1]) > $tamanho_right) {
+						$extra = strlen($exp[1]) - $tamanho_right;
+						$extraPow = pow(10, $extra);
+						$exp[1] = round($exp[1] / $extraPow);
+					}
 					$valor_right   = \str_pad($exp[1], $tamanho_right, '0', STR_PAD_RIGHT);
 					return $valor_left.$valor_right;
 				}

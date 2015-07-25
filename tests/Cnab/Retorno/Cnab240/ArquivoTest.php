@@ -50,7 +50,7 @@ class ArquivoTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(196, $detalhe->getNossoNumero());
     }
 
-    public function testArquivoCaixaPodeSerLido() {
+    public function testArquivoCaixaSigcbPodeSerLido() {
         $factory = new \Cnab\Factory;
         $arquivo = $factory->createRetorno('tests/fixtures/cnab240/retorno_cnab240_caixa.ret');
         $this->assertNotNull($arquivo);
@@ -94,7 +94,5 @@ class ArquivoTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(false, $detalhe->isDDA());
         $this->assertEquals(null, $detalhe->getAlegacaoPagador());
         $this->assertEquals(null, $detalhe->getDescricaoLiquidacao());
-    }
-
-    
+    }   
 }
