@@ -146,6 +146,7 @@ class Arquivo implements \Cnab\Remessa\IArquivo
         $detalhe->segmento_p->prazo_protesto = 0;
         $detalhe->segmento_p->codigo_baixa = 1; // Baixar
         $detalhe->segmento_p->prazo_baixa = 30; // Baixar automaticamente após 30 dias
+        $detalhe->segmento_p->identificacao_distribuicao = $boleto['identificacao_distribuicao'];
 
         if($tipo == 'remessa') {
             $detalhe->segmento_p->codigo_ocorrencia = 1;
