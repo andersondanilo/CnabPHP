@@ -39,7 +39,7 @@ class Arquivo implements \Cnab\Retorno\IArquivo
 			{
 				$this->header->loadFromString($linha);
 			}
-			else if($tipo_registro == '1')
+			else if(in_array((int)$tipo_registro,array(1,7)))
 			{
 				$detalhe = new Detalhe($this);
 				$detalhe->loadFromString($linha);
