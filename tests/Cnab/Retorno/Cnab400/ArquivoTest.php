@@ -46,6 +46,7 @@ class ArquivoTest extends \PHPUnit_Framework_TestCase
     	$this->assertEquals('11122450000000290', $detalhe->getNossoNumero());
     	$this->assertEquals(new \DateTime('2015-09-10 00:00:00'), $detalhe->getDataCredito());
     	$this->assertEquals(new \DateTime('2015-09-08 00:00:00'), $detalhe->getDataOcorrencia());
+    	$this->assertTrue($detalhe->isBaixa());
     }
     
     public function testArquivoItauCnab400PodeSerLido()
