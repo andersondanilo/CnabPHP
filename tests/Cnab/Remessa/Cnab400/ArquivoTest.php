@@ -62,11 +62,11 @@ class ArquivoTest extends \PHPUnit_Framework_TestCase
         $texto = $arquivo->getText();
         $lines = explode("\r\n", trim($texto, "\r\n"));
 
-        $this->assertEquals(4, count($lines));
+        $this->assertEquals(3, count($lines));
         $headerText = $lines[0];
         $detalheText = $lines[1];
-        $compl1Text = $lines[2];
-        $trailerText = $lines[3];
+        //$compl1Text = $lines[2];
+        $trailerText = $lines[2];
 
         $asserts = array(
             'header' => array(
@@ -134,7 +134,7 @@ class ArquivoTest extends \PHPUnit_Framework_TestCase
                 '392:393' => '10',
                 '394:394' => ' ',
                 '395:400' => sprintf('%06d', 2)
-            ),
+            ),/*
             'compl1' => array(
                 '1:1' => '2',
                 '2:2' => '2',
@@ -142,11 +142,11 @@ class ArquivoTest extends \PHPUnit_Framework_TestCase
                 '11:23' => '0000000000020',
                 '24:394' => str_repeat(' ', 371),
                 '395:400' => '000003'
-            ),
+            ),*/
             'trailer' => array(
                 '001:001' => '9',
                 '002:394' => str_pad(' ', 393),
-                '395:400' => sprintf('%06d', 4)
+                '395:400' => sprintf('%06d', 3)
             )
         );
 
