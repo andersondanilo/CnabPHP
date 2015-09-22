@@ -122,6 +122,9 @@ class Arquivo implements \Cnab\Remessa\IArquivo
                 $detalhe->data_mora = $boleto['data_multa'];
 
                 if($boleto['valor_multa'] > 0) {
+                    /*
+                    // Não está presente na documentação disponibilizada no site
+                    // os valores de multa devem ser configurados com o gerente da sua conta
                     $detalheMulta = new DetalheMulta($this);
                     if(@$boleto['tipo_multa'] == 'porcentagem')
                         $detalheMulta->codigo_multa = 2;
@@ -132,6 +135,7 @@ class Arquivo implements \Cnab\Remessa\IArquivo
                     $detalheMulta->data_multa = $boleto['data_multa'];
                     $detalheMulta->valor_multa = $boleto['valor_multa'];
                     $complementos[] = $detalheMulta;
+                    */
                 }
             }
 
