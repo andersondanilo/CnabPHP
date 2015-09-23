@@ -19,14 +19,17 @@ class Detalhe extends \Cnab\Format\Linha implements \Cnab\Retorno\IDetalhe
 	 */
 	public function isBaixa()
 	{
-		$tipo_baixa = array(9, 10, 32, 47, 59, 72);
 		$codigo_ocorrencia = (int)$this->codigo_de_ocorrencia;
-		return self::isBaixaStatic($codigo_ocorrencia);
+		return self::isBaixaStatic($codigo_ocorrencia,$this->_codigo_banco);
 	}
 	
-	public static function isBaixaStatic($codigo)
+	public static function isBaixaStatic($codigo,$banco = null)
 	{
-		$tipo_baixa = array(9, 10, 32, 47, 59, 72);
+		if ($banco == 1) //Banco do Brasil
+			$tipo_baixa = array(6);
+		else
+			$tipo_baixa = array(9, 10, 32, 47, 59, 72);
+		
 		$codigo_ocorrencia = (int)$codigo;
 		if(in_array($codigo_ocorrencia, $tipo_baixa))
 			return true;
