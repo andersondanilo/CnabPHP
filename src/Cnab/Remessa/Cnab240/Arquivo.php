@@ -37,6 +37,8 @@ class Arquivo implements \Cnab\Remessa\IArquivo
         {
             $campos[] = 'agencia';
             $campos[] = 'agencia_dv';
+            $campos[] = 'conta';
+            $campos[] = 'operacao';
             $campos[] = 'codigo_cedente';
             $campos[] = 'numero_sequencial_arquivo';
         }
@@ -80,6 +82,17 @@ class Arquivo implements \Cnab\Remessa\IArquivo
         $this->headerArquivo->hora_geracao = $this->configuracao['data_geracao'];
         $this->headerArquivo->numero_sequencial_arquivo = $this->configuracao['numero_sequencial_arquivo'];
 
+        if($this->codigo_banco == \Cnab\Banco::CEF) {
+            $codigoConvenio = sprintf(
+                '%04d%03d%08d',
+                $params['agencia'],
+                $params['operacao'],
+                $params['conta']
+            );
+            $codigoConvenio .= $this->mod11($codigoConvenio);
+            $this->headerArquivo->codigo_convenio = $codigoConvenio;
+        }
+
         $this->headerLote->codigo_banco = $this->headerArquivo->codigo_banco;
         $this->headerLote->lote_servico = 1;
         $this->headerLote->tipo_operacao = 'R';
@@ -99,6 +112,37 @@ class Arquivo implements \Cnab\Remessa\IArquivo
         $this->trailerLote->lote_servico = $this->headerLote->lote_servico;
 
         $this->trailerArquivo->codigo_banco = $this->headerArquivo->codigo_banco;
+    }
+
+    public function mod11($num, $base=9, $r=0) 
+    {
+        $soma = 0;
+        $fator = 2;
+        /* Separacao dos numeros */
+        for ($i = strlen($num); $i > 0; $i--) {
+            // pega cada numero isoladamente
+            $numeros[$i] = substr($num,$i-1,1);
+            // Efetua multiplicacao do numero pelo falor
+            $parcial[$i] = $numeros[$i] * $fator;
+            // Soma dos digitos
+            $soma += $parcial[$i];
+            if ($fator == $base) { // restaura fator de multiplicacao para 2
+                $fator = 1;
+            }
+            $fator++;
+        }
+        /* Calculo do modulo 11 */
+        if ($r == 0) {
+            $soma *= 10;
+            $digito = $soma % 11;
+            if ($digito == 10) {
+                $digito = 0;
+            }
+            return $digito;
+        } elseif ($r == 1){
+            $resto = $soma % 11;
+            return $resto;
+        }
     }
        
     public function insertDetalhe(array $boleto, $tipo='remessa')

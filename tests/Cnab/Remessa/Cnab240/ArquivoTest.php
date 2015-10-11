@@ -22,7 +22,8 @@ class ArquivoTest extends \PHPUnit_Framework_TestCase
             'cidade'        => 'Cidade da sua empresa',
             'uf'            => 'SP',
             'cep'           => '00000111',
-
+            'conta'         => '123456',
+            'operacao'      => '012',
             'agencia'       => '1234',
             'agencia_dv'    => '3',
             'codigo_cedente' => '123123',
@@ -83,7 +84,8 @@ class ArquivoTest extends \PHPUnit_Framework_TestCase
                 '9:17' => '         ', // uso_exclusivo_febraban_01 
                 '18:18' => '2', // codigo_inscricao 
                 '19:32' => '11222333444455', // numero_inscricao 
-                '33:52' => '00000000000000000000', // uso_exclusivo_caixa_01 
+                '33:49' => '01234012001234560', // codigo convenio
+                '50:52' => '000', // uso_exclusivo_caixa_01 
                 '53:57' => '01234', // agencia 
                 '58:58' => '3', // agencia_dv 
                 '59:64' => '123123', // codigo_cedente 
@@ -203,10 +205,10 @@ class ArquivoTest extends \PHPUnit_Framework_TestCase
                 '4:7' => '0001', // lote_servico 
                 '8:8' => '3', // tipo_registro 
                 '9:13' => '00003', // numero_sequencial_lote 
-                '14:14' => 'Q', // codigo_segmento 
+                '14:14' => 'R', // codigo_segmento 
                 '15:15' => ' ', // uso_exclusivo_febraban_01 
                 '16:17' => '01', // codigo_ocorrencia 
-                '18:65' => '                                                ', // uso_exclusivo_febraban_02 
+                '18:65' => '000000000000000000000000000000000000000000000000', // uso_exclusivo_febraban_02 
                 '66:66' => '1', // codigo_multa 
                 '67:74' => '07022015', // data_multa 
                 '75:89' => '000000000001120', // valor_multa 
