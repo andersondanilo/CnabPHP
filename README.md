@@ -1,6 +1,8 @@
 CnabPHP
 =======
 
+[![Join the chat at https://gitter.im/andersondanilo/CnabPHP](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/andersondanilo/CnabPHP?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 [![Build Status](https://secure.travis-ci.org/andersondanilo/CnabPHP.png?branch=master)](http://travis-ci.org/andersondanilo/CnabPHP)
 [![Latest Stable Version](https://poser.pugx.org/andersondanilo/cnab_php/v/stable.svg)](https://packagist.org/packages/andersondanilo/cnab_php)
 [![Latest Unstable Version](https://poser.pugx.org/andersondanilo/cnab_php/v/unstable.svg)](https://packagist.org/packages/andersondanilo/cnab_php)
