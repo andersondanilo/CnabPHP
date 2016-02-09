@@ -1,14 +1,19 @@
 <?php
 namespace Cnab\Retorno\Cnab400; 
 
+use Cnab\Retorno\Linha;
+
 class Arquivo implements \Cnab\Retorno\IArquivo
 {
 	private $content;
 	
 	public $header   = false;
 	public $detalhes = array();
+    public $linhas   = array();
 	public $trailer  = false;
     public $layoutVersao; // ex: sicoob, sigcb
+
+    public $lines;
 
 	public $codigo_banco;
 
@@ -31,22 +36,41 @@ class Arquivo implements \Cnab\Retorno\IArquivo
 			$linhas = explode("\n", $this->content);
 		$this->header  = new Header($this);
 		$this->trailer = new Trailer($this);
+
+        $posLinha = 0;
 		
 		foreach($linhas as $linha)
 		{
+            if(!trim($linha))
+                continue;
+
+            $linhaRetorno = new Linha;
+            $linhaRetorno->pos = $posLinha++;
+            $linhaRetorno->texto = $linha;
+
+            $this->linhas[] = $linhaRetorno;
+
 			$tipo_registro = substr($linha, 0, 1);
+
 			if($tipo_registro == '0' && $linha)
 			{
 				$this->header->loadFromString($linha);
+
+                $linhaRetorno->linhaCnab = $this->header;
 			}
 			else if(in_array((int)$tipo_registro,array(1,7)))
 			{
 				$detalhe = new Detalhe($this);
 				$detalhe->loadFromString($linha);
 				$this->detalhes[] = $detalhe;
+
+                $linhaRetorno->linhaCnab = $detalhe;
 			}
 			else if($tipo_registro == '9')
+            {
 				$this->trailer->loadFromString($linha);
+                $linhaRetorno->linhaCnab = $this->trailer;
+            }
 		}
 	}
 	

@@ -45,6 +45,7 @@ class Lote
             if($this->lastDetalhe)
                 $this->lastDetalhe->segmento_w = $segmento;
         }
+        return $segmento;
     }
 
     public function listDetalhes()

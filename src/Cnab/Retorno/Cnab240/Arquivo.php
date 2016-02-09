@@ -1,6 +1,8 @@
 <?php
 namespace Cnab\Retorno\Cnab240;
+
 use Cnab\Factory;
+use Cnab\Retorno\Linha;
 
 class Arquivo implements \Cnab\Retorno\IArquivo
 {
@@ -8,6 +10,7 @@ class Arquivo implements \Cnab\Retorno\IArquivo
 
 	public $header   = false;
 	public $lotes    = array();
+    public $linhas   = array();
 	public $trailer  = false;
 
 	public $codigo_banco;
@@ -35,15 +38,25 @@ class Arquivo implements \Cnab\Retorno\IArquivo
 
         $lastLote = null;
 
+        $posLinha = 0;
+
 		foreach($linhas as $linha)
         {
-            if(!$linha)
+            if(!trim($linha))
                 continue;
+
+            $linhaRetorno = new Linha;
+            $linhaRetorno->pos = $posLinha++;
+            $linhaRetorno->texto = $linha;
+
+            $this->linhas[] = $linhaRetorno;
+
             $tipo_registro = substr($linha, 7, 1);
 			if($tipo_registro == '0')
             {
                 // header
                 $this->header->loadFromString($linha);
+                $linhaRetorno->linhaCnab = $this->header;
 			}
 			else if($tipo_registro == '1')
             {
@@ -53,6 +66,8 @@ class Arquivo implements \Cnab\Retorno\IArquivo
                 $lastLote = new Lote($this);
                 $lastLote->header = new HeaderLote($this);
                 $lastLote->header->loadFromString($linha);
+
+                $linhaRetorno->linhaCnab = $lastLote->header;
 			}
             else if($tipo_registro == '2')
             {
@@ -62,7 +77,7 @@ class Arquivo implements \Cnab\Retorno\IArquivo
             {
                 // registros de detalhe - Segmentos
                 if($lastLote)
-                    $lastLote->insertSegmento($linha);
+                    $linhaRetorno->linhaCnab = $lastLote->insertSegmento($linha);
             }
             else if($tipo_registro == '4')
             {
@@ -74,12 +89,15 @@ class Arquivo implements \Cnab\Retorno\IArquivo
                 $lastLote->trailer = new TrailerLote($this);
                 $lastLote->trailer->loadFromString($linha);
                 $this->lotes[] = $lastLote;
+                $linhaRetorno->linhaCnab = $lastLote->trailer;
                 $lastLote = null;
             }
             else if($tipo_registro == '9')
             {
                 // trailer do arquivo
                 $this->trailer->loadFromString($linha);
+
+                $linhaRetorno->linhaCnab = $this->trailer;
             }
 		}
 	}
