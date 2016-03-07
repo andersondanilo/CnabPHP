@@ -1,31 +1,31 @@
 <?php
+
 namespace Cnab\Tests\Remessa\Cnab240;
 
-
-class ArquivoTest extends \PHPUnit_Framework_TestCase 
+class ArquivoTest extends \PHPUnit_Framework_TestCase
 {
     public function testArquivoCaixaCnab240SigcbPodeSerCriado()
     {
         $codigoBanco = \Cnab\Banco::CEF;
-        $cnabFactory = new \Cnab\Factory;
+        $cnabFactory = new \Cnab\Factory();
         $arquivo = $cnabFactory->createRemessa($codigoBanco, 'cnab240', 'sigcb');
         $arquivo->configure(array(
-            'data_geracao'  => new \DateTime('2015-02-01 01:02:03'),
-            'data_gravacao' => new \DateTime('2015-02-01'), 
-            'nome_fantasia' => 'Nome Fantasia da sua empresa', 
-            'razao_social'  => 'Razão social da sua empresa', 
-            'cnpj'          => '11222333444455',
-            'banco'         => $codigoBanco, //código do banco
-            'logradouro'    => 'Logradouro da Sua empresa',
-            'numero'        => 'Número do endereço',
-            'bairro'        => 'Bairro da sua empresa', 
-            'cidade'        => 'Cidade da sua empresa',
-            'uf'            => 'SP',
-            'cep'           => '00000111',
-            'conta'         => '123456',
-            'operacao'      => '012',
-            'agencia'       => '1234',
-            'agencia_dv'    => '3',
+            'data_geracao' => new \DateTime('2015-02-01 01:02:03'),
+            'data_gravacao' => new \DateTime('2015-02-01'),
+            'nome_fantasia' => 'Nome Fantasia da sua empresa',
+            'razao_social' => 'Razão social da sua empresa',
+            'cnpj' => '11222333444455',
+            'banco' => $codigoBanco, //código do banco
+            'logradouro' => 'Logradouro da Sua empresa',
+            'numero' => 'Número do endereço',
+            'bairro' => 'Bairro da sua empresa',
+            'cidade' => 'Cidade da sua empresa',
+            'uf' => 'SP',
+            'cep' => '00000111',
+            'conta' => '123456',
+            'operacao' => '012',
+            'agencia' => '1234',
+            'agencia_dv' => '3',
             'codigo_cedente' => '123123',
             'numero_sequencial_arquivo' => 1,
         ));
@@ -33,34 +33,34 @@ class ArquivoTest extends \PHPUnit_Framework_TestCase
         // você pode adicionar vários boletos em uma remessa
         $arquivo->insertDetalhe(array(
             'codigo_ocorrencia' => 1, // 1 = Entrada de título, futuramente poderemos ter uma constante
-            'nosso_numero'      => '12345679',
-            'numero_documento'  => '12345678',
-            'carteira'          => '111',
-            'especie'           => \Cnab\Especie::CNAB240_OUTROS, // Você pode consultar as especies Cnab\Especie::CEF_OUTROS, futuramente poderemos ter uma tabela na documentação
-            'aceite'            => 'N', // "S" ou "N"
-            'registrado'        => false,
+            'nosso_numero' => '12345679',
+            'numero_documento' => '12345678',
+            'carteira' => '111',
+            'especie' => \Cnab\Especie::CNAB240_OUTROS, // Você pode consultar as especies Cnab\Especie::CEF_OUTROS, futuramente poderemos ter uma tabela na documentação
+            'aceite' => 'N', // "S" ou "N"
+            'registrado' => false,
             'modalidade_carteira' => '21',
-            'valor'             => 100.39, // Valor do boleto
-            'instrucao1'        => '', // 1 = Protestar com (Prazo) dias, 2 = Devolver após (Prazo) dias, futuramente poderemos ter uma constante
-            'instrucao2'        => '', // preenchido com zeros
+            'valor' => 100.39, // Valor do boleto
+            'instrucao1' => '', // 1 = Protestar com (Prazo) dias, 2 = Devolver após (Prazo) dias, futuramente poderemos ter uma constante
+            'instrucao2' => '', // preenchido com zeros
             'sacado_razao_social' => 'Nome do cliente', // O Sacado é o cliente, preste atenção nos campos abaixo
-            'sacado_tipo'       => 'cnpj', //campo fixo, escreva 'cpf' (sim as letras cpf) se for pessoa fisica, cnpj se for pessoa juridica
-            'sacado_cnpj'        => '21.222.333.4444-55',
+            'sacado_tipo' => 'cnpj', //campo fixo, escreva 'cpf' (sim as letras cpf) se for pessoa fisica, cnpj se for pessoa juridica
+            'sacado_cnpj' => '21.222.333.4444-55',
             'sacado_logradouro' => 'Logradouro do cliente',
-            'sacado_bairro'     => 'Bairro do cliente',
-            'sacado_cep'        => '00000-111',
-            'sacado_cidade'     => 'Cidade do cliente',
-            'sacado_uf'         => 'BA',
-            'data_vencimento'   => new \DateTime('2015-02-03'),
-            'data_cadastro'     => new \DateTime('2015-01-14'),
-            'juros_de_um_dia'     => 0.10, // Valor do juros de 1 dia'
-            'data_desconto'       => new \DateTime('2015-02-09'),
-            'valor_desconto'      => 10.0, // Valor do desconto
-            'prazo'               => 10, // prazo de dias para o cliente pagar após o vencimento
+            'sacado_bairro' => 'Bairro do cliente',
+            'sacado_cep' => '00000-111',
+            'sacado_cidade' => 'Cidade do cliente',
+            'sacado_uf' => 'BA',
+            'data_vencimento' => new \DateTime('2015-02-03'),
+            'data_cadastro' => new \DateTime('2015-01-14'),
+            'juros_de_um_dia' => 0.10, // Valor do juros de 1 dia'
+            'data_desconto' => new \DateTime('2015-02-09'),
+            'valor_desconto' => 10.0, // Valor do desconto
+            'prazo' => 10, // prazo de dias para o cliente pagar após o vencimento
             'taxa_de_permanencia' => '0', //00 = Acata Comissão por Dia (recomendável), 51 Acata Condições de Cadastramento na CAIXA
-            'mensagem'            => 'Descrição do boleto',
-            'data_multa'          => new \DateTime('2015-02-07'), // data da multa
-            'valor_multa'         => 11.2, // valor da multa
+            'mensagem' => 'Descrição do boleto',
+            'data_multa' => new \DateTime('2015-02-07'), // data da multa
+            'valor_multa' => 11.2, // valor da multa
         ));
 
         $texto = $arquivo->getText();
@@ -244,9 +244,9 @@ class ArquivoTest extends \PHPUnit_Framework_TestCase
             ),
         );
 
-        foreach($asserts as $tipo => $campos) {
+        foreach ($asserts as $tipo => $campos) {
             $vname = "{$tipo}Text";
-            foreach($campos as $pos => $value) {
+            foreach ($campos as $pos => $value) {
                 $aux = explode(':', $pos);
                 $start = $aux[0] - 1;
                 $end = ($aux[1] - $aux[0]) + 1;

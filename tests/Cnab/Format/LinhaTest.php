@@ -1,4 +1,5 @@
 <?php
+
 namespace Cnab\Tests\Format;
 
 use Cnab\Format\Linha;
@@ -24,7 +25,7 @@ class LinhaTest extends \PHPUnit_Framework_TestCase
         $linha->addField('uso_exclusivo_banco_01', 33, 40, 'X(8)', str_repeat(' ', 8), array());
         $this->assertFalse($linha->existField('codigo_cedente_dv'));
         $this->assertTrue($linha->existField('uso_exclusivo_banco_01'));
-        
+
         $linha = new Linha();
         $linha->addField('codigo_banco', 1, 3, '9(3)', '000', array());
         $linha->addField('numero_lote', 4, 7, '9(4)', '000', array());

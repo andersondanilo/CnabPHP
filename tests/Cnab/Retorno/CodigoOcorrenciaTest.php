@@ -1,9 +1,10 @@
 <?php
+
 namespace Cnab\Tests\Retorno;
 
 use Cnab\Retorno\CodigoOcorrencia;
 
-class CodigoOcorrenciaTest extends \PHPUnit_Framework_TestCase 
+class CodigoOcorrenciaTest extends \PHPUnit_Framework_TestCase
 {
     public function testIdentificaCodigoDeOcorrencia()
     {

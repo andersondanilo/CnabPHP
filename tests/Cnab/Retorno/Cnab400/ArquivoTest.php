@@ -1,13 +1,12 @@
 <?php
+
 namespace Cnab\Tests\Retorno\Cnab400;
 
-use Cnab\Retorno\Cnab400\Arquivo;
-
-class ArquivoTest extends \PHPUnit_Framework_TestCase 
+class ArquivoTest extends \PHPUnit_Framework_TestCase
 {
     public function testArquivoBradescoCnab400PodeSerLido()
     {
-        $factory = new \Cnab\Factory;
+        $factory = new \Cnab\Factory();
         $arquivo = $factory->createRetorno('tests/fixtures/cnab400/retorno-cb030400-bradesco.ret');
         $this->assertNotNull($arquivo);
         $this->assertNotNull($arquivo->header);
@@ -18,7 +17,7 @@ class ArquivoTest extends \PHPUnit_Framework_TestCase
 
         $detalhes = $arquivo->listDetalhes();
         $detalhe = $detalhes[1];
-        
+
         $this->assertEquals(new \DateTime('2012-04-12 00:00:00'), $detalhe->getDataVencimento());
         $this->assertEquals(5.0, $detalhe->getValorRecebido());
         $this->assertEquals(97, $detalhe->getNossoNumero());
@@ -28,30 +27,29 @@ class ArquivoTest extends \PHPUnit_Framework_TestCase
 
     public function testArquivoBancoDoBrasilCnab400PodeSerLido()
     {
-    	$factory = new \Cnab\Factory;
-    	$arquivo = $factory->createRetorno('tests/fixtures/cnab400/retorno-cnab400-bb.ret');
+        $factory = new \Cnab\Factory();
+        $arquivo = $factory->createRetorno('tests/fixtures/cnab400/retorno-cnab400-bb.ret');
 
-    	$this->assertNotNull($arquivo);
-    	$this->assertNotNull($arquivo->header);
-    	$this->assertNotNull($arquivo->trailer);
-    
-    	$this->assertEquals('33448000011113', $arquivo->getCodigoCedente());
-    	$this->assertEquals(\Cnab\Banco::BANCO_DO_BRASIL, $arquivo->getCodigoBanco());
-    
-    	$detalhes = $arquivo->listDetalhes();
-    	$detalhe = $detalhes[0];
+        $this->assertNotNull($arquivo);
+        $this->assertNotNull($arquivo->header);
+        $this->assertNotNull($arquivo->trailer);
 
-    	
-    	$this->assertEquals(25.0, $detalhe->getValorRecebido());
-    	$this->assertEquals('11122450000000290', $detalhe->getNossoNumero());
-    	$this->assertEquals(new \DateTime('2015-09-10 00:00:00'), $detalhe->getDataCredito());
-    	$this->assertEquals(new \DateTime('2015-09-08 00:00:00'), $detalhe->getDataOcorrencia());
-    	$this->assertTrue($detalhe->isBaixa());
+        $this->assertEquals('33448000011113', $arquivo->getCodigoCedente());
+        $this->assertEquals(\Cnab\Banco::BANCO_DO_BRASIL, $arquivo->getCodigoBanco());
+
+        $detalhes = $arquivo->listDetalhes();
+        $detalhe = $detalhes[0];
+
+        $this->assertEquals(25.0, $detalhe->getValorRecebido());
+        $this->assertEquals('11122450000000290', $detalhe->getNossoNumero());
+        $this->assertEquals(new \DateTime('2015-09-10 00:00:00'), $detalhe->getDataCredito());
+        $this->assertEquals(new \DateTime('2015-09-08 00:00:00'), $detalhe->getDataOcorrencia());
+        $this->assertTrue($detalhe->isBaixa());
     }
-    
+
     public function testArquivoItauCnab400PodeSerLido()
     {
-        $factory = new \Cnab\Factory;
+        $factory = new \Cnab\Factory();
         $arquivo = $factory->createRetorno('tests/fixtures/cnab400/retorno-cnab400-itau.ret');
         $this->assertNotNull($arquivo);
         $this->assertNotNull($arquivo->header);

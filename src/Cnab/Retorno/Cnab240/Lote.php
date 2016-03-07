@@ -1,4 +1,5 @@
 <?php
+
 namespace Cnab\Retorno\Cnab240;
 
 class Lote
@@ -23,28 +24,26 @@ class Lote
     {
         $codigo_segmento = strtoupper(substr($linha, 13, 1));
         $segmento = null;
-        if('T' == $codigo_segmento)
-        {
+        if ('T' == $codigo_segmento) {
             $segmento = new SegmentoT($this->arquivo);
             $segmento->loadFromString($linha);
             $this->lastDetalhe = new Detalhe($this->arquivo);
             $this->detalhes[] = $this->lastDetalhe;
             $this->lastDetalhe->segmento_t = $segmento;
-        }
-        else if('U' == $codigo_segmento)
-        {
+        } elseif ('U' == $codigo_segmento) {
             $segmento = new SegmentoU($this->arquivo);
             $segmento->loadFromString($linha);
-            if($this->lastDetalhe)
+            if ($this->lastDetalhe) {
                 $this->lastDetalhe->segmento_u = $segmento;
-        }
-        else if('W' == $codigo_segmento)
-        {
+            }
+        } elseif ('W' == $codigo_segmento) {
             $segmento = new SegmentoW($this->arquivo);
             $segmento->loadFromString($linha);
-            if($this->lastDetalhe)
+            if ($this->lastDetalhe) {
                 $this->lastDetalhe->segmento_w = $segmento;
+            }
         }
+
         return $segmento;
     }
 

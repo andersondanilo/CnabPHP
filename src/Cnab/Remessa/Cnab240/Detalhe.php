@@ -1,4 +1,5 @@
 <?php
+
 namespace Cnab\Remessa\Cnab240;
 
 class Detalhe
@@ -19,15 +20,18 @@ class Detalhe
     public function validate()
     {
         $this->last_error = null;
-        foreach($this->listSegmento() as $segmento) {
-            if(!$segmento->validate())
-                $this->last_error = get_class($segmento) . ': ' . $segmento->last_error;
+        foreach ($this->listSegmento() as $segmento) {
+            if (!$segmento->validate()) {
+                $this->last_error = get_class($segmento).': '.$segmento->last_error;
+            }
         }
+
         return is_null($this->last_error);
     }
 
     /**
-     * Lista todos os segmentos deste detalhe
+     * Lista todos os segmentos deste detalhe.
+     *
      * @return array
      */
     public function listSegmento()
@@ -35,19 +39,22 @@ class Detalhe
         return array(
             $this->segmento_p,
             $this->segmento_q,
-            $this->segmento_r
+            $this->segmento_r,
         );
     }
 
     /**
-     * Retorna todas as linhas destes detalhes
+     * Retorna todas as linhas destes detalhes.
+     *
      * @return string
      */
     public function getEncoded()
     {
         $text = array();
-        foreach($this->listSegmento() as $segmento)
+        foreach ($this->listSegmento() as $segmento) {
             $text[] = $segmento->getEncoded();
+        }
+
         return implode(Arquivo::QUEBRA_LINHA, $text);
     }
 }
