@@ -2,8 +2,8 @@
 
 // exemplo pré-gerar teste unitário
 
-$dumpLine = function($line) {
-    foreach($line->getFields() as $field) {
+$dumpLine = function ($line) {
+    foreach ($line->getFields() as $field) {
         echo "        '{$field->pos_start}:{$field->pos_end}' => '{$field->getEncoded()}', // {$field->nome} \n";
     }
 };

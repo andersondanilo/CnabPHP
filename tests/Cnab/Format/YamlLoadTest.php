@@ -1,4 +1,5 @@
 <?php
+
 namespace Cnab\Tests\Format;
 
 use Cnab\Format\YamlLoad;
@@ -8,7 +9,6 @@ define('CNAB_FIXTURE_PATH', dirname(__FILE__).'/../../fixtures/yaml');
 
 class YamlLoadTest extends \PHPUnit_Framework_TestCase
 {
-
     /**
      * @expectedException DomainException
      * @expectedExceptionMessage O campo codigo_banco colide com o campo tipo_registro
@@ -22,7 +22,7 @@ class YamlLoadTest extends \PHPUnit_Framework_TestCase
                 'pos' => array(1, 3),
             ),
             'tipo_registro' => array(
-                'pos' => array(1, 4)
+                'pos' => array(1, 4),
             ),
         );
 
@@ -38,14 +38,14 @@ class YamlLoadTest extends \PHPUnit_Framework_TestCase
                 'pos' => array(1, 3),
             ),
             'tipo_registro' => array(
-                'pos' => array(4, 4)
+                'pos' => array(4, 4),
             ),
         );
 
         $fields2 = array(
             'codigo_banco' => array(
                 'pos' => array(1, 3),
-            )
+            ),
         );
 
         $this->assertTrue($yamlLoad->validateCollision($fields1));
@@ -61,21 +61,21 @@ class YamlLoadTest extends \PHPUnit_Framework_TestCase
             'generic' => array(
                 'codigo_banco' => array(
                     'pos' => array(1, 3),
-                    'picture' => ''
+                    'picture' => '',
                 ),
                 'tipo_registro' => array(
                     'pos' => array(4, 4),
-                    'picture' => ''
+                    'picture' => '',
                 ),
             ),
             '033' => array(
                 'nome_empresa' => array(
                     'pos' => array(40, 80),
-                    'picture' => ''
+                    'picture' => '',
                 ),
                 'numero_inscricao' => array(
                     'pos' => array(79, 80),
-                    'picture' => ''
+                    'picture' => '',
                 ),
             ),
         );
@@ -90,21 +90,21 @@ class YamlLoadTest extends \PHPUnit_Framework_TestCase
             'generic' => array(
                 'codigo_banco' => array(
                     'pos' => array(1, 3),
-                    'picture' => ''
+                    'picture' => '',
                 ),
                 'tipo_registro' => array(
                     'pos' => array(4, 4),
-                    'picture' => ''
+                    'picture' => '',
                 ),
             ),
             '033' => array(
                 'nome_empresa' => array(
                     'pos' => array(40, 80),
-                    'picture' => ''
+                    'picture' => '',
                 ),
                 'numero_inscricao' => array(
                     'pos' => array(81, 81),
-                    'picture' => ''
+                    'picture' => '',
                 ),
             ),
         );
@@ -113,7 +113,8 @@ class YamlLoadTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($yamlLoad->validateArray($array));
     }
 
-    public function testBuscaFormatoGenericoEEspecifico() {
+    public function testBuscaFormatoGenericoEEspecifico()
+    {
         $yamlLoad = $this->getMockBuilder('\Cnab\Format\YamlLoad')
                          ->setMethods(array('loadYaml'))
                          ->setConstructorArgs(array(33))
@@ -123,7 +124,7 @@ class YamlLoadTest extends \PHPUnit_Framework_TestCase
             'codigo_banco' => array(
                 'pos' => array(1, 3),
                 'picture' => '9(3)',
-            )
+            ),
         );
 
         $yamlLoad->expects($this->at(0))
@@ -140,7 +141,7 @@ class YamlLoadTest extends \PHPUnit_Framework_TestCase
                 )
                 ->will($this->returnValue($testFormat));
 
-        $linha = new Linha;
+        $linha = new Linha();
         $yamlLoad->load($linha, 'cnab240', 'header_lote');
     }
 }

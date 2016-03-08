@@ -1,4 +1,5 @@
 <?php
+
 namespace Cnab\Retorno;
 
 class Linha
@@ -14,7 +15,7 @@ class Linha
     public $texto;
 
     /**
-     * @var \Cnab\Format\Linha $linha
+     * @var \Cnab\Format\Linha
      */
     public $linhaCnab;
 }

@@ -1,4 +1,5 @@
 <?php
+
 namespace Cnab\Remessa\Cnab240;
 
 class HeaderArquivo extends \Cnab\Format\Linha

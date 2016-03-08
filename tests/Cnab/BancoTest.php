@@ -1,4 +1,5 @@
 <?php
+
 namespace Cnab\Tests;
 
 use Cnab\Banco;

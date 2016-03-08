@@ -1,4 +1,5 @@
 <?php
+
 namespace Cnab\Remessa\Cnab240;
 
 class SegmentoQ extends \Cnab\Format\Linha

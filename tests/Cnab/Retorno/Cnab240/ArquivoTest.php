@@ -1,13 +1,12 @@
 <?php
+
 namespace Cnab\Tests\Retorno\Cnab240;
 
-use Cnab\Retorno\Cnab240\Arquivo;
-
-class ArquivoTest extends \PHPUnit_Framework_TestCase 
+class ArquivoTest extends \PHPUnit_Framework_TestCase
 {
     public function testArquivoSantanderPodeSerLido()
     {
-        $factory = new \Cnab\Factory;
+        $factory = new \Cnab\Factory();
         $arquivo = $factory->createRetorno('tests/fixtures/cnab240/retorno_santander.ret');
         $this->assertNotNull($arquivo);
         $this->assertNotNull($arquivo->header);
@@ -25,8 +24,9 @@ class ArquivoTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(10, $detalhe->segmento_t->valor_titulo);
     }
 
-    public function testArquivoBancoDoBrasilPodeSerLido() {
-        $factory = new \Cnab\Factory;
+    public function testArquivoBancoDoBrasilPodeSerLido()
+    {
+        $factory = new \Cnab\Factory();
         $arquivo = $factory->createRetorno('tests/fixtures/cnab240/retorno_bb.ret');
         $this->assertNotNull($arquivo);
         $this->assertNotNull($arquivo->header);
@@ -50,8 +50,9 @@ class ArquivoTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(196, $detalhe->getNossoNumero());
     }
 
-    public function testArquivoCaixaSigcbPodeSerLido() {
-        $factory = new \Cnab\Factory;
+    public function testArquivoCaixaSigcbPodeSerLido()
+    {
+        $factory = new \Cnab\Factory();
         $arquivo = $factory->createRetorno('tests/fixtures/cnab240/retorno_cnab240_caixa.ret');
         $this->assertNotNull($arquivo);
         $this->assertNotNull($arquivo->header);
@@ -66,7 +67,7 @@ class ArquivoTest extends \PHPUnit_Framework_TestCase
         );
 
         $detalhe = $arquivo->listDetalhes();
-        $detalhe = $detalhe[0];        
+        $detalhe = $detalhe[0];
 
         $this->assertEquals(6, $detalhe->getCodigo());
         $this->assertEquals(80.00, $detalhe->getValorRecebido());
@@ -94,5 +95,5 @@ class ArquivoTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(false, $detalhe->isDDA());
         $this->assertEquals(null, $detalhe->getAlegacaoPagador());
         $this->assertEquals(null, $detalhe->getDescricaoLiquidacao());
-    }   
+    }
 }
