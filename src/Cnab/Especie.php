@@ -21,12 +21,12 @@ class Especie
     const ITAU_DIVERSOS = '99';
 
     // Caixa
-    const CEF_DUPLICATA_MERCANTIL = '01';
-    const CEF_NOTA_PROMISSORIA = '02';
-    const CEF_DUPLICATA_DE_PRESTACAO_DE_SERVICOS = '03';
-    const CEF_NOTA_DE_SEGURO = '05';
-    const CEF_LETRA_DE_CAMBIO = '06';
-    const CEF_OUTROS = '09';
+    const CEF_DUPLICATA_MERCANTIL = 2;
+    const CEF_NOTA_PROMISSORIA = 12;
+    const CEF_DUPLICATA_DE_PRESTACAO_DE_SERVICOS = 4;
+    const CEF_NOTA_DE_SEGURO = 16;
+    const CEF_LETRA_DE_CAMBIO = 7;
+    const CEF_OUTROS = 99;
 
     // Banco do Brasil
     // Para carteira 11 e 17 modalidade Simples, pode ser usado: 01 – Cheque, 02 – Duplicata Mercantil, 04 –
