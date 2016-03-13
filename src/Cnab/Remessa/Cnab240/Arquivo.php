@@ -106,14 +106,18 @@ class Arquivo implements \Cnab\Remessa\IArquivo
         $this->headerArquivo->numero_sequencial_arquivo = $this->configuracao['numero_sequencial_arquivo'];
 
         if ($this->codigo_banco == \Cnab\Banco::CEF) {
-            $codigoConvenio = sprintf(
-                '%04d%03d%08d',
-                $params['agencia'],
-                $params['operacao'],
-                $params['conta']
-            );
-            $codigoConvenio .= $this->mod11($codigoConvenio);
-            $this->headerArquivo->codigo_convenio = $codigoConvenio;
+            if($this->layoutVersao === 'sigcb') {
+                $this->headerArquivo->codigo_convenio = 0;
+            } else {
+                $codigoConvenio = sprintf(
+                    '%04d%03d%08d',
+                    $params['agencia'],
+                    $params['operacao'],
+                    $params['conta']
+                );
+                $codigoConvenio .= $this->mod11($codigoConvenio);
+                $this->headerArquivo->codigo_convenio = $codigoConvenio;
+            }
         }
 
         $this->headerLote->codigo_banco = $this->headerArquivo->codigo_banco;

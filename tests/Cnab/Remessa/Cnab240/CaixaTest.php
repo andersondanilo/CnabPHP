@@ -85,8 +85,7 @@ class CaixaTest extends \PHPUnit_Framework_TestCase
                 '9:17' => '         ', // uso_exclusivo_febraban_01 
                 '18:18' => '2', // codigo_inscricao 
                 '19:32' => '11222333444455', // numero_inscricao 
-                '33:49' => '01234012001234560', // codigo convenio
-                '50:52' => '000', // uso_exclusivo_caixa_01 
+                '33:52' => '00000000000000000000', // uso exclusivo caixa
                 '53:57' => '01234', // agencia 
                 '58:58' => '3', // agencia_dv 
                 '59:64' => '123123', // codigo_cedente 
