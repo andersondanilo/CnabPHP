@@ -2,7 +2,7 @@
 
 namespace Cnab\Tests\Remessa\Cnab240;
 
-class ArquivoTest extends \PHPUnit_Framework_TestCase
+class CaixaTest extends \PHPUnit_Framework_TestCase
 {
     public function testArquivoCaixaCnab240SigcbPodeSerCriado()
     {
@@ -61,6 +61,7 @@ class ArquivoTest extends \PHPUnit_Framework_TestCase
             'mensagem' => 'Descrição do boleto',
             'data_multa' => new \DateTime('2015-02-07'), // data da multa
             'valor_multa' => 11.2, // valor da multa
+            'baixar_apos_dias' => 30,
         ));
 
         $texto = $arquivo->getText();

@@ -15,7 +15,7 @@ class Banco
         if ($codigo == self::BANCO_DO_BRASIL) {
             return array(
                 'codigo_do_banco' => self::BANCO_DO_BRASIL,
-                'nome_do_banco' => 'BANCO DO BRASIL SA',
+                'nome_do_banco' => 'BANCO DO BRASIL S.A.',
             );
         } elseif ($codigo == self::ITAU) {
             return array(
