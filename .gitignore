@@ -5,4 +5,4 @@ bin
 vendor
 composer.phar
 phpunit.xml
-#composer.lock
+composer.lock
