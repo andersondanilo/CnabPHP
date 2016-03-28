@@ -253,8 +253,14 @@ class Arquivo implements \Cnab\Remessa\IArquivo
         }
         $detalhe->segmento_p->valor_abatimento = 0;
         $detalhe->segmento_p->uso_empresa = $boleto['numero_documento'];
-        $detalhe->segmento_p->codigo_protesto = 3; // 3 = Não protestar
-        $detalhe->segmento_p->prazo_protesto = 0;
+
+        if (!empty($boleto['codigo_protesto']) && !empty($boleto['prazo_protesto'])) {
+            $detalhe->segmento_p->codigo_protesto = $boleto['codigo_protesto'];
+            $detalhe->segmento_p->prazo_protesto = $boleto['prazo_protesto'];
+        } else {
+            $detalhe->segmento_p->codigo_protesto = 3; // 3 = Não protestar
+            $detalhe->segmento_p->prazo_protesto = 0;
+        }
 
         if ($this->codigo_banco == \Cnab\Banco::BANCO_DO_BRASIL) {
             // Campo não tratado pelo sistema. Informar 'zeros'.
