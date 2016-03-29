@@ -92,7 +92,7 @@ class CaixaTest extends \PHPUnit_Framework_TestCase
                 '65:71' => '0000000', // uso_exclusivo_caixa_02 
                 '72:72' => '0', // uso_exclusivo_caixa_03 
                 '73:102' => 'Nome Fantasia da sua empresa  ', // nome_empresa 
-                '103:132' => 'C ECON FEDERAL                ', // nome_banco 
+                '103:132' => 'CAIXA ECONOMICA FEDERAL       ', // nome_banco
                 '133:142' => '          ', // uso_exclusivo_febraban_02 
                 '143:143' => '1', // codigo_remessa_retorno 
                 '144:151' => '01022015', // data_geracao 
