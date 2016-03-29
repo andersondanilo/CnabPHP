@@ -117,7 +117,7 @@ class CaixaTest extends \PHPUnit_Framework_TestCase
                 '18:18' => '2', // codigo_inscricao 
                 '19:33' => '011222333444455', // numero_inscricao 
                 '34:39' => '123123', // codigo_convenio 
-                '40:53' => '              ', // uso_exclusivo_banco 
+                '40:53' => '00000000000000', // uso_exclusivo_banco
                 '54:58' => '01234', // agencia 
                 '59:59' => '3', // agencia_dv 
                 '60:65' => '123123', // codigo_cedente 
