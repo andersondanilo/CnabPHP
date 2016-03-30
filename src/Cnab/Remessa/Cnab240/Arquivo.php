@@ -248,7 +248,7 @@ class Arquivo implements \Cnab\Remessa\IArquivo
             $dateJurosMora->modify('+1 day');
         }
 
-        $detalhe->segmento_p->data_juros_mora = $dateVencimento;
+        $detalhe->segmento_p->data_juros_mora = $dateJurosMora;
 
         $detalhe->segmento_p->valor_juros_mora = $boleto['juros_de_um_dia'];
         if ($boleto['valor_desconto'] > 0) {

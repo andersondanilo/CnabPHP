@@ -62,6 +62,7 @@ class CaixaTest extends \PHPUnit_Framework_TestCase
             'data_multa' => new \DateTime('2015-02-07'), // data da multa
             'valor_multa' => 11.2, // valor da multa
             'baixar_apos_dias' => 30,
+            'dias_iniciar_contagem_juros' => 1,
         ));
 
         $texto = $arquivo->getText();
@@ -161,7 +162,7 @@ class CaixaTest extends \PHPUnit_Framework_TestCase
                 '109:109' => 'N', // aceite 
                 '110:117' => '14012015', // data_emissao 
                 '118:118' => '1', // codigo_juros_mora 
-                '119:126' => '03022015', // data_juros_mora 
+                '119:126' => '04022015', // data_juros_mora
                 '127:141' => '000000000000010', // valor_juros_mora 
                 '142:142' => '1', // codigo_desconto_1 
                 '143:150' => '09022015', // data_desconto_1 
