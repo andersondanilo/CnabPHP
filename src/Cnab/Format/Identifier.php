@@ -16,6 +16,8 @@ class Identifier
 
         $contents = \file_get_contents($filename);
 
+        $contents = str_replace("\r\n", "\n", $contents);
+
         $lines = \explode("\n", $contents);
 
         if (\count($lines) < 2) {
