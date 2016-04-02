@@ -25,7 +25,7 @@ class Banco
         } elseif ($codigo == self::CEF) {
             return array(
                 'codigo_do_banco' => self::CEF,
-                'nome_do_banco' => 'C ECON FEDERAL',
+                'nome_do_banco' => 'CAIXA ECONOMICA FEDERAL',
             );
         } elseif ($codigo == self::SANTANDER) {
             return array(

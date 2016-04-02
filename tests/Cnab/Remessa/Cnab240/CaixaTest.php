@@ -62,6 +62,7 @@ class CaixaTest extends \PHPUnit_Framework_TestCase
             'data_multa' => new \DateTime('2015-02-07'), // data da multa
             'valor_multa' => 11.2, // valor da multa
             'baixar_apos_dias' => 30,
+            'dias_iniciar_contagem_juros' => 1,
         ));
 
         $texto = $arquivo->getText();
@@ -92,7 +93,7 @@ class CaixaTest extends \PHPUnit_Framework_TestCase
                 '65:71' => '0000000', // uso_exclusivo_caixa_02 
                 '72:72' => '0', // uso_exclusivo_caixa_03 
                 '73:102' => 'Nome Fantasia da sua empresa  ', // nome_empresa 
-                '103:132' => 'C ECON FEDERAL                ', // nome_banco 
+                '103:132' => 'CAIXA ECONOMICA FEDERAL       ', // nome_banco
                 '133:142' => '          ', // uso_exclusivo_febraban_02 
                 '143:143' => '1', // codigo_remessa_retorno 
                 '144:151' => '01022015', // data_geracao 
@@ -117,7 +118,7 @@ class CaixaTest extends \PHPUnit_Framework_TestCase
                 '18:18' => '2', // codigo_inscricao 
                 '19:33' => '011222333444455', // numero_inscricao 
                 '34:39' => '123123', // codigo_convenio 
-                '40:53' => '              ', // uso_exclusivo_banco 
+                '40:53' => '00000000000000', // uso_exclusivo_banco
                 '54:58' => '01234', // agencia 
                 '59:59' => '3', // agencia_dv 
                 '60:65' => '123123', // codigo_cedente 
@@ -161,7 +162,7 @@ class CaixaTest extends \PHPUnit_Framework_TestCase
                 '109:109' => 'N', // aceite 
                 '110:117' => '14012015', // data_emissao 
                 '118:118' => '1', // codigo_juros_mora 
-                '119:126' => '03022015', // data_juros_mora 
+                '119:126' => '04022015', // data_juros_mora
                 '127:141' => '000000000000010', // valor_juros_mora 
                 '142:142' => '1', // codigo_desconto_1 
                 '143:150' => '09022015', // data_desconto_1 

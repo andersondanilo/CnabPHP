@@ -193,6 +193,7 @@ class Arquivo implements \Cnab\Remessa\IArquivo
     {
         $dateVencimento = $boleto['data_vencimento'] instanceof \DateTime ? $boleto['data_vencimento'] : new \DateTime($boleto['data_vencimento']);
         $dateCadastro = $boleto['data_cadastro'] instanceof \DateTime ? $boleto['data_cadastro'] : new \DateTime($boleto['data_cadastro']);
+        $dateJurosMora = clone $dateVencimento;
 
         $detalhe = new Detalhe($this);
 
@@ -240,7 +241,15 @@ class Arquivo implements \Cnab\Remessa\IArquivo
         $detalhe->segmento_p->aceite = $boleto['aceite'];
         $detalhe->segmento_p->data_emissao = $dateCadastro;
         $detalhe->segmento_p->codigo_juros_mora = 1; // 1 = Por dia
-        $detalhe->segmento_p->data_juros_mora = $dateVencimento;
+
+        if (!empty($boleto['dias_iniciar_contagem_juros']) && is_numeric($boleto['dias_iniciar_contagem_juros'])) {
+            $dateJurosMora->modify("+{$boleto['dias_iniciar_contagem_juros']} days");
+        } else {
+            $dateJurosMora->modify('+1 day');
+        }
+
+        $detalhe->segmento_p->data_juros_mora = $dateJurosMora;
+
         $detalhe->segmento_p->valor_juros_mora = $boleto['juros_de_um_dia'];
         if ($boleto['valor_desconto'] > 0) {
             $detalhe->segmento_p->codigo_desconto_1 = 1; // valor fixo
@@ -253,8 +262,14 @@ class Arquivo implements \Cnab\Remessa\IArquivo
         }
         $detalhe->segmento_p->valor_abatimento = 0;
         $detalhe->segmento_p->uso_empresa = $boleto['numero_documento'];
-        $detalhe->segmento_p->codigo_protesto = 3; // 3 = Não protestar
-        $detalhe->segmento_p->prazo_protesto = 0;
+
+        if (!empty($boleto['codigo_protesto']) && !empty($boleto['prazo_protesto'])) {
+            $detalhe->segmento_p->codigo_protesto = $boleto['codigo_protesto'];
+            $detalhe->segmento_p->prazo_protesto = $boleto['prazo_protesto'];
+        } else {
+            $detalhe->segmento_p->codigo_protesto = 3; // 3 = Não protestar
+            $detalhe->segmento_p->prazo_protesto = 0;
+        }
 
         if ($this->codigo_banco == \Cnab\Banco::BANCO_DO_BRASIL) {
             // Campo não tratado pelo sistema. Informar 'zeros'.
