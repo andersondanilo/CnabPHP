@@ -27,20 +27,21 @@ class Arquivo implements \Cnab\Remessa\IArquivo
     {
         $campos = array(
             'data_geracao', 'data_gravacao', 'nome_fantasia', 'razao_social', 'cnpj', 'logradouro', 'numero', 'bairro',
-            'cidade', 'uf', 'cep',
+            'cidade', 'uf', 'cep', 'agencia', 'conta'
         );
 
-        if ($this->codigo_banco == \Cnab\Banco::CEF) {
-            //$campos[] = 'codigo_cedente';
-            $campos[] = 'agencia';
-            $campos[] = 'conta';
-            $campos[] = 'operacao';
-            $campos[] = 'codigo_cedente';
-            $campos[] = 'codigo_cedente_dac';
-        } else {
-            $campos[] = 'agencia';
-            $campos[] = 'conta';
-            $campos[] = 'conta_dac';
+        switch ($this->codigo_banco) {
+            case \Cnab\Banco::CEF:
+                $campos[] = 'operacao';
+                $campos[] = 'codigo_cedente';
+                $campos[] = 'codigo_cedente_dac';
+            case \Cnab\Banco::BRADESCO:
+                $campos[] = 'codigo_cedente';
+                $campos[] = 'sequencial_remessa';
+                break;
+            default:
+                $campos[] = 'conta_dac';
+                break;
         }
 
         foreach ($campos as $campo) {
@@ -67,13 +68,20 @@ class Arquivo implements \Cnab\Remessa\IArquivo
 
         $this->header->codigo_banco = $this->banco['codigo_do_banco'];
         $this->header->nome_banco = $this->banco['nome_do_banco'];
+        $this->header->agencia = $this->configuracao['agencia'];
+        $this->header->conta = $this->configuracao['conta'];
 
-        if ($this->codigo_banco == \Cnab\Banco::CEF) {
-            $this->header->codigo_cedente = $this->configuracao['codigo_cedente'];
-        } else {
-            $this->header->agencia = $this->configuracao['agencia'];
-            $this->header->conta = $this->configuracao['conta'];
-            $this->header->conta_dv = $this->configuracao['conta_dac'];
+        switch ($this->codigo_banco) {
+            case \Cnab\Banco::CEF:
+                $this->header->codigo_cedente = $this->configuracao['codigo_cedente'];
+            case \Cnab\Banco::BRADESCO:
+                $this->header->codigo_cedente = $this->configuracao['codigo_cedente'];
+                $this->header->sequencial_remessa = $this->configuracao['sequencial_remessa'];
+                $this->header->razao_social = $this->configuracao['razao_social'];
+                break;
+            default:
+                $this->header->conta_dv = $this->configuracao['conta_dac'];
+                break;
         }
 
         $this->header->nome_empresa = $this->configuracao['nome_fantasia'];
@@ -94,7 +102,10 @@ class Arquivo implements \Cnab\Remessa\IArquivo
             $detalhe->codigo_inscricao = 2;
             $detalhe->numero_inscricao = $this->prepareText($this->configuracao['cnpj'], '.-/');
 
-            if (\Cnab\Banco::CEF == $this->codigo_banco) {
+            if (\Cnab\Banco::BRADESCO == $this->codigo_banco) {
+                $detalhe->codigo_cedente = $this->header->codigo_cedente;
+                $detalhe->digito_nosso_numero = $boleto['digito_nosso_numero'];
+            } else if (\Cnab\Banco::CEF == $this->codigo_banco) {
                 $detalhe->codigo_cedente = $this->header->codigo_cedente;
                 $detalhe->taxa_de_permanencia = $boleto['taxa_de_permanencia'];
                 $detalhe->mensagem = $boleto['mensagem'];
@@ -163,6 +174,7 @@ class Arquivo implements \Cnab\Remessa\IArquivo
                 $detalhe->sacado_numero_inscricao = $this->prepareText($boleto['sacado_cpf'], '.-/');
                 $detalhe->nome = $this->prepareText($boleto['sacado_nome']);
             }
+            
             $detalhe->logradouro = $this->prepareText($boleto['sacado_logradouro']);
             $detalhe->bairro = $this->prepareText($boleto['sacado_bairro']);
             $detalhe->cep = str_replace('-', '', $boleto['sacado_cep']);
