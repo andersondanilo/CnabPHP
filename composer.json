@@ -8,6 +8,10 @@
         {
             "name": "Anderson Danilo",
             "email": "andersondanilo.souza@gmail.com"
+        },
+        {
+            "name": "Hermenegildo Marin Junior",
+            "email": "hmarinjr@gmail.com"
         }
     ],
     "require-dev": {

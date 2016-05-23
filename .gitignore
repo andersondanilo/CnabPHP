@@ -6,3 +6,4 @@ vendor
 composer.phar
 phpunit.xml
 composer.lock
+nbproject
