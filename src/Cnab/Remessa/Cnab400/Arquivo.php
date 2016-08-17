@@ -37,6 +37,7 @@ class Arquivo implements \Cnab\Remessa\IArquivo
         		$campos[] = 'codigo_cedente';
         		$campos[] = 'codigo_cedente_dac';
         	case \Cnab\Banco::BRADESCO:
+        		$campos[] = 'agencia';
         		$campos[] = 'conta';
         		$campos[] = 'codigo_cedente';
         		$campos[] = 'sequencial_remessa';
@@ -77,20 +78,24 @@ class Arquivo implements \Cnab\Remessa\IArquivo
         
         $this->header->codigo_banco = $this->banco['codigo_do_banco'];
         $this->header->nome_banco = $this->banco['nome_do_banco'];
-        $this->header->agencia = $this->configuracao['agencia'];
         
         switch ($this->codigo_banco) {
         	case \Cnab\Banco::CEF:
+        		$this->header->agencia = $this->configuracao['agencia'];
         		$this->header->codigo_cedente = $this->configuracao['codigo_cedente'];
         	case \Cnab\Banco::BRADESCO:
+        		$this->header->agencia = $this->configuracao['agencia'];
         		$this->header->codigo_cedente = $this->configuracao['codigo_cedente'];
         		$this->header->sequencial_remessa = $this->configuracao['sequencial_remessa'];
         		$this->header->razao_social = $this->configuracao['razao_social'];
         		break;
         	case \Cnab\Banco::SANTANDER:
         		$this->header->codigo_transmissao = $this->configuracao['codigo_transmissao'];
+        		$this->configuracao['valor_total'] = 0;
+        		$this->configuracao['qtd_documentos'] = 0;
         		break;
         	default:
+        		$this->header->agencia = $this->configuracao['agencia'];
         		$this->header->conta = $this->configuracao['conta'];
         		$this->header->conta_dv = $this->configuracao['conta_dac'];
         		break;
@@ -134,6 +139,8 @@ class Arquivo implements \Cnab\Remessa\IArquivo
             		$detalhe->data_seg_desconto = $boleto['data_seg_desconto'];
             		$detalhe->data_multa = $boleto['data_multa'];
             		$detalhe->pct_multa_atraso = $boleto['pct_multa_atraso'];
+            		$this->configuracao['valor_total'] += $boleto['valor'];
+            		$this->configuracao['qtd_documentos']++;
             		break;
             	default:
             		$detalhe->agencia = $this->header->agencia;
@@ -349,6 +356,14 @@ class Arquivo implements \Cnab\Remessa\IArquivo
 
             $dados .= $detalhe->getEncoded().self::QUEBRA_LINHA;
         }
+        
+        switch($this->codigo_banco) {
+        	case \Cnab\Banco::SANTANDER:
+		        $this->trailer->qtd_documentos = $this->configuracao['qtd_documentos'];
+		        $this->trailer->valor_total = $this->configuracao['valor_total'];
+        		break;
+        }
+        
         $this->trailer->numero_sequencial = $numero_sequencial++;
 
         if (!$this->trailer->validate()) {
