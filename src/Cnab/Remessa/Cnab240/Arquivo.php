@@ -249,7 +249,7 @@ class Arquivo implements \Cnab\Remessa\IArquivo
         }
 
         if($this->codigo_banco == \Cnab\Banco::SANTANDER) {
-            $detalhe->segmento_p->codigo_carteira = $boleto['codigo_carteira'];
+            $detalhe->segmento_p->codigo_carteira = $boleto['carteira'];
         }
         
         if ($this->layoutVersao === 'sigcb' && $this->codigo_banco == \Cnab\Banco::CEF) {
