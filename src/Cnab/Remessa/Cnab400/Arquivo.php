@@ -132,9 +132,7 @@ class Arquivo implements \Cnab\Remessa\IArquivo
             		$detalhe->digito_nosso_numero = $boleto['digito_nosso_numero'];
             		break;
             	case \Cnab\Banco::SANTANDER:
-            		$detalhe->agencia = $this->configuracao['agencia'];
-            		$detalhe->conta_movimento = $this->configuracao['conta_movimento'];
-            		$detalhe->conta_cobranca = $this->configuracao['conta_cobranca'];
+                    $detalhe->codigo_transmissao = $this->header->codigo_transmissao;
             		$detalhe->complemento_conta = $this->configuracao['complemento_conta'];
             		$detalhe->data_seg_desconto = $boleto['data_seg_desconto'];
             		$detalhe->data_multa = $boleto['data_multa'];
@@ -359,7 +357,7 @@ class Arquivo implements \Cnab\Remessa\IArquivo
         
         switch($this->codigo_banco) {
         	case \Cnab\Banco::SANTANDER:
-		        $this->trailer->qtd_documentos = $this->configuracao['qtd_documentos'];
+		        $this->trailer->qtd_documentos = $this->configuracao['qtd_documentos'] + 2; // Quantidade de documentos + Header + Trailler
 		        $this->trailer->valor_total = $this->configuracao['valor_total'];
         		break;
         }
