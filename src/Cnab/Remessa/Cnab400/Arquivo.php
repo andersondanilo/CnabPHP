@@ -136,7 +136,7 @@ class Arquivo implements \Cnab\Remessa\IArquivo
             		$detalhe->conta_movimento = $this->configuracao['conta_movimento'];
             		$detalhe->conta_cobranca = $this->configuracao['conta_cobranca'];
             		$detalhe->complemento_conta = $this->configuracao['complemento_conta'];
-            		$detalhe->data_seg_desconto = $boleto['data_seg_desconto'];
+            		$detalhe->data_seg_desconto = $boleto['data_seg_desconto']->format('dmy');
             		$detalhe->data_multa = $boleto['data_multa'];
             		$detalhe->pct_multa_atraso = $boleto['pct_multa_atraso'];
             		$this->configuracao['valor_total'] += $boleto['valor'];
@@ -214,7 +214,7 @@ class Arquivo implements \Cnab\Remessa\IArquivo
             $detalhe->sacador = $this->prepareText($this->configuracao['nome_fantasia']);
 
             $detalhe->juros_um_dia = $boleto['juros_de_um_dia'];
-            $detalhe->desconto_ate = $boleto['data_desconto'];
+            $detalhe->desconto_ate = $boleto['data_desconto']->format('dmy');
             $detalhe->valor_desconto = $boleto['valor_desconto'];
             $detalhe->prazo = $boleto['prazo'];
         } elseif ($tipo == 'baixa') {
