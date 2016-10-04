@@ -92,7 +92,7 @@ class Arquivo implements \Cnab\Remessa\IArquivo
         	case \Cnab\Banco::SANTANDER:
         		$this->header->codigo_transmissao = $this->configuracao['codigo_transmissao'];
         		$this->configuracao['valor_total'] = 0;
-        		$this->configuracao['qtd_documentos'] = 0;
+        		$this->configuracao['qtd_documentos'] = 1; // Header
         		break;
         	default:
         		$this->header->agencia = $this->configuracao['agencia'];
@@ -359,8 +359,9 @@ class Arquivo implements \Cnab\Remessa\IArquivo
         
         switch($this->codigo_banco) {
         	case \Cnab\Banco::SANTANDER:
-		        $this->trailer->qtd_documentos = $this->configuracao['qtd_documentos'];
-		        $this->trailer->valor_total = $this->configuracao['valor_total'];
+                $this->configuracao['qtd_documentos']++;
+                $this->trailer->qtd_documentos = $this->configuracao['qtd_documentos'];
+                $this->trailer->valor_total = $this->configuracao['valor_total'];
         		break;
         }
         
