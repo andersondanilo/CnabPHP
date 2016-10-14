@@ -132,10 +132,8 @@ class Arquivo implements \Cnab\Remessa\IArquivo
             		$detalhe->digito_nosso_numero = $boleto['digito_nosso_numero'];
             		break;
             	case \Cnab\Banco::SANTANDER:
-            		$detalhe->agencia = $this->configuracao['agencia'];
-            		$detalhe->conta_movimento = $this->configuracao['conta_movimento'];
-            		$detalhe->conta_cobranca = $this->configuracao['conta_cobranca'];
-            		$detalhe->complemento_conta = $this->configuracao['complemento_conta'];
+            		$detalhe->codigo_transmissao = $this->configuracao['codigo_transmissao'];
+                    $detalhe->complemento_conta = $this->configuracao['complemento_conta'];
             		$detalhe->data_seg_desconto = $boleto['data_seg_desconto']->format('dmy');
             		$detalhe->data_multa = $boleto['data_multa'];
             		$detalhe->pct_multa_atraso = $boleto['pct_multa_atraso'];
