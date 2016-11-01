@@ -114,7 +114,7 @@ class Arquivo implements \Cnab\Remessa\IArquivo
         $complementos = array();
 
         if ($tipo == 'remessa') {
-            $detalhe->codigo_ocorrencia = !empty($boleto['codigo_de_ocorrencia']) ? $boleto['codigo_de_ocorrencia'] : '1';
+            $detalhe->codigo_ocorrencia = !empty($boleto['codigo_ocorrencia']) ? $boleto['codigo_ocorrencia'] : '1';
 
             $detalhe->codigo_inscricao = 2;
             $detalhe->numero_inscricao = $this->prepareText($this->configuracao['cnpj'], '.-/');
