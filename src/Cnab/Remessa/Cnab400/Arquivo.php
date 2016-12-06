@@ -12,13 +12,13 @@ class Arquivo implements \Cnab\Remessa\IArquivo
     public $banco;
     public $codigo_banco;
     public $configuracao = array();
-    public $layout_versao;
+    public $layoutVersao;
     const   QUEBRA_LINHA = "\r\n";
 
-    public function __construct($codigo_banco, $layout_versao = null)
+    public function __construct($codigo_banco, $layoutVersao = null)
     {
         $this->codigo_banco = $codigo_banco;
-        $this->layout_versao = $layout_versao;
+        $this->layoutVersao = $layoutVersao;
         $this->banco = \Cnab\Banco::getBanco($this->codigo_banco);
         //$this->data_gravacao = date('dmY');
     }
@@ -33,9 +33,8 @@ class Arquivo implements \Cnab\Remessa\IArquivo
         switch($this->codigo_banco) {
         	case \Cnab\Banco::CEF:
         		$campos[] = 'conta';
-        		$campos[] = 'operacao';
         		$campos[] = 'codigo_cedente';
-        		$campos[] = 'codigo_cedente_dac';
+                break;
         	case \Cnab\Banco::BRADESCO:
         		$campos[] = 'agencia';
         		$campos[] = 'conta';
@@ -77,12 +76,13 @@ class Arquivo implements \Cnab\Remessa\IArquivo
         $this->header = new Header($this);
         
         $this->header->codigo_banco = $this->banco['codigo_do_banco'];
-        $this->header->nome_banco = $this->banco['nome_do_banco'];
         
         switch ($this->codigo_banco) {
-        	case \Cnab\Banco::CEF:
+            case \Cnab\Banco::CEF:
+                $this->header->nome_banco = 'C ECON FEDERAL';
         		$this->header->agencia = $this->configuracao['agencia'];
         		$this->header->codigo_cedente = $this->configuracao['codigo_cedente'];
+                break;
         	case \Cnab\Banco::BRADESCO:
         		$this->header->agencia = $this->configuracao['agencia'];
         		$this->header->codigo_cedente = $this->configuracao['codigo_cedente'];
@@ -121,9 +121,8 @@ class Arquivo implements \Cnab\Remessa\IArquivo
 
             switch ($this->codigo_banco) {
             	case \Cnab\Banco::CEF:
-            		$detalhe->codigo_cedente = $this->header->codigo_cedente;
-            		$detalhe->taxa_de_permanencia = $boleto['taxa_de_permanencia'];
-            		$detalhe->mensagem = $boleto['mensagem'];
+                    $detalhe->agencia = '0654';
+                    $detalhe->codigo_cedente = $this->header->codigo_cedente;
             		$detalhe->data_multa = $boleto['data_multa'];
             		$detalhe->valor_multa = $boleto['valor_multa'];
             		break;
@@ -142,6 +141,18 @@ class Arquivo implements \Cnab\Remessa\IArquivo
                     }
 
             		$detalhe->data_multa = $boleto['data_multa'];
+
+                    if($detalhe->data_multa instanceof \DateTime)
+                    {
+                        $detalhe->data_multa = $boleto['data_multa']->format('dmy');
+                    }
+
+                    if($boleto['pct_multa_atraso']==0
+                    && $boleto['data_seg_desconto']=='000000')
+                    {
+                        $detalhe->info_multa = 0;
+                    }
+
             		$detalhe->pct_multa_atraso = $boleto['pct_multa_atraso'];
             		$this->configuracao['valor_total'] += $boleto['valor'];
             		$this->configuracao['qtd_documentos']++;
@@ -185,6 +196,15 @@ class Arquivo implements \Cnab\Remessa\IArquivo
 
             $detalhe->numero_carteira = $boleto['carteira'];
             $detalhe->numero_documento = $boleto['numero_documento'];
+
+
+            if ($this->codigo_banco==\Cnab\Banco::CEF)
+            {
+                $detalhe->uso_empresa = str_pad($detalhe->uso_empresa, 25, 0, STR_PAD_LEFT);
+                $detalhe->numero_documento = str_pad($detalhe->numero_documento, 10, 0, STR_PAD_LEFT);
+            }
+
+
             $detalhe->vencimento = $dateVencimento->format('dmy');
             $detalhe->valor_titulo = $boleto['valor'];
             $detalhe->aceite = empty($boleto['aceite']) ? 'N' : $boleto['aceite'];
