@@ -121,7 +121,7 @@ class Arquivo implements \Cnab\Remessa\IArquivo
 
             switch ($this->codigo_banco) {
             	case \Cnab\Banco::CEF:
-                    $detalhe->agencia = '0654';
+                    $detalhe->agencia = $this->header->agencia;
                     $detalhe->codigo_cedente = $this->header->codigo_cedente;
             		$detalhe->data_multa = $boleto['data_multa'];
             		$detalhe->valor_multa = $boleto['valor_multa'];
