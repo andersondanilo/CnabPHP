@@ -102,6 +102,11 @@ class Arquivo implements \Cnab\Remessa\IArquivo
         		break;
         }
         
+        if ($this->header->codigo_banco == \Cnab\Banco::ITAU)
+        {
+            $this->header->nome_banco = 'BANCO ITAU SA';
+        }
+
         if ($this->codigo_banco != \Cnab\Banco::BRADESCO)
         {
             $this->header->nome_empresa = $this->configuracao['nome_fantasia'];
@@ -139,6 +144,13 @@ class Arquivo implements \Cnab\Remessa\IArquivo
                     $detalhe->conta = $this->configuracao['conta'];
                     $detalhe->conta_dv = $this->configuracao['conta_dac'];
             		$detalhe->digito_nosso_numero = $boleto['digito_nosso_numero'];
+                    $detalhe->valor_multa = $boleto['juros_de_um_dia'];
+
+                    if($boleto['valor_multa'] > 0)
+                    {
+                        $detalhe->multa = 2;
+                    }
+
             		break;
             	case \Cnab\Banco::SANTANDER:
             		$detalhe->codigo_transmissao = $this->configuracao['codigo_transmissao'];
