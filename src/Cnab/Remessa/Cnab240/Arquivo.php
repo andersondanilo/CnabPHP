@@ -224,7 +224,7 @@ class Arquivo implements \Cnab\Remessa\IArquivo
                 $detalhe->segmento_p->codigo_carteira = $boleto['codigo_carteira'];
             }
         }
-        
+
         if ($this->layoutVersao === 'sigcb' && $this->codigo_banco == \Cnab\Banco::CEF) {
             $detalhe->segmento_p->codigo_carteira = 1; // 1 = Cobrança Simples
             $detalhe->segmento_p->modalidade_carteira = $boleto['modalidade_carteira']; // 21 = (título Sem Registro emissão CAIXA)
@@ -418,8 +418,10 @@ class Arquivo implements \Cnab\Remessa\IArquivo
                     '/\xc3[\xac-\xaf]/',
                     '/\xc3([\xb2-\xb6]|\xb8)/',
                     '/\xc3[\xb9-\xbc]/',
+                    '/\xC2\xAA/',
+                    '/\xC2\xBA/',
             ),
-            str_split('ACEIOUaceiou', 1),
+            str_split('ACEIOUaceiouao', 1),
             $this->isUtf8($string) ? $string : utf8_encode($string)
         );
     }
