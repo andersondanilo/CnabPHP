@@ -258,7 +258,7 @@ class Arquivo implements \Cnab\Remessa\IArquivo
         } else {
             $detalhe->segmento_p->codigo_desconto_1 = 0; // sem desconto
             $detalhe->segmento_p->data_desconto_1 = 0;
-            $detalhe->segmento_p->valor_desconto_1 = 9;
+            $detalhe->segmento_p->valor_desconto_1 = 0;
         }
         $detalhe->segmento_p->valor_abatimento = 0;
         $detalhe->segmento_p->uso_empresa = $boleto['numero_documento'];
