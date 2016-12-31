@@ -180,7 +180,7 @@ class Detalhe extends \Cnab\Format\Linha implements \Cnab\Retorno\IDetalhe
     {
         $nossoNumero = $this->segmento_t->nosso_numero;
 
-        if ($this->codigo_banco == 1) {
+        if ($this->codigo_banco == \Cnab\Banco::BANCO_DO_BRASIL) {
             $nossoNumero = preg_replace(
                 '/^'.strval($this->arquivo->getCodigoConvenio()).'/',
                 '',
