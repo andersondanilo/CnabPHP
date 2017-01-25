@@ -10,7 +10,7 @@ class YamlLoad
     public $formatPath;
     public $layoutVersao;
     
-    protected static $loaded = [];
+    protected static $loaded = array();
     
     public function __construct($codigo_banco, $layoutVersao = null)
     {
