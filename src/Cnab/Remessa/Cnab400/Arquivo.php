@@ -193,7 +193,7 @@ class Arquivo implements \Cnab\Remessa\IArquivo
             $detalhe->numero_inscricao = '0';
             $detalhe->agencia = $this->header->agencia;
             $detalhe->conta = $this->header->conta;
-            $detalhe->conta_dac = $this->header->dac;
+            $detalhe->conta_dv = $this->header->conta_dv;
             $detalhe->codigo_instrucao = '0';
             /*
                Deve ser preenchido na remessa somente quando utilizados, na posição 109-110, os códigos de
@@ -216,7 +216,7 @@ class Arquivo implements \Cnab\Remessa\IArquivo
             $detalhe->especie = ' ';
             $detalhe->sacado_numero_inscricao = '0';
             $detalhe->juros_um_dia = $boleto['juros_de_um_dia'];
-            $detalhe->data_juros = $boleto['data_juros'];
+            $detalhe->data_mora = $boleto['data_multa'];
 
             $detalhe->nome = ' ';
             $detalhe->logradouro = ' ';
