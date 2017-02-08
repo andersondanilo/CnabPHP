@@ -1,9 +1,5 @@
-# Vim
-*.swp
-*.swo
-bin
-vendor
-composer.phar
-phpunit.xml
+.idea/
 composer.lock
-nbproject
+vendor/
+bin/
+tests/*

@@ -1,0 +1,72 @@
+# Com base na documentação do banco do brasil
+# disponível em: http://www.bb.com.br/docs/pub/emp/empl/dwn/CbrVer04BB.pdf
+
+codigo_convenio:
+  # Código de convênio no Banco
+  # O código de convênio é composto pelo número do contrato do cliente junto
+  # ao Banco no sistema PAG com tamanho 9 e com '0' (Zeros) a esquerda e mais
+  # 11 espaços em branco.
+  #
+  # O contrato deve estar cadastrado no PAG (Pagamentos a terceiros) no 
+  # serviço 30 (Pagamentos de títulos do Banco do Brasil) e no serviço 31
+  # (Pagamentos de títulos de outros bancos).
+  pos: [33, 41]
+  picture: '9(9)'
+
+cobranca_cedente:
+  # Informar 0014 para cobrança cedente
+  pos: [42, 45]
+  picture: '9(4)'
+  default: 14
+
+carteira:
+  pos: [46, 47]
+  picture: '9(2)'
+
+variacao_carteira:
+  pos: [48, 50]
+  picture: '9(3)'
+
+uso_exclusivo_bb_01:
+  pos: [51, 52]
+  picture: 'X(2)'
+  default: ''
+
+conta:
+  pos: [59, 70]
+  picture: '9(12)'
+
+conta_dv:
+  pos: [71, 71]
+  picture: 'X(1)'
+
+agencia_mais_cedente_dv:
+  # Campo não tratado pelo Banco do Brasil. Informar 'branco' (espaço) OU zero.
+  pos: [72, 72]
+  picture: 'X(1)'
+  default: ''
+
+uso_exclusivo_febraban_03:
+  pos: [212, 222]
+  picture: 'X(11)'
+  default: ''
+
+identificacao_cobranca_sem_papel:
+  pos: [223, 225]
+  picture: 'X(3)'
+  default: ''
+
+controle_vans:
+  pos: [226, 228]
+  picture: '9(3)'
+  default: '0'
+
+tipo_servico:
+  pos: [229, 230]
+  picture: '9(2)'
+  default: '0'
+
+ocorrencias:
+  pos: [231, 240]
+  picture: '9(10)'
+  default: '0'

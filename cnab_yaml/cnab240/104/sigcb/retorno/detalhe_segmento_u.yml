@@ -1,0 +1,11 @@
+# Registro Detalhe - Segmento U (Obrigatório - Retorno)
+# Baseado na documentação da caixa cef
+
+data_debito_tarifa:
+  pos: [154, 161]
+  picture: '9(8)'
+  date_format: '%d%m%Y'
+
+uso_exclusivo_febraban_02:
+  pos: [162, 240]
+  picture: '9(79)'

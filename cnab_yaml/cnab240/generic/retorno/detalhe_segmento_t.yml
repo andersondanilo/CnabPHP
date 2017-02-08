@@ -1,0 +1,120 @@
+# Registro Detalhe - Segmento T (Obrigatório - Retorno)
+# Baseado na documentação da Febraban Versão 08.8
+
+
+codigo_banco:
+  pos: [1, 3]
+  picture: '9(3)'
+
+lote_servico:
+  pos: [4, 7]
+  picture: '9(4)'
+
+tipo_registro:
+  pos: [8, 8]
+  picture: '9(1)'
+
+numero_sequencial_lote:
+  pos: [9, 13]
+  picture: '9(5)'
+
+codigo_segmento:
+  pos: [14, 14]
+  picture: 'X(1)'
+
+uso_exclusivo_febraban_01:
+  pos: [15, 15]
+  picture: 'X(1)'
+
+codigo_movimento:
+  pos: [16, 17]
+  picture: '9(2)'
+
+agencia_mantenedora:
+  pos: [18, 22]
+  picture: '9(5)'
+
+agencia_dv:
+  pos: [23, 23]
+  picture: '9(1)'
+
+codigo_cedente:
+  pos: [24, 35]
+  picture: '9(12)'
+
+codigo_cedente_dv:
+  pos: [36, 36]
+  picture: '9(1)'
+
+agencia_dv_mais_cedente_dv:
+  pos: [37, 37]
+  picture: '9(1)'
+
+nosso_numero:
+  pos: [38, 57]
+  picture: '9(20)'
+
+codigo_carteira:
+  pos: [58, 58]
+  picture: '9(1)'
+
+numero_documento:
+  pos: [59, 73]
+  picture: 'X(15)'
+
+data_vencimento:
+  pos: [74, 81]
+  picture: '9(8)'
+  date_format: '%d%m%Y'
+
+valor_titulo:
+  pos: [82, 96]
+  picture: '9(13)V9(2)'
+
+numero_banco:
+  pos: [97, 99]
+  picture: '9(3)'
+
+agencia_cobradora:
+  pos: [100, 104]
+  picture: '9(5)'
+
+agencia_cobradora_dac:
+  pos: [105, 105]
+  picture: '9(1)'
+
+uso_empresa:
+  pos: [106, 130]
+  picture: 'X(25)'
+
+codigo_moeda:
+  pos: [131, 132]
+  picture: '9(2)'
+
+tipo_inscricao:
+  pos: [133, 133]
+  picture: '9(1)'
+
+numero_inscricao:
+  pos: [134, 148]
+  picture: '9(15)'
+
+nome_sacado:
+  pos: [149, 188]
+  picture: 'X(40)'
+
+uso_exclusivo_febraban_02:
+  pos: [189, 198]
+  picture: 'X(10)'
+
+valor_tarifa:
+  pos: [199, 213]
+  picture: '9(13)V9(2)'
+
+identificacao_rejeicao:
+  pos: [214, 223]
+  picture: '9(10)'
+
+uso_exclusivo_febraban:
+  pos: [224, 240]
+  picture: 'X(17)'

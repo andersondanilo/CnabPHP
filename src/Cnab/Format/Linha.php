@@ -94,7 +94,9 @@ class Linha
     public function validate()
     {
         foreach ($this->fields as $fieldNome => $field) {
+
             if ($field->getValue() === null || $field->getValue() === false) {
+
                 $this->last_error = "$fieldNome dont be null or false";
 
                 return false;

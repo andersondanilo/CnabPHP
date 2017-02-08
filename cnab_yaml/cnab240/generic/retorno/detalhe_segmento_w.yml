@@ -1,0 +1,49 @@
+# Registro Detalhe - Segmento W (Opcional - Retorno)
+
+codigo_banco:
+  pos: [1, 3]
+  picture: '9(3)'
+
+lote_servico:
+  pos: [4, 7]
+  picture: '9(4)'
+
+tipo_registro:
+  pos: [8, 8]
+  picture: '9(1)'
+
+numero_sequencial:
+  pos: [9, 13]
+  picture: '9(5)'
+
+codigo_segmento:
+  pos: [14, 14]
+  picture: 'X(1)'
+
+uso_exclusivo_febraban_01:
+  pos: [15, 15]
+  picture: 'X(1)'
+
+codigo_movimento:
+  pos: [16, 17]
+  picture: '9(2)'
+
+posicao_relativa:
+  pos: [18, 23]
+  picture: '9(6)'
+
+uso_exclusivo_banco_01:
+  pos: [24, 24]
+  picture: 'X(1)'
+
+codigo_campo_01:
+  pos: [25, 28]
+  picture: '9(4)'
+
+codigo_erro_01:
+  pos: [29, 31]
+  picture: '9(3)'
+
+todo_repeat_codigo_campo_codigo_erro_20:
+  pos: [32, 157]
+  picture: 'X(126)'

@@ -1,0 +1,100 @@
+# Registro de Detalhe
+# Baseado na documentação da Caixa e do Itaú
+
+tipo_de_registro:
+  #Identificação Do Registro Transação
+  pos: [1, 1]
+  picture: '9(01)'
+  default: '1'
+
+codigo_de_inscricao:
+  #Identificação Do Tipo De Inscrição/empresa
+  pos: [2, 3]
+  picture: '9(02)'
+
+numero_de_inscricao:
+  #Número De Inscrição Da Empresa (cpf/cnpj)    
+  pos: [4, 17]
+  picture: '9(14)'
+
+uso_da_empresa:
+  #Nota 2 - Identificação Do Título Na Empresa
+  pos: [38, 62]
+  picture: 'X(25)'
+
+codigo_de_ocorrencia:
+  #Nota 17 - Identificação Da Ocorrência
+  pos: [109, 110]
+  picture: '9(02)'
+
+data_de_ocorrencia:
+  #Data De Ocorrência No Banco
+  pos: [111, 116]
+  picture: '9(06)'
+  date_format: '%d%m%y'
+
+numero_do_documento:
+  #Nota 18 - Nº Do Documento De Cobrança (dupl, Np Etc)
+  pos: [117, 126]
+  picture: 'X(10)'
+
+data_vencimento:
+  #Data De Vencimento Do Título
+  pos: [147, 152]
+  picture: '9(06)'
+  date_format: '%d%m%y'
+
+valor_do_titulo:
+  #Valor Nominal Do Título
+  pos: [153, 165]
+  picture: '9(11)V9(2)'
+
+codigo_do_banco:
+  #Número Do Banco Na Câmara De Compensação
+  pos: [166, 168]
+  picture: '9(03)'
+
+agencia_cobradora:
+  #Nota 9 - Ag. Cobradora, Ag. De Liquidação Ou Baixa
+  pos: [169, 172]
+  picture: '9(04)'
+
+agencia_cobradora_dac:
+  #Dac Da Agência Cobradora
+  pos: [173, 173]
+  picture: '9(01)'
+
+especie:
+  #Nota 10 - Espécie Do Título
+  pos: [174, 175]
+  picture: '9(02)'
+
+valor_tarifa:
+  #Valor Da Despesa De Cobrança
+  pos: [176, 188]
+  picture: '9(11)V9(2)'
+
+valor_iof:
+  #Valor Do Iof A Ser Recolhido (notas Seguro)
+  pos: [215, 227]
+  picture: '9(11)V9(2)'
+
+valor_abatimento:
+  #Nota 19 - Valor Do Abatimento Concedido
+  pos: [228, 240]
+  picture: '9(11)V9(2)'
+
+valor_desconto:
+  #Nota 19 - Valor Do Desconto Concedido
+  pos: [241, 253]
+  picture: '9(11)V9(2)'
+
+valor_principal:
+  #Valor Lançado Em Conta Corrente
+  pos: [254, 266]
+  picture: '9(11)V9(2)'
+
+numero_sequencial:
+  #Número Seqüencial Do Registro No Arquivo  
+  pos: [395, 400]
+  picture: '9(06)'
