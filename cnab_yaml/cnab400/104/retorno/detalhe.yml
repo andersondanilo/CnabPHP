@@ -1,0 +1,82 @@
+# 104 = Caixa Econômica
+
+codigo_cedente:
+  pos: [18, 33]
+  picture: 'X(16)'
+  default: ''
+
+brancos01:
+  #Complemento De Registro      
+  pos: [34, 37]
+  picture: 'X(04)'
+  default: ''
+
+nosso_numero:
+  #Identificação Do Título No Banco 
+  pos: [63, 73]
+  picture: '9(11)'
+
+brancos21:
+  pos: [74, 79]
+  picture: 'X(6)'
+
+codigo_rejeicao:
+  pos: [80, 82]
+  picture: '9(3)'
+
+uso_do_banco:
+  pos: [83, 106]
+  picture: 'X(24)'
+
+carteira:
+  pos: [107, 108]
+  picture: '9(2)'
+
+brancos04:
+  #Complemento Do Registro
+  pos: [127, 146]
+  picture: 'X(20)'
+
+tipo_de_liquidacao:
+  pos: [189, 191]
+  picture: '9(3)'
+
+forma_de_pagamento:
+  pos: [192, 192]
+  picture: '9(1)'
+
+float:
+  pos: [193, 194]
+  picture: '9(2)'
+
+data_debito_tarifa:
+  pos: [195, 200]
+  picture: '9(6)'
+  date_format: '%d%m%y'
+
+brancos05:
+  pos: [201, 214]
+  picture: 'X(14)'
+
+valor_juros:
+  pos: [267, 279]
+  picture: '9(11)V9(2)'
+
+valor_multa:
+  pos: [280, 292]
+  picture: '9(11)V9(2)'
+
+moeda:
+  pos: [293, 293]
+  picture: '9(1)'
+
+data_credito:
+  #Data De Crédito Desta Liquidação
+  pos: [294, 299]
+  picture: 'X(06)'
+  date_format: '%d%m%y'
+
+brancos06:
+  #Data De Crédito Desta Liquidação
+  pos: [300, 394]
+  picture: 'X(95)'

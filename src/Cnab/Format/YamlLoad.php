@@ -9,14 +9,16 @@ class YamlLoad
     public $codigo_banco = null;
     public $formatPath;
     public $layoutVersao;
+    public $fileNameGeneric;
     
     protected static $loaded = array();
     
-    public function __construct($codigo_banco, $layoutVersao = null)
+    public function __construct($codigo_banco, $layoutVersao = null, $fileNameGeneric = null)
     {
         $this->codigo_banco = $codigo_banco;
         $this->layoutVersao = $layoutVersao;
         $this->formatPath = Factory::getCnabFormatPath();
+        $this->fileNameGeneric = $fileNameGeneric;
     }
 
     public function validateCollision($fields)
@@ -77,7 +79,6 @@ class YamlLoad
                     $end = $info['pos'][1];
                     $default = isset($info['default']) ? $info['default'] : false;
                     $options = $info;
-
                     $cnabLinha->addField($name, $start, $end, $picture, $default, $options);
                 }
             }
@@ -92,13 +93,18 @@ class YamlLoad
             } 
             static::$loaded[$filename] = spyc_load_file($filename);
         }
+
         return static::$loaded[$filename];
     }
 
     public function loadFormat($cnab, $filename)
     {
+        if($this->fileNameGeneric == null){
+            $this->fileNameGeneric = $filename;
+        }
+
         $banco = sprintf('%03d', $this->codigo_banco);
-        $filenamePadrao = $this->formatPath.'/'.$cnab.'/generic/'.$filename.'.yml';
+        $filenamePadrao = $this->formatPath.'/'.$cnab.'/generic/'.$this->fileNameGeneric.'.yml';
         $filenameEspecifico = $this->formatPath.'/'.$cnab.'/'.$banco.'/'.$filename.'.yml';
 
         if ($this->layoutVersao != null && $this->codigo_banco == 104) {

@@ -1,0 +1,77 @@
+# Registro Detalhe - Segmento S (Obrigatório - Remessa)
+# Baseado na documentação da caixa
+codigo_banco:
+  # Código fornecido pelo Banco Central para identificação do Banco que está recebendo ou enviando o
+  # arquivo, com o qual se firmou o contrato de prestação de serviços.
+  # CAIXA ECONÔMICA FEDERAL = ‘104’
+  pos: [1, 3]
+  picture: '9(3)'
+
+lote_servico:
+  pos: [4, 7]
+  picture: '9(4)'
+
+tipo_registro:
+  pos: [8, 8]
+  picture: '9(1)'
+  default: '3'
+
+numero_sequencial_lote:
+  pos: [9, 13]
+  picture: '9(5)'
+
+codigo_segmento:
+  pos: [14, 14]
+  picture: 'X(1)'
+  default: 'S'
+
+uso_exclusivo_febraban_01:
+  pos: [15, 15]
+  picture: 'X(1)'
+  default: ''
+
+codigo_ocorrencia:
+  # Código de Movimento Remessa
+  # Código adotado pela FEBRABAN, para identificar o tipo de movimentação enviado nos registros do
+  # arquivo de remessa.
+  # Cada Banco definirá os campos a serem alterados para o código de movimento ‘31’.
+  # Código Descrição
+  # ‘01’ Entrada de Títulos
+  # ‘02’ Pedido de Baixa
+  # ‘04’ Concessão de Abatimento
+  # ‘05’ Cancelamento de Abatimento
+  # ‘06’ Alteração de Vencimento
+  # ‘07’ Concessão de Desconto
+  # ‘08’ Cancelamento de Desconto
+  # ‘09’ Protestar
+  # ‘10’ Sustar Protesto e Baixar Título
+  # ‘31’ Alteração de Outros Dados
+  pos: [16, 17]
+  picture: '9(2)'
+
+tipo_impressao:
+  # Identificação da Impressão:
+  # '1'  =  Frente do Bloqueto
+  # '2'  =  Verso do Bloqueto
+  pos: [18, 18]
+  picture: '9(1)'
+
+numero_linha:
+  # Número da Linha a ser Impressa
+  pos: [18, 20]
+  picture: '9(2)'
+
+mensagem:
+  # Mensagem a ser impressa:
+  # Os tipos de impressão 1 e 2 não são utilizadas. Preencher com brancos.
+  pos: [21, 160]
+  picture: 'X(140)'
+
+tipo_fonte:
+  # Tipo de caracter a ser impresso
+  pos: [161, 162]
+  picture: '9(2)'
+
+uso_exclusivo_febraban_03:
+  pos: [163, 240]
+  picture: 'X(27)'

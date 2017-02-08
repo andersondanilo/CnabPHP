@@ -1,0 +1,18 @@
+# Registro Detalhe - Segmento T (Obrigatório - Retorno)
+# Baseado na documentação da caixa cef
+
+uso_exclusivo_cef_01:
+  pos: [38, 46]
+  picture: 'X(9)'
+
+nosso_numero:
+  pos: [47, 57]
+  picture: '9(11)'
+
+numero_documento:
+  pos: [59, 69]
+  picture: 'X(11)'
+
+uso_exclusivo_cef_02:
+  pos: [70, 73]
+  picture: 'X(4)'

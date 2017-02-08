@@ -1,0 +1,30 @@
+# Registro de Detalhe, Retorno
+# Baseado na documentação da Caixa e do Itaú
+
+tipo_de_registro:
+  #Identificação Do Registro Trailer
+  pos: [1, 1]
+  picture: '9(01)'
+  default: '9'
+
+codigo_de_retorno:
+  #Identificação De Arquivo Retorno
+  pos: [2, 2]
+  picture: '9(01)'
+  default: '2'
+
+codigo_de_servico:
+  #Identificação Do Tipo De Serviço
+  pos: [3, 4]
+  picture: '9(02)'
+  default: '01'
+
+codigo_do_banco:
+  #Identificação Do Banco Na Compensação
+  pos: [5, 7]
+  picture: '9(03)'
+
+numero_sequencial:
+  #Número Seqüencial Do Registro No Arquivo
+  pos: [395, 400]
+  picture: '9(06)'
