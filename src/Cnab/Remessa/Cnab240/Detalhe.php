@@ -36,11 +36,18 @@ class Detalhe
      */
     public function listSegmento()
     {
-        return array(
-            $this->segmento_p,
-            $this->segmento_q,
-            $this->segmento_r,
-        );
+        $ret = array();
+        if (isset($this->segmento_p))
+        {   $ret[] = $this->segmento_p;
+        }
+        if (isset($this->segmento_q))
+        {   $ret[] = $this->segmento_q;
+        }
+        if (isset($this->segmento_r))
+        {   $ret[] = $this->segmento_r;
+        }
+
+        return $ret;
     }
 
     /**

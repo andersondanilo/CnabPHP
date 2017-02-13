@@ -19,7 +19,7 @@ Projeto para criar arquivos de remessas e processar arquivos de retorno no forma
 
 | Banco           | Versão da Remessa  | Versão do Retorno  |
 |-----------------|--------------------|--------------------|
-| Banco do Brasil | 240 (Beta)         | 240 e 400          |
+| Banco do Brasil | 240                | 240 e 400          |
 | Bradesco        |                    | 240                |
 | Caixa           | 240                | 240 e 400          |
 | Itaú            | 400                | 400                |

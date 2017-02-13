@@ -180,7 +180,7 @@ class Detalhe extends \Cnab\Format\Linha implements \Cnab\Retorno\IDetalhe
     {
         $nossoNumero = $this->segmento_t->nosso_numero;
 
-        if ($this->codigo_banco == 1) {
+        if ($this->codigo_banco == \Cnab\Banco::BANCO_DO_BRASIL) {
             $nossoNumero = preg_replace(
                 '/^'.strval($this->arquivo->getCodigoConvenio()).'/',
                 '',
@@ -373,7 +373,7 @@ class Detalhe extends \Cnab\Format\Linha implements \Cnab\Retorno\IDetalhe
     }
 
     /**
-     * Retorna o código de liquidação, normalmente usado para 
+     * Retorna o código de liquidação, normalmente usado para
      * saber onde o cliente efetuou o pagamento.
      *
      * @return string
@@ -385,7 +385,7 @@ class Detalhe extends \Cnab\Format\Linha implements \Cnab\Retorno\IDetalhe
     }
 
     /**
-     * Retorna a descrição do código de liquidação, normalmente usado para 
+     * Retorna a descrição do código de liquidação, normalmente usado para
      * saber onde o cliente efetuou o pagamento.
      *
      * @return string

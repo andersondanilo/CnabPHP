@@ -54,7 +54,7 @@ class Identifier
             $codigo_tipo = \substr($lines[0],  142, 1);
             $tipo = null;
 
-            // Pega a Versao do Layout da CEF 
+            // Pega a Versao do Layout da CEF
             if (\Cnab\Banco::CEF == $codigo_banco) {
                 $layout_versao = \substr($lines[0], 163, 3);
 
