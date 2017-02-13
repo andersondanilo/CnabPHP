@@ -144,7 +144,9 @@ class Arquivo implements \Cnab\Remessa\IArquivo
                ocorrência 35 – Cancelamento de Instrução e 38 – Cedente não concorda com alegação do sacado. Para
                os demais códigos de ocorrência este campo deverá ser preenchido com zeros.
             */
-            $detalhe->uso_empresa = $boleto['nosso_numero'];
+            $detalhe->uso_empresa = isset($boleto['uso_empresa']) 
+                                  ? $boleto['uso_empresa'] 
+                                  : $boleto['nosso_numero'];
             $detalhe->nosso_numero = $boleto['nosso_numero'];
 
             $detalhe->numero_carteira = $boleto['carteira'];

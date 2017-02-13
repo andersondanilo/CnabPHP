@@ -55,5 +55,10 @@ Consulte na wiki: https://github.com/andersondanilo/CnabPHP/wiki/Criando-um-arqu
 ## Como Contribuir
 Você pode contribuir com testes (unitários ou manuais), ou adaptando o formato para outro banco através do projeto cnab_yaml (https://github.com/andersondanilo/cnab_yaml) (que é utilizado pelo cnab_php).  [Leia a wiki](https://github.com/andersondanilo/CnabPHP/wiki)
 
+O projeto está usando o Waffle para gerenciar o status da impleentação de novas remessas e retornos:
+
+[![Stories in Ready](https://badge.waffle.io/andersondanilo/CnabPHP.png?label=ready&title=Ready)](http://waffle.io/andersondanilo/CnabPHP)
+
+
 ## Licença
 Este projeto esta sobre a licença MIT
