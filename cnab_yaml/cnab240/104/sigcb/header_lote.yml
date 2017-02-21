@@ -1,0 +1,50 @@
+# Registro Header de Lote
+
+# Baseado na documentação da Caixa
+# Disponível em: http://www.caixa.gov.br/downloads/cobranca-caixa-manuais/LEIAUTE_CNAB_240_SIGCB_COBRANCA_CAIXA.pdf
+
+codigo_inscricao:
+  # Código que identifica o tipo de inscrição da Empresa ou Pessoa Física.
+  # '1' = CPF
+  # '2' = CGC / CNPJ
+  pos: [18, 18]
+  picture: '9(1)'
+
+numero_inscricao:
+  # Informar o número de inscrição da Empresa (CNPJ) ou Pessoa Física (CPF).
+  pos: [19, 33]
+  picture: '9(15)'
+
+codigo_convenio:
+  pos: [34, 39]
+  picture: 'X(6)'
+
+uso_exclusivo_banco:
+  # Preenchar com zeros
+  pos: [40, 53]
+  picture: '9(14)'
+  default: '0'
+
+agencia:
+  # Código da Agência mantenedora da conta, fornecido pela CAIXA.
+  pos: [54, 58]
+  picture: '9(5)'
+
+agencia_dv:
+  # Dígito Verificador da Agência mantendedora da conta, fornecido pela CAIXA.
+  pos: [59, 59]
+  picture: '9(1)'
+
+codigo_cedente:
+  pos: [60, 65]
+  picture: '9(6)'
+
+codigo_modelo:
+  pos: [66, 72]
+  picture: '9(7)'
+  default: '0'
+
+uso_exclusivo_banco_02:
+  pos: [73, 73]
+  picture: '9(1)'
+  default: '0'

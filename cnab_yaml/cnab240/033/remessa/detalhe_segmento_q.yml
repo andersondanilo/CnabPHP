@@ -1,0 +1,24 @@
+identificador_carne:
+  pos: [210, 212]
+  picture: '9(3)'
+  default: '0'
+
+sequencial_parcela:
+  pos: [213, 215]
+  picture: '9(3)'
+  default: '0'
+
+quantidade_parcela:
+  pos: [216, 218]
+  picture: '9(3)'
+  default: '0'
+
+numero_plano:
+  pos: [219, 221]
+  picture: '9(3)'
+  default: '0'
+
+reservado_santander_01:
+  pos: [222, 240]
+  picture: 'X(19)'
+  default: ''

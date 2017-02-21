@@ -1,0 +1,15 @@
+# Baseado na documentação do ITAU
+
+tipo_registro:
+  pos: [1, 1]
+  picture: '9(01)'
+  default:  '9'
+
+brancos01:
+  pos: [2, 394]
+  picture: 'X(393)'
+  default:  ''
+
+numero_sequencial:
+  pos: [395, 400]
+  picture: '9(06)'

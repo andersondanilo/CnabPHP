@@ -9,6 +9,7 @@ class Banco
     const CEF = 104;
     const BRADESCO = 237;
     const ITAU = 341;
+    const BANRISUL = 41;
 
     public static function getBanco($codigo)
     {
@@ -30,12 +31,17 @@ class Banco
         } elseif ($codigo == self::SANTANDER) {
             return array(
                 'codigo_do_banco' => self::SANTANDER,
-                'nome_do_banco' => 'BANCO SANTANDER (BRASIL) S/A',
+                'nome_do_banco' => 'BANCO SANTANDER',
             );
         } elseif ($codigo == self::BRADESCO) {
             return array(
                 'codigo_do_banco' => self::BRADESCO,
                 'nome_do_banco' => 'BRADESCO',
+            );
+        } elseif ($codigo == self::BANRISUL) {
+            return array(
+                'codigo_do_banco' => self::BANRISUL,
+                'nome_do_banco' => 'BANRISUL',
             );
         } else {
             return false;

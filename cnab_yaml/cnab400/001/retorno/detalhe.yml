@@ -1,0 +1,170 @@
+# 001 = Banco do Brasil
+
+tipo_de_registro:
+  #Identificação Do Registro Transação para BB '7'
+  pos: [1, 1]
+  picture: '9(01)'
+  default: '7'
+
+zeros01:
+  pos: [2, 17]
+  picture: '9(16)'
+  default: 0
+
+agencia_cobradora:
+  pos: [18, 21]
+  picture: '9(04)'
+
+agencia_cobradora_dac:
+  pos: [22, 22]
+  picture: '9(01)'
+
+conta_cedente:
+  pos: [23, 30]
+  picture: '9(08)'
+
+conta_cedente_dac:
+  pos: [31, 31]
+  picture: 'X(01)'
+
+convenio:
+  pos: [32, 38]
+  picture: '9(07)'
+
+controle_participante:
+  pos: [39, 63]
+  picture: 'X(25)'
+
+nosso_numero:
+  #Identificação Do Título No Banco 
+  pos: [64, 80]
+  picture: '9(17)'
+
+tipo_cobranca:
+  #Nota 2 
+  pos: [81, 81]
+  picture: '9(01)'
+
+tipo_cobranca_especifico:
+  #Nota 3
+  pos: [82, 82]
+  picture: '9(01)'
+
+dias_calculo:
+  #Nota 4
+  pos: [83, 86]
+  picture: '9(04)'
+
+natureza_recebimento:
+  #Nota 5
+  pos: [87, 88]
+  picture: '9(02)'
+
+prefixo_titulo:
+  #Nota 6
+  pos: [89, 91]
+  picture: 'X(03)'
+
+variacao_carteira:
+  pos: [92, 94]
+  picture: '9(03)'
+
+conta_caucao:
+  #Nota 6
+  pos: [95, 95]
+  picture: '9(01)'
+
+taxa_desconto:
+  pos: [96, 100]
+  picture: '9(05)'
+
+taxa_iof:
+  pos: [101, 105]
+  picture: '9(05)'
+
+zeros02:
+  pos: [106, 106]
+  picture: '9(1)'
+  default: 0
+
+carteira:
+  pos: [107, 108]
+  picture: '9(2)'
+
+brancos01:
+  pos: [127, 146]
+  picture: 'X(20)'
+  default: ''
+
+data_credito:
+  #Data De Crédito Desta Liquidação
+  pos: [176, 181]
+  picture: '9(06)'
+  date_format: '%d%m%y'
+
+valor_tarifa:
+  #Valor Da Despesa De Cobrança
+  pos: [182, 188]
+  picture: '9(5)V9(2)'
+
+valor_outras_despesas:
+  pos: [189, 201]
+  picture: '9(11)V9(2)'
+
+valor_juros_desconto:
+  pos: [202, 214]
+  picture: '9(11)V9(2)'
+
+valor_juros:
+  pos: [267, 279]
+  picture: '9(11)V9(2)'
+
+valor_outros_recebimentos:
+  pos: [280, 292]
+  picture: '9(11)V9(2)'
+
+valor_abatimento_nao_aproveitado:
+  pos: [293, 305]
+  picture: '9(11)V9(2)'
+
+valor_lancamento:
+  pos: [306, 318]
+  picture: '9(11)V9(2)'
+
+indicativo_debito_credito:
+  #Nota 11
+  pos: [319, 319]
+  picture: '9(01)'
+
+indicador_valor:
+  #Nota 12
+  pos: [320, 320]
+  picture: '9(01)'
+
+valor_ajuste:
+  pos: [321, 332]
+  picture: '9(10)V9(2)'
+
+brancos02:
+  pos: [333, 333]
+  picture: 'X(1)'
+  default: ''
+
+zeros03:
+  pos: [334, 390]
+  picture: '9(57)'
+  default: 0
+
+indicativo_autorizacao_liquidacao_parcial:
+  pos: [391, 391]
+  picture: '9(1)'
+
+brancos03:
+  pos: [392, 392]
+  picture: 'X(1)'
+  default: ''
+
+codigo_liquidacao:
+  #Nota 15 - Meio Pelo Qual O Título Foi Liquidado
+  pos: [393, 394]
+  picture: '9(02)'

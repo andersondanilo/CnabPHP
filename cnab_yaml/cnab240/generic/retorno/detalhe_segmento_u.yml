@@ -1,0 +1,104 @@
+# Registro Detalhe - Segmento U (Obrigatório - Retorno)
+# Baseado na documentação da febraban versão 08.8
+
+codigo_banco:
+  pos: [1, 3]
+  picture: '9(3)'
+
+lote_servico:
+  pos: [4, 7]
+  picture: '9(4)'
+
+tipo_registro:
+  pos: [8, 8]
+  picture: '9(1)'
+
+numero_sequencial_registro:
+  pos: [9, 13]
+  picture: '9(5)'
+
+codigo_segmento:
+  pos: [14, 14]
+  picture: 'X(1)'
+
+uso_exclusivo_febraban_01:
+  pos: [15, 15]
+  picture: 'X(1)'
+
+codigo_movimento:
+  pos: [16, 17]
+  picture: '9(2)'
+
+valor_acrescimos:
+  pos: [18, 32]
+  picture: '9(13)V9(2)'
+
+valor_desconto:
+  pos: [33, 47]
+  picture: '9(13)V9(2)'
+
+valor_abatimento:
+  pos: [48, 62]
+  picture: '9(13)V9(2)'
+
+valor_iof:
+  pos: [63, 77]
+  picture: '9(13)V9(2)'
+
+valor_pago:
+  pos: [78, 92]
+  picture: '9(13)V9(2)'
+
+valor_liquido:
+  pos: [93, 107]
+  picture: '9(13)V9(2)'
+
+valor_outras_despesas:
+  pos: [108, 122]
+  picture: '9(13)V9(2)'
+
+valor_outros_creditos:
+  pos: [123, 137]
+  picture: '9(13)V9(2)'
+
+data_ocorrencia:
+  pos: [138, 145]
+  picture: '9(8)'
+  date_format: '%d%m%Y'
+
+data_credito:
+  pos: [146, 153]
+  picture: '9(8)'
+  date_format: '%d%m%Y'
+
+# foi usado este nome para não confundir com código de ocorrência (que é o mesmo que código de movimento no CNAB 400)
+ocorrencia_sacado_codigo:
+  pos: [154, 157]
+  picture: 'X(4)'
+
+ocorrencia_sacado_data:
+  pos: [158, 165]
+  picture: 'X(8)'
+
+ocorrencia_sacado_valor:
+  pos: [166, 180]
+  picture: '9(13)V9(2)'
+
+ocorrencia_sacado_complemento:
+  pos: [181, 210]
+  picture: 'X(30)'
+
+# Cód. Banco Correspondente Compens.
+codigo_banco_correspondente:
+  pos: [211, 213]
+  picture: '9(3)'
+
+# Nosso No Banco Correspondente
+nosso_numero_banco_correspondente:
+  pos: [214, 233]
+  picture: '9(20)'
+
+# Uso Exclusivo FEBRABAN/CNAB
+uso_exclusivo_febraban_02:
+  pos: [234, 240]
+  picture: '9(7)'

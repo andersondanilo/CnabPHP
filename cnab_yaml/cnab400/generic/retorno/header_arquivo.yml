@@ -1,0 +1,51 @@
+# Registro de Detalhe, Retorno
+# Baseado na documentação da Caixa e do Itaú
+
+tipo_de_registro:
+  #Identificação Do Registro Header
+  pos: [1, 1]
+  picture: '9(01)'
+  default: '0'
+
+codigo_de_retorno:
+  #Identificação Do Arquivo Retorno
+  pos: [2, 2]
+  picture: '9(01)'
+  default: '2'
+
+literal_de_retorno:
+  #Identificação. Por Extenso Do Tipo De Movimento
+  pos: [3, 9]
+  picture: 'X(07)'
+
+retorno_codigo_do_servico:
+  #Identificação Do Tipo De Serviço
+  pos: [10, 11]
+  picture: '9(02)'
+  default: '01'
+
+literal_de_servico:
+  #Identificação Por Extenso Do Tipo De Serviço
+  pos: [12, 26]
+  picture: 'X(15)'
+
+nome_da_empresa:
+  #Nome Por Extenso Da "empresa Mãe"  
+  pos: [47, 76]
+  picture: 'X(30)'
+
+codigo_do_banco:
+  #Número Do Banco Na Câmara De Compensação
+  pos: [77, 79]
+  picture: '9(03)'
+
+nome_do_banco:
+  #Nome Por Extenso Do Banco Cobrador
+  pos: [80, 94]
+  picture: 'X(15)'
+
+data_de_geracao:
+  #Data De Geração Do Arquivo
+  pos: [95, 100]
+  picture: '9(06)'
+  date_format: '%d%m%y'
