@@ -8,6 +8,7 @@ CnabPHP
 [![Latest Unstable Version](https://poser.pugx.org/andersondanilo/cnab_php/v/unstable.svg)](https://packagist.org/packages/andersondanilo/cnab_php)
 [![Code Climate](https://codeclimate.com/github/andersondanilo/CnabPHP/badges/gpa.svg)](https://codeclimate.com/github/andersondanilo/CnabPHP)
 [![Test Coverage](https://codeclimate.com/github/andersondanilo/CnabPHP/badges/coverage.svg)](https://codeclimate.com/github/andersondanilo/CnabPHP/coverage)
+[<img src="https://img.shields.io/badge/rating-4%2B%20stars-brightgreen.svg">](https://recordnotfound.com/CnabPHP-andersondanilo-40440)
 
 
 Projeto para criar arquivos de remessas e processar arquivos de retorno no formato CNAB, utilizado nos bancos geralmente para boleto bancário.
