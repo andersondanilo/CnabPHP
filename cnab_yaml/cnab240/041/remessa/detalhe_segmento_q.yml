@@ -1,0 +1,4 @@
+banco_correspondente:
+  pos: [210, 212]
+  picture: '9(3)'
+  default: '000'
