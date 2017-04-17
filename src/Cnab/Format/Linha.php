@@ -67,6 +67,7 @@ class Linha
             $lastField = null;
             foreach ($fields as $field) {
                 if ($lastField && $field->pos_start != $lastField->pos_end + 1) {
+
                     throw new \Exception("gap between {$lastField->nome} and {$field->nome}");
                 }
                 $dados .= $field->getEncoded();

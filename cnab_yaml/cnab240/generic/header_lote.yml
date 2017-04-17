@@ -183,7 +183,7 @@ mensagem_2:
   # Mensagem 1 / 2
   # Texto referente a mensagens que serão impressas, em todos os bloquetos referentes ao mesmo lote, no
   # corpo de instruções da ficha de compensação e do recibo do sacado do bloqueto.
-  # Estes campos não serão utilizados no arquivo retorno.
+  # Estes campos não serão utilizados no ar quivo retorno.
   pos: [144, 183]
   picture: 'X(40)'
   default: ''

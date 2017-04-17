@@ -2,6 +2,8 @@
 
 namespace Cnab\Remessa\Cnab240;
 
+use Hamcrest\Thingy;
+
 class Arquivo implements \Cnab\Remessa\IArquivo
 {
     public $headerArquivo;
@@ -60,7 +62,16 @@ class Arquivo implements \Cnab\Remessa\IArquivo
             $campos[] = 'conta';
             $campos[] = 'conta_dv';
             $campos[] = 'numero_sequencial_arquivo';
+        }
 
+        if ($this->codigo_banco == \Cnab\Banco::BANRISUL) {
+            //$campos[] = 'codigo_cedente';
+            $campos[] = 'agencia';
+            $campos[] = 'agencia_dv';
+            $campos[] = 'conta';
+            $campos[] = 'conta_dv';
+            $campos[] = 'numero_sequencial_arquivo';
+            $campos[] = 'codigo_convenio';
         }
 
         foreach ($campos as $campo) {
@@ -76,7 +87,7 @@ class Arquivo implements \Cnab\Remessa\IArquivo
 
         foreach ($campos as $key) {
             if (!array_key_exists($key, $params)) {
-                throw new Exception('Configuração "' . $key . '" dont exists');
+                throw new \Exception('Configuração "' . $key . '" dont exists');
             }
         }
 
@@ -102,19 +113,23 @@ class Arquivo implements \Cnab\Remessa\IArquivo
             $this->headerArquivo->conta_dv = $this->configuracao['conta_dv'];
         }
 
-        if ($this->codigo_banco == \Cnab\Banco::SANTANDER) {
-
-        }
 
         if ($this->codigo_banco == \Cnab\Banco::CEF || $this->codigo_banco == \Cnab\Banco::SANTANDER) {
             $this->headerArquivo->codigo_cedente = $this->configuracao['codigo_cedente'];
+        }
+
+        if ($this->codigo_banco == \Cnab\Banco::BANRISUL) {
+            //$this->headerArquivo->codigo_cedente = $this->configuracao['codigo_cedente'];
+            $this->headerArquivo->conta = $this->configuracao['conta'];
+            $this->headerArquivo->conta_dv = $this->configuracao['conta_dv'];
+            $this->headerArquivo->codigo_convenio = $this->configuracao['agencia'] . $this->configuracao['codigo_convenio'];
+            //$this->headerArquivo->agencia_dv = '';
         }
 
         $this->headerArquivo->nome_empresa = $this->configuracao['nome_fantasia'];
         $this->headerArquivo->nome_banco = $banco['nome_do_banco'];
         $this->headerArquivo->codigo_remessa_retorno = 1;
         $this->headerArquivo->data_geracao = $this->configuracao['data_geracao'];
-        $this->headerArquivo->hora_geracao = $this->configuracao['data_geracao'];
         $this->headerArquivo->numero_sequencial_arquivo = $this->configuracao['numero_sequencial_arquivo'];
 
         if ($this->codigo_banco == \Cnab\Banco::CEF) {
@@ -138,7 +153,7 @@ class Arquivo implements \Cnab\Remessa\IArquivo
         $this->headerLote->codigo_inscricao = $this->headerArquivo->codigo_inscricao;
         $this->headerLote->numero_inscricao = $this->headerArquivo->numero_inscricao;
         $this->headerLote->agencia = $this->headerArquivo->agencia;
-        $this->headerLote->agencia_dv = $this->headerArquivo->agencia_dv;
+        $this->headerLote->agencia_dv = $this->configuracao['agencia_dv'];
 
 
         if ($this->codigo_banco == \Cnab\Banco::CEF) {
@@ -148,13 +163,18 @@ class Arquivo implements \Cnab\Remessa\IArquivo
 
         if ($this->codigo_banco == \Cnab\Banco::SANTANDER) {
             $this->headerLote->codigo_cedente = $this->configuracao['codigo_cedente'];
-
         }
 
         if ($this->codigo_banco == \Cnab\Banco::BANCO_DO_BRASIL) {
             $this->headerLote->codigo_convenio = $this->headerArquivo->codigo_convenio;
             $this->headerLote->carteira = $this->headerArquivo->carteira;
             $this->headerLote->variacao_carteira = $this->headerArquivo->variacao_carteira;
+            $this->headerLote->conta = $this->headerArquivo->conta;
+            $this->headerLote->conta_dv = $this->headerArquivo->conta_dv;
+        }
+
+        if ($this->codigo_banco == \Cnab\Banco::BANRISUL) {
+            $this->headerLote->codigo_convenio = $this->headerArquivo->codigo_convenio;
             $this->headerLote->conta = $this->headerArquivo->conta;
             $this->headerLote->conta_dv = $this->headerArquivo->conta_dv;
         }
@@ -218,13 +238,18 @@ class Arquivo implements \Cnab\Remessa\IArquivo
         $detalhe->segmento_p->codigo_banco = $this->headerArquivo->codigo_banco;
         $detalhe->segmento_p->lote_servico = $this->headerLote->lote_servico;
         $detalhe->segmento_p->agencia = $this->headerArquivo->agencia;
-        $detalhe->segmento_p->agencia_dv = $this->headerArquivo->agencia_dv;
+        $detalhe->segmento_p->agencia_dv = $this->configuracao['agencia_dv'];
 
         if ($this->codigo_banco == \Cnab\Banco::CEF) {
             $detalhe->segmento_p->codigo_cedente = $this->headerArquivo->codigo_cedente;
         }
 
         if ($this->codigo_banco == \Cnab\Banco::BANCO_DO_BRASIL || $this->codigo_banco == \Cnab\Banco::SANTANDER) {
+            $detalhe->segmento_p->conta = $this->configuracao['conta'];
+            $detalhe->segmento_p->conta_dv = $this->configuracao['conta_dv'];
+        }
+
+        if ($this->codigo_banco == \Cnab\Banco::BANRISUL) {
             $detalhe->segmento_p->conta = $this->configuracao['conta'];
             $detalhe->segmento_p->conta_dv = $this->configuracao['conta_dv'];
         }
@@ -253,6 +278,10 @@ class Arquivo implements \Cnab\Remessa\IArquivo
             $detalhe->segmento_p->codigo_carteira = $boleto['carteira'];
         }
 
+        if ($this->codigo_banco == \Cnab\Banco::BANRISUL) {
+            $detalhe->segmento_p->codigo_carteira = $boleto['carteira'];
+        }
+
         if ($this->layoutVersao === 'sigcb' && $this->codigo_banco == \Cnab\Banco::CEF) {
             $detalhe->segmento_p->codigo_carteira = 1; // 1 = Cobrança Simples
             $detalhe->segmento_p->modalidade_carteira = $boleto['modalidade_carteira']; // 21 = (título Sem Registro emissão CAIXA)
@@ -273,7 +302,7 @@ class Arquivo implements \Cnab\Remessa\IArquivo
         if (!empty($boleto['dias_iniciar_contagem_juros']) && is_numeric($boleto['dias_iniciar_contagem_juros'])) {
             $dateJurosMora->modify("+{$boleto['dias_iniciar_contagem_juros']} days");
         } else {
-            $dateJurosMora->modify('+1 day');
+            $dateJurosMora->modify('+0 day');
         }
 
         $detalhe->segmento_p->data_juros_mora = $dateJurosMora;
@@ -305,6 +334,9 @@ class Arquivo implements \Cnab\Remessa\IArquivo
             // sua carteira junto ao Banco do Brasil.
             $detalhe->segmento_p->codigo_baixa = 0;
             $detalhe->segmento_p->prazo_baixa = 0;
+        } elseif ($this->codigo_banco == \Cnab\Banco::SANTANDER) {
+            $detalhe->segmento_p->codigo_baixa = 1;
+            $detalhe->segmento_p->prazo_baixa = 60;
         } else {
             if (isset($boleto['baixar_apos_dias'])) {
                 if ($boleto['baixar_apos_dias'] === false) {
@@ -362,14 +394,18 @@ class Arquivo implements \Cnab\Remessa\IArquivo
         $detalhe->segmento_r->lote_servico = $detalhe->segmento_p->lote_servico;
         $detalhe->segmento_r->codigo_ocorrencia = $detalhe->segmento_p->codigo_ocorrencia;
         if ($boleto['valor_multa'] > 0) {
-            if($boleto['codigo_multa'] == 2){
+            if ($boleto['codigo_multa'] == 2) {
                 $detalhe->segmento_r->codigo_multa = 2;
                 $detalhe->segmento_r->valor_multa = $boleto['valor_multa'];
                 $detalhe->segmento_r->data_multa = $boleto['data_multa'];
-            }else{
+            } else {
                 $detalhe->segmento_r->codigo_multa = 1;
                 $detalhe->segmento_r->valor_multa = $boleto['valor_multa'];
                 $detalhe->segmento_r->data_multa = $boleto['data_multa'];
+            }
+
+            if ($this->codigo_banco == \Cnab\Banco::BANRISUL) {
+                $detalhe->segmento_r->codigo_multa = $boleto['codigo_multa'];
             }
 
         } else {
@@ -496,6 +532,8 @@ class Arquivo implements \Cnab\Remessa\IArquivo
         $valor_total_titulo_simples = 0;
 
         // valida os dados
+        $dados = $this->headerArquivo->getEncoded() . self::QUEBRA_LINHA;
+
         if (!$this->headerArquivo->validate()) {
             throw new \InvalidArgumentException($this->headerArquivo->last_error);
         }
@@ -503,8 +541,6 @@ class Arquivo implements \Cnab\Remessa\IArquivo
         if (!$this->headerLote->validate()) {
             throw new \InvalidArgumentException($this->headerLote->last_error);
         }
-
-        $dados = $this->headerArquivo->getEncoded() . self::QUEBRA_LINHA;
 
         $dados .= $this->headerLote->getEncoded() . self::QUEBRA_LINHA;
 
@@ -525,7 +561,7 @@ class Arquivo implements \Cnab\Remessa\IArquivo
 
         $this->trailerLote->qtde_registro_lote = $qtde_registro_lote;
 
-        if ($this->codigo_banco == \Cnab\Banco::CEF || $this->codigo_banco == \Cnab\Banco::SANTANDER) {
+        if ($this->codigo_banco == \Cnab\Banco::CEF || $this->codigo_banco == \Cnab\Banco::BANRISUL) {
             $this->trailerLote->qtde_titulo_cobranca_simples = $qtde_titulo_cobranca_simples;
             $this->trailerLote->valor_total_titulo_simples = $valor_total_titulo_simples;
         }

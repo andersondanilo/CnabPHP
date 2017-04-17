@@ -42,6 +42,7 @@ class Especie
     const BB_DUPLICATA_DE_SERVICO = 4;
 
     const SANTANDER_DUPLICATA_MERCANTIL = '02';
+    const BANRISUL_DUPLICATA_MERCANTIL = '02';
 
     const CNAB240_OUTROS = '99';
 }
