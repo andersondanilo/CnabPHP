@@ -1,0 +1,34 @@
+forma_lancamento:
+  pos: [12, 13]
+  picture: 'X(2)'
+  default: ''
+
+versao_layout_lote:
+  pos: [14, 16]
+  picture: '9(3)'
+  default: '020'
+
+codigo_convenio:
+  pos: [34, 53]
+  picture: 'X(20)'
+
+agencia:
+  pos: [54, 58]
+  picture: '9(5)'
+
+agencia_dv:
+  pos: [59, 59]
+  picture: '9(1)'
+
+conta:
+  pos: [60, 71]
+  picture: '9(12)'
+
+conta_dv:
+  pos: [72, 72]
+  picture: '9(1)'
+
+agencia_mais_cedente_dv:
+  pos: [73, 73]
+  picture: 'X(1)'
+  default: ''

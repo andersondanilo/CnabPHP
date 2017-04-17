@@ -1,38 +1,20 @@
-agencia:
-  pos: [18, 21]
-  picture: '9(4)'
-
-agencia_dv:
-  # Dígito Verificador da Agência
-  pos: [22, 22]
-  picture: '9(1)'
-
 conta:
   # Número da conta corrente
-  pos: [23, 31]
-  picture: '9(9)'
+  pos: [24, 35]
+  picture: '9(12)'
 
 conta_dv:
-  pos: [32, 32]
+  pos: [36, 36]
   picture: '9(1)'
 
-conta_cobranca:
-  # Número da conta corrente
-  pos: [33, 41]
-  picture: '9(9)'
-
-conta_cobranca_dv:
-  pos: [42, 42]
-  picture: '9(1)'
-
-reservado_santander_01:
-  pos: [43, 44]
-  picture: 'X(2)'
+agencia_mais_cedente_dv:
+  pos: [37,37]
+  picture: 'X(1)'
   default: ''
 
 nosso_numero:
-  pos: [45, 57]
-  picture: '9(13)'
+  pos: [38, 57]
+  picture: '9(20)'
 
 tipo_documento:
   # ‘1’ = Tradicional
@@ -41,13 +23,8 @@ tipo_documento:
   picture: 'X(1)'
   default: '1'
 
-reservado_santander_02:
-  pos: [61, 61]
-  picture: 'X(1)'
-  default: ''
-
-reservado_santander_03:
-  pos: [62, 62]
+identificacao_distribuicao:
+  pos: [62,62]
   picture: 'X(1)'
   default: ''
 
@@ -69,11 +46,6 @@ reservado_santander_04:
   pos: [106, 106]
   picture: 'X(1)'
   default: ''
-
-valor_juros_mora:
-  # Valor ou porcentagem sobre o valor do título a ser cobrado de juros de mora.
-  pos: [127, 141]
-  picture: '9(10)V9(5)'
 
 reservado_santander_05:
   pos: [225, 225]

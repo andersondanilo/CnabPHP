@@ -1,47 +1,4 @@
-qtde_titulo_cobranca_simples:
-  pos: [24, 29]
-  picture: '9(6)'
-
-valor_total_titulo_simples:
-  pos: [30, 46]
-  picture: '9(15)V9(2)'
-
-uso_exclusivo_febraban_02:
-  pos: [47, 52]
-  picture: 'X(6)'
-  default: ''
-
-uso_exclusivo_febraban_03:
-  pos: [53, 69]
-  picture: 'X(17)'
-  default: ''
-
-qtde_titulo_cobranca_caucionada:
-  pos: [70, 75]
-  picture: 'X(6)'
-  default: ''
-
-valor_total_titulo_caucionada:
-  pos: [76, 92]
-  picture: 'X(17)'
-  default: ''
-
-qtde_titulo_cobranca_descontada:
-  pos: [93, 98]
-  picture: 'X(6)'
-  default: ''
-
-valor_total_titulo_descontada:
-  pos: [99, 115]
-  picture: 'X(17)'
-  default: ''
-
-uso_exclusivo_febraban_04:
-  pos: [116, 123]
-  picture: 'X(8)'
-  default: ''
-
 uso_exclusivo_febraban_05:
-  pos: [124, 240]
-  picture: 'X(117)'
+  pos: [24, 240]
+  picture: 'X(217)'
   default: ''

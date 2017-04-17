@@ -1,0 +1,28 @@
+codigo_multa:
+  pos: [66, 66]
+  picture: '9(1)'
+
+codigo_banco_debito:
+  pos: [180, 182]
+  picture: 'X(3)'
+  default: ''
+
+agencia_banco_debito:
+  pos: [183, 186]
+  picture: 'X(4)'
+  default: ''
+
+conta_banco_debito:
+  pos: [187, 199]
+  picture: 'X(13)'
+  default: ''
+
+ocorrencia_pagador:
+  pos: [200, 207]
+  picture: '9(8)'
+  default: '00000000'
+
+uso_exclusivo_febraban_03:
+  pos: [208, 240]
+  picture: 'X(33)'
+  default: ''

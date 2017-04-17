@@ -81,7 +81,7 @@ codigo_cedente:
   pos: [59, 70]
   picture: '9(12)'
 
-codigo_cedente_dv: 
+codigo_cedente_dv:
   # Dígito Verificador do Cedente
   # Código adotado pela CAIXA, para verificação da autenticidade do Código do Cedente. Calculado
   # através do módulo 11.
