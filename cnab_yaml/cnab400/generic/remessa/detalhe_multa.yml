@@ -1,0 +1,28 @@
+# Baseado na documentação do itau
+
+tipo_registro:
+  pos: [1, 1]
+  picture: '9(1)'
+  default:  '2'
+
+codigo_multa:
+  pos: [2, 2]
+  picture: 'X(1)'
+
+data_multa:
+  pos: [3, 10]
+  picture: '9(8)'
+  date_format: '%d%m%Y'
+
+valor_multa:
+  pos: [11, 23]
+  picture: '9(11)V9(2)'
+
+brancos01:
+  pos: [24, 394]
+  picture: 'X(371)'
+  default: ''
+
+numero_sequencial:
+  pos: [395, 400]
+  picture: '9(6)'

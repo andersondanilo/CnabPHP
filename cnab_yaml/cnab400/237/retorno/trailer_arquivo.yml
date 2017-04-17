@@ -1,0 +1,8 @@
+# 237 = Itaú
+# Existem campos de quantidade de boleto que por enquanto não serão utilizados
+# por isso foram omitidos com a nossa criação de um campo "brancos01"
+
+brancos01:
+  #Complemento De Registro
+  pos: [8, 394]
+  picture: 'X(387)'

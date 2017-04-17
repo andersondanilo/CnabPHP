@@ -1,0 +1,34 @@
+# Registro Trailer de Lote
+# Baseado na documentação da caixa SIGCB (CNAB 240)
+# @link http://www.caixa.gov.br/downloads/cobranca-caixa-manuais/LEIAUTE_CNAB_240_SIGCB_COBRANCA_CAIXA.pdf
+
+uso_exclusivo_febraban_01:
+  pos: [9, 17]
+  picture: 'X(9)'
+  default: ''
+
+uso_exclusivo_febraban_02:
+  pos: [93, 123]
+  picture: 'X(31)'
+  default: ''
+
+uso_exclusivo_febraban_03:
+  pos: [124, 240]
+  picture: 'X(117)'
+  default: ''
+
+qtde_titulo_cobranca_caucionada:
+  pos: [47, 52]
+  picture: '9(6)'
+
+valor_total_titulo_caucionada:
+  pos: [53, 69]
+  picture: '9(15)V9(2)'
+
+qtde_titulo_cobranca_descontada:
+  pos: [70, 75]
+  picture: '9(6)'
+
+valor_total_titulo_descontada:
+  pos: [76, 92]
+  picture: '9(15)V9(2)'

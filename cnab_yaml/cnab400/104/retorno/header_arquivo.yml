@@ -1,0 +1,31 @@
+# 104 = Caixa Econômica
+
+codigo_cedente:
+  pos: [27, 42]
+  picture: '9(16)'
+
+brancos01:
+  pos: [43, 46]
+  picture: 'X(04)'
+  default: ''
+
+mensagem:
+  #Unidade Da Densidade
+  pos: [101, 158]
+  picture: 'X(58)'
+
+brancos02:
+  #Complemento Do Registro
+  pos: [159, 389]
+  picture: 'X(231)'
+  default: ''
+
+numero_sequencial_a:
+  pos: [390, 394]
+  picture: '9(05)'
+  default: '1'
+
+numero_sequencial_b:
+  pos: [395, 400]
+  picture: '9(06)'
+  default: '1'

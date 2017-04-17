@@ -1,0 +1,19 @@
+# Registro Detalhe - Segmento T (Obrigatório - Retorno)
+# Baseado na documentação da Caixa
+# Disponível em: http://www.caixa.gov.br/downloads/cobranca-caixa-manuais/LEIAUTE_CNAB_240_SIGCB_COBRANCA_CAIXA.pdf
+
+codigo_cedente:
+  pos: [24, 29]
+  picture: '9(6)'
+
+nosso_numero:
+  pos: [42, 56]
+  picture: '9(15)'
+
+numero_documento:
+  pos: [59, 69]
+  picture: 'X(11)'
+
+valor_titulo:
+  pos: [82, 96]
+  picture: '9(13)V9(2)'

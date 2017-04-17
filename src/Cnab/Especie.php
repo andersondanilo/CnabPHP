@@ -1,7 +1,6 @@
 <?php
 // espécies de cobranças
 namespace Cnab;
-
 class Especie
 {
     // Itaú
@@ -19,7 +18,6 @@ class Especie
     const ITAU_ENCARGOS_CONDOMINIAIS = '16';
     const ITAU_CONTRATO_DE_PRESTACAO_DE_SERVICOS = '17';
     const ITAU_DIVERSOS = '99';
-
     // Caixa
     const CEF_DUPLICATA_MERCANTIL = 2;
     const CEF_NOTA_PROMISSORIA = 12;
@@ -27,7 +25,6 @@ class Especie
     const CEF_NOTA_DE_SEGURO = 16;
     const CEF_LETRA_DE_CAMBIO = 7;
     const CEF_OUTROS = 99;
-
     // Banco do Brasil
     // Para carteira 11 e 17 modalidade Simples, pode ser usado: 01 – Cheque, 02 – Duplicata Mercantil, 04 –
     // Duplicata de Serviço, 06 – Duplicata Rural, 07 – Letra de Câmbio, 12 – Nota Promissória, 17 - Recibo, 19 –
@@ -43,6 +40,9 @@ class Especie
     const BB_CHEQUE = 1;
     const BB_DUPLICATA_MERCANTIL = 2;
     const BB_DUPLICATA_DE_SERVICO = 4;
+
+    const SANTANDER_DUPLICATA_MERCANTIL = '02';
+    const BANRISUL_DUPLICATA_MERCANTIL = '02';
 
     const CNAB240_OUTROS = '99';
 }

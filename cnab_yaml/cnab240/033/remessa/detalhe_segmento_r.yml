@@ -1,0 +1,21 @@
+codigo_desconto_02:
+  pos: [18, 18]
+  picture: '9(1)'
+  default: 0
+
+data_desconto_02:
+  pos: [19, 26]
+  picture: '9(8)'
+  date_format: '%d%m%Y'
+
+
+valor_desconto_02:
+  # Valor ou Percentual (de acordo com o código)
+  pos: [27, 41]
+  picture: '9(13)V9(2)'
+  default: 0
+
+reservado_santander_01:
+  pos: [42, 65]
+  picture: 'X(24)'
+  default: ''
