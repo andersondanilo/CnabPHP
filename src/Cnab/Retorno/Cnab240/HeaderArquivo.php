@@ -2,7 +2,9 @@
 
 namespace Cnab\Retorno\Cnab240;
 
-class HeaderArquivo extends \Cnab\Format\Linha
+use Cnab\Retorno\IHeaderArquivo;
+
+class HeaderArquivo extends \Cnab\Format\Linha implements IHeaderArquivo
 {
     public function __construct(\Cnab\Retorno\IArquivo $arquivo)
     {
@@ -36,4 +38,15 @@ class HeaderArquivo extends \Cnab\Format\Linha
             return;
         }
     }
+
+    public function getCodigoRetorno()
+    {
+        if ($this->existField('codigo_remessa_retorno')) {
+            return $this->codigo_remessa_retorno;
+        } else {
+            return;
+        }
+    }
+
+
 }

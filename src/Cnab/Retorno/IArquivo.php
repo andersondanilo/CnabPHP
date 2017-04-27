@@ -46,4 +46,11 @@ interface IArquivo
      * @return \DateTime
      */
     public function getDataCredito();
+
+    /**
+     * Retorna o Header do arquivo re retorno
+     *
+     * @return IHeaderArquivo
+     */
+    public function getHeader();
 }

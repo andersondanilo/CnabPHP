@@ -2,6 +2,7 @@
 
 namespace Cnab\Retorno\Cnab400;
 
+use Cnab\Retorno\IHeaderArquivo;
 use Cnab\Retorno\Linha;
 
 class Arquivo implements \Cnab\Retorno\IArquivo
@@ -75,6 +76,16 @@ class Arquivo implements \Cnab\Retorno\IArquivo
     public function listDetalhes()
     {
         return $this->detalhes;
+    }
+
+    /**
+     * Retorna o Header do arquivo re retorno
+     *
+     * @return IHeaderArquivo
+     */
+    public function getHeader()
+    {
+        return $this->header;
     }
 
     /**
