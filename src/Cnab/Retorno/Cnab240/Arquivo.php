@@ -4,6 +4,7 @@ namespace Cnab\Retorno\Cnab240;
 
 use Cnab\Retorno\IHeaderArquivo;
 use Cnab\Retorno\Linha;
+use DateTime;
 
 class Arquivo implements \Cnab\Retorno\IArquivo
 {
@@ -143,7 +144,7 @@ class Arquivo implements \Cnab\Retorno\IArquivo
      */
     public function getCodigoBanco()
     {
-        return $this->header->codigo_banco;
+        return $this->codigo_banco;
     }
 
     /**

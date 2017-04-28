@@ -6,8 +6,12 @@ use Cnab\Retorno\IHeaderArquivo;
 
 class HeaderArquivo extends \Cnab\Format\Linha implements IHeaderArquivo
 {
+
+    private $_codigo_banco = null;
+
     public function __construct(\Cnab\Retorno\IArquivo $arquivo)
     {
+        $this->_codigo_banco = $arquivo->codigo_banco;
         $yamlLoad = new \Cnab\Format\YamlLoad($arquivo->codigo_banco, $arquivo->layoutVersao);
         $yamlLoad->load($this, 'cnab240', 'header_arquivo');
     }
@@ -48,5 +52,9 @@ class HeaderArquivo extends \Cnab\Format\Linha implements IHeaderArquivo
         }
     }
 
+    public function getCodigoBanco()
+    {
+        return $this->_codigo_banco;
+    }
 
 }

@@ -54,7 +54,7 @@ class Factory
      *
      * @param string $filename
      *
-     * @return \Cnab\Remessa\IArquivo
+     * @return \Cnab\Retorno\IArquivo
      */
     public function createRetorno($filename)
     {
@@ -70,7 +70,12 @@ class Factory
             throw new \Exception('Formato do arquivo não identificado');
         }
 
-        if ($format['tipo'] != 'retorno') {
+        if (
+            $format['tipo'] != 'retorno' &&
+            $format['tipo'] != 'remessa_processada' &&
+            $format['tipo'] != 'remessa_processada_parcial' &&
+            $format['tipo'] != 'remessa_rejeitada') {
+
             throw new \Exception('Este não é um arquivo de retorno');
         }
 
@@ -83,6 +88,8 @@ class Factory
         }
 
         // por enquanto só suporta o Cnab400
+
+
 
         if ($format['bytes'] == 400) {
             return new Retorno\Cnab400\Arquivo($format['banco'], $filename, $format['layout_versao']);

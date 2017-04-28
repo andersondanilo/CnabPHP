@@ -11,4 +11,6 @@ interface IHeaderArquivo
 
     public function getCodigoRetorno();
 
+    public function getCodigoBanco();
+
 }

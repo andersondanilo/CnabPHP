@@ -53,4 +53,10 @@ class Header  extends \Cnab\Format\Linha implements IHeaderArquivo
         }
     }
 
+    public function getCodigoBanco()
+    {
+        //return $this->_codigo_banco;
+        return $this->codigo_do_banco;
+    }
+
 }
