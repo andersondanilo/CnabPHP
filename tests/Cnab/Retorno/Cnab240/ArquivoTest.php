@@ -69,6 +69,7 @@ class ArquivoTest extends \PHPUnit_Framework_TestCase
         $detalhe = $arquivo->listDetalhes();
         $detalhe = $detalhe[0];
 
+        $this->assertEquals(3, $detalhe->getTipoRegistro());
         $this->assertEquals(6, $detalhe->getCodigo());
         $this->assertEquals(80.00, $detalhe->getValorRecebido());
         $this->assertEquals(80.00, $detalhe->getValorTitulo());
@@ -81,6 +82,7 @@ class ArquivoTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(null, $detalhe->getNumeroDocumento());
         $this->assertEquals(null, $detalhe->getCarteira());
         $this->assertEquals('0', $detalhe->getAgencia());
+
         $this->assertEquals(11136997, $detalhe->getNossoNumero());
         $this->assertEquals(new \DateTime('2014-01-02 00:00:00'), $detalhe->getDataVencimento());
         $this->assertEquals(new \DateTime('2014-01-07 00:00:00'), $detalhe->getDataCredito());

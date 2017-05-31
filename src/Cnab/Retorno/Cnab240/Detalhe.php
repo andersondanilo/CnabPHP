@@ -67,6 +67,21 @@ class Detalhe extends \Cnab\Format\Linha implements \Cnab\Retorno\IDetalhe
     }
 
     /**
+     * Código adotado pela FEBRABAN para identificar o tipo de registro:
+     * 0 =  Header de Arquivo
+     * 1 =  Header de Lote
+     * 3 =  Detalhe
+     * 5 =  Trailer de Lote
+     * 9 =  Trailer de Arquivo
+     *
+     * @return int
+     */
+    public function getTipoRegistro()
+    {
+        return (int) $this->segmento_t->tipo_registro;
+    }
+
+    /**
      * Retorna o valor recebido em conta.
      *
      * @return float
