@@ -388,27 +388,47 @@ class Detalhe extends \Cnab\Format\Linha implements \Cnab\Retorno\IDetalhe
     }
 
     /**
-     * Retorna o código de liquidação, normalmente usado para 
+     * Retorna o código de liquidação ou da baixa, normalmente usado para
      * saber onde o cliente efetuou o pagamento.
      *
      * @return string
      */
-    public function getCodigoLiquidacao()
+    public function getCodigoLiquidacaoOuBaixa()
     {
-        // @TODO: Resgatar o código de liquidação
-        return;
+        return substr($this->segmento_t->identificacao_rejeicao,0,2);
     }
 
     /**
-     * Retorna a descrição do código de liquidação, normalmente usado para 
+     * Retorna a descrição do código de liquidação ou da baixa, normalmente usado para
      * saber onde o cliente efetuou o pagamento.
      *
      * @return string
      */
-    public function getDescricaoLiquidacao()
+    public function getDescricaoLiquidacaoOuBaixa()
     {
-        // @TODO: Resgator descrição do código de liquidação
-        return;
+        $codigo = (int) $this->getCodigoLiquidacaoOuBaixa();
+
+        $table = array(
+            2  => 'Casa Lotérica',
+            3  => 'Agências CAIXA',
+            4  => 'Compensação Eletrônica',
+            5  => 'Compoensação Convencional',
+            6  => 'Internet Banking',
+            7  => 'Correspondente Bancário',
+            8  => 'Em Cartório',
+            9  => 'Comandada Banco',
+            10 => 'Comandada Cliente via Arquivo',
+            11 => 'Comandada Cliente On-Line',
+            12 => 'Decurso Prazo - Cliente',
+            13 => 'Decurso Prazo - Banco',
+            14 => 'Protestado'
+        );
+
+        if (array_key_exists($codigo, $table)) {
+            return $table[$codigo];
+        } else {
+            return 'Desconhecido';
+        }
     }
 
     public function dump()

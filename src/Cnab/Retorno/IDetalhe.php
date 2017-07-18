@@ -164,7 +164,7 @@ interface IDetalhe
      *
      * @return string
      */
-    public function getCodigoLiquidacao();
+    public function getCodigoLiquidacaoOuBaixa();
 
     /**
      * Retorna a descrição do código de liquidação, normalmente usado para 
@@ -172,7 +172,7 @@ interface IDetalhe
      *
      * @return string
      */
-    public function getDescricaoLiquidacao();
+    public function getDescricaoLiquidacaoOuBaixa();
 
     /**
      * Retorna de o boleto foi pago através do Débito Direto Autorizado.
