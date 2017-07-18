@@ -391,11 +391,11 @@ class Detalhe extends \Cnab\Format\Linha implements \Cnab\Retorno\IDetalhe
      * Retorna o código de liquidação ou da baixa, normalmente usado para
      * saber onde o cliente efetuou o pagamento.
      *
-     * @return string
+     * @return int
      */
     public function getCodigoLiquidacaoOuBaixa()
     {
-        return substr($this->segmento_t->identificacao_rejeicao,0,2);
+        return (int) substr($this->segmento_t->identificacao_rejeicao,0,2);
     }
 
     /**
