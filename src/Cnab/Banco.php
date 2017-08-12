@@ -8,6 +8,7 @@ class Banco
     const SANTANDER = 33;
     const CEF = 104;
     const BRADESCO = 237;
+    const SICOOB = 756;
     const ITAU = 341;
 
     public static function getBanco($codigo)
@@ -36,6 +37,11 @@ class Banco
             return array(
                 'codigo_do_banco' => self::BRADESCO,
                 'nome_do_banco' => 'BRADESCO',
+            );
+        } elseif ($codigo == self::SICOOB) {
+            return array(
+                'codigo_do_banco' => self::SICOOB,
+                'nome_do_banco' => 'SICOOB',
             );
         } else {
             return false;
