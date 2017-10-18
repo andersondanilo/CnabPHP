@@ -1,5 +1,5 @@
 {
-    "name": "andersondanilo/cnab_php",
+    "name": "mensagemsei/cnab_php",
     "type": "library",
     "description": "Projeto para criar arquivos de remessas e processar arquivos de retorno no formato CNAB",
     "keywords": ["boleto", "remessa", "retorno"],
