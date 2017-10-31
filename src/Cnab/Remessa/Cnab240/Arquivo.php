@@ -413,17 +413,10 @@ class Arquivo implements \Cnab\Remessa\IArquivo
             $detalhe->segmento_r->valor_multa = 0;
             $detalhe->segmento_r->data_multa = 0;
         }
-        if ($this->codigo_banco == \Cnab\Banco::SANTANDER) {
-            if ($boleto['valor_desconto'] > 0) {
 
-                $detalhe->segmento_r->data_desconto_02 = $boleto['data_desconto'];
-                $detalhe->segmento_r->valor_desconto_02 = $boleto['valor_desconto'];
-            } else {
-                // sem desconto
-                $detalhe->segmento_r->data_desconto_02 = 0;
-                $detalhe->segmento_r->valor_desconto_02 = 0;
-            }
-        }
+        $detalhe->segmento_r->data_desconto_02 = 0;
+        $detalhe->segmento_r->valor_desconto_02 = 0;
+
 
         $this->detalhes[] = $detalhe;
     }
