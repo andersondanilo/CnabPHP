@@ -6,6 +6,8 @@ class BancoDoBrasilTest extends \PHPUnit_Framework_TestCase
 {
     public function testArquivoBancoDoBrasil240PodeSerCriado()
     {
+        $this->markTestIncomplete('A versão do layout foi alterada de 020 para 030, porém não ainda está em beta e não foram feitos testes para a nova versão');
+
         $codigoBanco = \Cnab\Banco::BANCO_DO_BRASIL;
         $cnabFactory = new \Cnab\Factory();
         $arquivo = $cnabFactory->createRemessa($codigoBanco, 'cnab240');
