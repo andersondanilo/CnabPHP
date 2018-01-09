@@ -39,6 +39,10 @@ class Arquivo implements \Cnab\Remessa\IArquivo
                 $campos[] = 'codigo_cedente';
                 $campos[] = 'sequencial_remessa';
                 break;
+            case \Cnab\Banco::BANCO_DO_BRASIL:
+                $campos[] = 'agencia_dac';
+                $campos[] = 'conta_dac';
+                break;                
             default:
                 $campos[] = 'conta_dac';
                 break;
@@ -79,6 +83,10 @@ class Arquivo implements \Cnab\Remessa\IArquivo
                 $this->header->sequencial_remessa = $this->configuracao['sequencial_remessa'];
                 $this->header->razao_social = $this->configuracao['razao_social'];
                 break;
+            case \Cnab\Banco::BANCO_DO_BRASIL:
+                $this->header->agencia_dv = $this->configuracao['agencia_dac'];
+                $this->header->conta_dv = $this->configuracao['conta_dac'];
+                break;                    
             default:
                 $this->header->conta_dv = $this->configuracao['conta_dac'];
                 break;
@@ -111,6 +119,15 @@ class Arquivo implements \Cnab\Remessa\IArquivo
                 $detalhe->mensagem = $boleto['mensagem'];
                 $detalhe->data_multa = $boleto['data_multa'];
                 $detalhe->valor_multa = $boleto['valor_multa'];
+            } else if (\Cnab\Banco::BANCO_DO_BRASIL == $this->codigo_banco) {
+                $detalhe->agencia = $this->header->agencia;
+                $detalhe->agencia_dv = $this->header->agencia_dv;
+                $detalhe->conta = $this->header->conta;
+                $detalhe->conta_dv = $this->header->conta_dv;
+                $detalhe->numero_convenio = $boleto['numero_convenio'];
+                $detalhe->variacao_carteira = $boleto['variacao_carteira'];
+                $detalhe->tipo_cobranca = (isset($boleto['tipo_cobranca']) ?: '');
+
             } else {
                 $detalhe->agencia = $this->header->agencia;
                 $detalhe->conta = $this->header->conta;
