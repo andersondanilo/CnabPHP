@@ -42,6 +42,8 @@ class Arquivo implements \Cnab\Remessa\IArquivo
             case \Cnab\Banco::BANCO_DO_BRASIL:
                 $campos[] = 'agencia_dac';
                 $campos[] = 'conta_dac';
+                $campos[] = 'numero_sequencial';
+                $campos[] = 'numero_convenio';                
                 break;                
             default:
                 $campos[] = 'conta_dac';
@@ -86,6 +88,8 @@ class Arquivo implements \Cnab\Remessa\IArquivo
             case \Cnab\Banco::BANCO_DO_BRASIL:
                 $this->header->agencia_dv = $this->configuracao['agencia_dac'];
                 $this->header->conta_dv = $this->configuracao['conta_dac'];
+                $this->header->numero_sequencial = $this->configuracao['numero_sequencial'];
+                $this->header->convenio_lider = $this->configuracao['numero_convenio'];                
                 break;                    
             default:
                 $this->header->conta_dv = $this->configuracao['conta_dac'];
