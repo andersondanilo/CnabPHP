@@ -240,7 +240,7 @@ class Arquivo implements \Cnab\Remessa\IArquivo
         $detalhe->segmento_p->especie = $boleto['especie']; // 4 = Duplicata serviço
         $detalhe->segmento_p->aceite = $boleto['aceite'];
         $detalhe->segmento_p->data_emissao = $dateCadastro;
-        $detalhe->segmento_p->codigo_juros_mora = 1; // 1 = Por dia
+        $detalhe->segmento_p->codigo_juros_mora = 2; // 1 = Por dia , 2 = Percentual Mensal
 
         if (!empty($boleto['dias_iniciar_contagem_juros']) && is_numeric($boleto['dias_iniciar_contagem_juros'])) {
             $dateJurosMora->modify("+{$boleto['dias_iniciar_contagem_juros']} days");
@@ -334,7 +334,7 @@ class Arquivo implements \Cnab\Remessa\IArquivo
         $detalhe->segmento_r->lote_servico = $detalhe->segmento_p->lote_servico;
         $detalhe->segmento_r->codigo_ocorrencia = $detalhe->segmento_p->codigo_ocorrencia;
         if ($boleto['valor_multa'] > 0) {
-            $detalhe->segmento_r->codigo_multa = 1;
+	    $detalhe->segmento_r->codigo_multa = isset($boleto['codigo_multa']) ? $boleto['codigo_multa'] : 1;
             $detalhe->segmento_r->valor_multa = $boleto['valor_multa'];
             $detalhe->segmento_r->data_multa = $boleto['data_multa'];
         } else {
