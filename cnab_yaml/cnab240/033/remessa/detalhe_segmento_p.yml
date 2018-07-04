@@ -73,7 +73,7 @@ reservado_santander_04:
 valor_juros_mora:
   # Valor ou porcentagem sobre o valor do título a ser cobrado de juros de mora.
   pos: [127, 141]
-  picture: '9(10)V9(5)'
+  picture: '9(13)V9(2)'
 
 reservado_santander_05:
   pos: [225, 225]
