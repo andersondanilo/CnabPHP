@@ -1,0 +1,73 @@
+codigo_banco:
+  # Código fornecido pelo Banco Central para identificação do Banco que está recebendo ou enviando o
+  # arquivo, com o qual se firmou o contrato de prestação de serviços.
+  # SICOOB = ‘756’
+  pos: [1, 3]
+  picture: '9(3)'
+  default: '756'
+
+lote_servico:
+  # Lote de Serviço: Número seqüencial para identificar univocamente um lote de serviço. 
+  # Criado e controlado pelo responsável pela geração magnética dos dados contidos no arquivo.
+  # Preencher com '0001' para o primeiro lote do arquivo. 
+  # Para os demais: número do lote anterior acrescido de 1. 
+  # O número não poderá ser repetido dentro do arquivo.
+  pos: [4, 7]
+  picture: '9(4)'
+
+tipo_registro:
+  # Código adotado pela FEBRABAN para identificar o tipo de registro.
+  # '1' = Header de Lote
+  pos: [8, 8]
+  picture: '9(1)'
+  default: '1'
+
+uso_exclusivo_febraban_01:
+  # Texto de observações destinado para uso exclusivo da FEBRABAN. Preencher com Brancos.
+  pos: [9, 17]
+  picture: 'X(9)'
+  default: ''
+
+qtd_registros_lote:
+  pos: [18,23]
+  picture: '9(6)'
+
+simples_total_titulo_cobranca:
+  pos: [24,29]
+  picture: '9(6)'
+
+simples_valor_total_titulo_carteira:
+  pos: [30,46]
+  picture: '9(15)V9(2)'
+
+vinculada_total_titulo_cobranca:
+  pos: [47,52]
+  picture: '9(6)'
+
+vinculada_valor_total_titulo_carteira:
+  pos: [53,69]
+  picture: '9(15)V9(2)'
+
+caucionada_total_titulo_cobranca:
+  pos: [70,75]
+  picture: '9(6)'
+
+caucionada_valor_total_titulo_carteira:
+  pos: [76,92]
+  picture: '9(15)V9(2)'
+
+descontada_total_titulo_cobranca:
+  pos: [93,98]
+  picture: '9(6)'
+
+descontada_valor_total_titulo_carteira:
+  pos: [99,115]
+  picture: '9(15)V9(2)'
+
+numero_aviso:
+  pos: [116,123]
+  picture: 'X(8)'
+
+uso_exclusivo_febraban_01:
+  pos: [124,240]
+  picture: 'X(205)'

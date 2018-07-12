@@ -1,0 +1,6 @@
+# Registro Detalhe - Segmento R (Obrigatório - Remessa)
+# Baseado na documentação da caixa
+uso_exclusivo_febraban_02:
+  pos: [18, 65]
+  picture: '9(48)'
+  default: '0'

@@ -1,0 +1,44 @@
+uso_exclusivo_febraban_01:
+  pos: [9, 16]
+  picture: 'X(8)'
+  default: ''
+
+codigo_inscricao:
+  pos: [17, 17]
+  picture: '9(1)'
+
+numero_inscricao:
+  pos: [18, 32]
+  picture: '9(15)'
+
+agencia:
+  pos: [33, 36]
+  picture: '9(4)'
+
+agencia_dv:
+  pos: [37, 37]
+  picture: '9(1)'
+
+codigo_cedente:
+  pos: [38, 47]
+  picture: '9(10)'
+
+uso_exclusivo_banco_01:
+  pos: [48, 72]
+  picture: 'X(25)'
+  default: ''
+
+hora_geracao:
+  pos: [152, 157]
+  picture: 'X(6)'
+  default: ''
+
+versao_layout_arquivo:
+  pos: [164, 166]
+  picture: '9(3)'
+  default: '040'
+
+uso_exclusivo_febraban_03:
+  pos: [167, 240]
+  picture: 'X(74)'
+  default: ''

@@ -1,0 +1,52 @@
+conta:
+  pos: [24,35]
+  picture: '9(12)'
+
+conta_dv:
+  pos: [36,36]
+  picture: '9(1)'
+
+agencia_mais_conta_dv:
+  # Campo não tratado pelo Banco do Brasil. Informar 'branco' (espaço) OU zero
+  pos: [37,37]
+  picture: 'X(1)'
+  default: ''
+
+nosso_numero:
+  # 1. Caso seja o Banco do Brasil quem gera o "Nosso Número", informar 'brancos' (espaços) ou Zeros.
+  # 2. Caso seja a empresa quem gera o "Nosso Número", informar de acordo com o número do convênio de 
+  # cobrança conforme as seguintes regras:
+  # a) Para número de convênio de 4 posições (carteira 17 até 9.999) informar o nosso número com 
+  # 11 posições mais o DV (dígito verificador), sendo as 4 primeiras posições o número do convênio, 
+  # as 7 posições seguintes um número sequencial para controle e mais o DV.
+  # Exemplo: CONVÊNIOS DE 0001 ATÉ 9.999
+  # 123412345671
+  # CCCCSSSSSSSD
+  # Onde: C = Convênio S = Sequencial D = dígito verificador 
+  # b) Para número de convênio de 6 posições (de 10.000 a 999.999), informar o nosso número com 
+  # 11 posições mais o DV, sendo as 6 primeiras posições o número do convênio, as 5 posições 
+  # seguintes um número sequencial para controle e mais o DV. 
+  # Exemplo: CONVÊNIOS DE 010.000 ATÉ 999.999
+  # 123456123451
+  # CCCCCCSSSSSD
+  # Onde: C = Convênio S = Sequencial D = dígito verificador
+  # c) Para número de convênio de 7 posições (acima de 1.000.000) informar o nosso número com 
+  # 17 posições sem DV, sendo as 7 primeiras posições o número do convênio e as 10 posições seguintes
+  # um número sequencial para controle. Esse é o padrão mais utilizado atualmente.
+  # Exemplo: CONVÊNIOS DE 1.000.000 ATÉ 9.999.999
+  # 12345671234567890
+  # CCCCCCCSSSSSSSSSS
+  # Onde: C = Convênio S = Sequencial
+  # Importante:
+  # todos os "nosso número" devem ser alinhados à esquerda com brancos à direita.
+  pos: [38, 57]
+  picture: 'X(20)'
+
+numero_documento:
+  # Número adotado e controlado pelo Cliente, para identificar o título de cobrança.
+  # Poderá conter número de duplicata, no caso de cobrança de duplicatas; número da apólice, no caso de
+  # cobrança de seguros, etc. Campo de preenchimento obrigatório.
+  pos: [63,77]
+  picture: 'X(15)'
+
+

@@ -31,7 +31,7 @@ class Detalhe extends \Cnab\Format\Linha implements \Cnab\Retorno\IDetalhe
 
     public static function isBaixaStatic($codigo_movimento)
     {
-        $tipo_baixa = array(6, 9, 17, 25);
+        $tipo_baixa = array(6, 17);
         $codigo_movimento = (int) $codigo_movimento;
         if (in_array($codigo_movimento, $tipo_baixa)) {
             return true;

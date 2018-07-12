@@ -1,0 +1,62 @@
+# 341 = Itaú
+
+cobranca:
+  #Agência Agência Mantenedora Da Conta
+  pos: [27, 30]
+  picture: '9(04)'
+
+zeros01:
+  #Complemento De Registro
+  pos: [31, 32]
+  picture: '9(02)'
+  default: '00'
+
+conta:
+  #Número Da Conta Corrente Da Empresa
+  pos: [33, 37]
+  picture: '9(05)'
+
+dac:
+  #Dígito De Auto Conferência Ag/conta Empresa
+  pos: [38, 38]
+  picture: '9(01)'
+
+brancos01:
+  #Complemento Do Registro
+  pos: [39, 46]
+  picture: 'X(08)'
+  default: ''
+
+densidade:
+  #Unidade Da Densidade
+  pos: [101, 105]
+  picture: '9(05)'
+
+unidade_de_densid:
+  #Densidade De Gravação Do Arquivo
+  pos: [106, 108]
+  picture: 'X(03)'
+  default: 'BPI'
+
+n_seq_arquivo_ret:
+  #Número Seqüencial Do Arquivo Retorno
+  pos: [109, 113]
+  picture: '9(05)'
+
+data_de_credito:
+  #Data De Crédito Dos Lançamentos
+  pos: [114, 119]
+  picture: '9(06)'
+  date_format: '%d%m%y'
+
+brancos02:
+  #Complemento Do Registro
+  pos: [120, 394]
+  picture: 'X(275)'
+  default: ''
+
+numero_sequencial:
+  #Número Seqüencial Do Registro No Arquivo
+  pos: [395, 400]
+  picture: '9(06)'
+  default: 1

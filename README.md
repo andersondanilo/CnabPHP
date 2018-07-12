@@ -23,7 +23,7 @@ Projeto para criar arquivos de remessas e processar arquivos de retorno no forma
 | Bradesco        |                    | 240                |
 | Caixa           | 240                | 240 e 400          |
 | Itaú            | 400                | 400                |
-| Santander       |                    | 240                |
+| Santander       | 240                | 240                |
 
 ## Instalação
 ### Composer
@@ -31,6 +31,16 @@ Se você já conhece o **Composer**, adicione a dependência abaixo à diretiva 
 ```
 "andersondanilo/cnab_php": "1.3.*"
 ```
+Além disso adicione esse repositório:
+```
+"repositories": [ 
+        {
+            "type": "vcs",
+            "url": "https://github.com/Pandora-una/CnabPHP.git"
+        }
+    ]
+```
+
 
 ## Como Usar
 ### Lendo um arquivo de Retorno

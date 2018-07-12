@@ -1,0 +1,369 @@
+# Registro Detalhe - Segmento P (Obrigatório - Remessa)
+# Baseado na documentação da Caixa
+# Disponível em: http://downloads.caixa.gov.br/_arquivos/cobrcaixasicob/manuaissicob/CNAB_240_SICOB.pdf (Acesso em 23/04/2014)
+
+codigo_banco:
+  # Código fornecido pelo Banco Central para identificação do Banco que está recebendo ou enviando o
+  # arquivo, com o qual se firmou o contrato de prestação de serviços.
+  # CAIXA ECONÔMICA FEDERAL = ‘104’
+  pos: [1, 3]
+  picture: '9(3)'
+
+lote_servico:
+  # Lote de Serviço
+  # Número seqüencial para identificar cada lote de serviço.
+  # Preencher com '0001' para o primeiro lote do arquivo. Para os demais: número do lote anterior
+  # acrescido de 1. Deve ser o mesmo número dentro do lote. O número não poderá ser repetido dentro
+  # do arquivo.
+  # Se registro for Header do Arquivo = '0000'
+  # Se registro for Trailer do Arquivo = '9999'
+  pos: [4, 7]
+  picture: '9(4)'
+
+tipo_registro:
+  # Código adotado pela FEBRABAN para identificar o tipo de registro.
+  # '3' = Detalhe
+  pos: [8, 8]
+  picture: '9(1)'
+  default: '3'
+
+numero_sequencial_lote:
+  # Nº Sequencial do Registro no Lote
+  # Deve ser iniciado sempre em 1, em cada novo lote
+  pos: [9, 13]
+  picture: '9(5)'
+
+codigo_segmento:
+  # Código adotado pela FEBRABAN para identificar o segmento do registro. 
+  pos: [14, 14]
+  picture: 'X(1)'
+  default: 'P'
+
+uso_exclusivo_febraban_01:
+  # Texto de observações destinado para uso exclusivo da FEBRABAN. Preencher com Brancos.
+  pos: [15, 15]
+  picture: 'X(1)'
+  default: ''
+
+codigo_ocorrencia:
+  # Código de Movimento Remessa
+  # Código adotado pela FEBRABAN, para identificar o tipo de movimentação enviado nos registros do
+  # arquivo de remessa.
+  # Cada Banco definirá os campos a serem alterados para o código de movimento ‘31’.
+  # ---------------------------------
+  # Código | Descrição
+  # ---------------------------------
+  # ‘01’   | Entrada de Títulos
+  # ‘02’   | Pedido de Baixa
+  # ‘04’   | Concessão de Abatimento
+  # ‘05’   | Cancelamento de Abatimento
+  # ‘06’   | Alteração de Vencimento
+  # ‘07’   | Concessão de Desconto
+  # ‘08’   | Cancelamento de Desconto
+  # ‘09’   | Protestar
+  # ‘10’   | Sustar Protesto e Baixar Título
+  # ‘31’   | Alteração de Outros Dados
+  pos: [16, 17]
+  picture: '9(2)'
+
+agencia:
+  # Código da Agência mantenedora da conta, fornecido pela CAIXA.
+  pos: [18, 22]
+  picture: '9(5)'
+
+agencia_dv:
+  # Dígito Verificador da Agência mantendedora da conta, fornecido pela CAIXA.
+  pos: [23,23]
+  picture: '9(1)'
+
+codigo_cedente:
+  # Código do Cedente
+  # Remessa: Código do Convênio no Banco (sem operação), tamanho: 12 posições, no formato
+  # 0000CCCCCCCC.
+  # Retorno: Código do Convênio no Banco (com operação), tamanho: 12 posições, no formato
+  # 0OOOCCCCCCCC.
+  # Onde:
+  # 0 = zero
+  # OOO = Operação
+  # CCCCCCCC = Cedente
+  pos: [24,35]
+  picture: '9(12)'
+
+codigo_cedente_dv:
+  # Dígito Verificador do Cedente
+  # Código adotado pela CAIXA, para verificação da autenticidade do Código do Cedente. Calculado
+  # através do módulo 11.
+  # Exemplo de como calcular o DV do Cedente:
+  # Agência/Código do Cedente: 0012.870.00000575-1
+  # Para Remessa – Cedente sem operação e sem DV: 00000575
+  # Para Retorno – Cedente com operação e sem DV: 87000000575
+  # 0  0  0  0  0   5   7  5
+  # 9  8  7  6  5   4   3  2
+  # 0  0  0  0  0  20  21 10
+  # 1ª linha – Código do Cedente
+  # 2ª linha – Índice multiplicação, preencher sequencialmente de 2 a 9 da direita para a esquerda
+  # 3ª linha – Multiplicação coluna por coluna (0x9, 0x8, 0x7, 0x6, 0x5, 0x4, 3x3, 3x2)
+  # Soma-se os valores da 3ª linha: 0+0+0+0+0+20+21+10 = 51
+  # Dividir o resultado da soma por onze: 51/11 = 4 (resto 7)
+  # Subtrair onze pelo resto da divisão: 11 – 7 = 4
+  # O Dígito Verificador calculado para o Código de Cedente acima é 4
+  # Obs.: se o resultado da subtração for maior que 9 (nove) o dígito será 0 (zero)
+  pos: [36,36]
+  picture: '9(1)'
+
+agencia_mais_cedente_dv:
+  # Dígito Verificador da Agência / Código do Cedente (Segmentos P e T)
+  # Código adotado pela CAIXA para verificação da autenticidade do par Código da Agência / Código do
+  # Cedente. Calculado através do módulo 11.
+  # Obs: Para o Retorno é o mesmo DV do Código do Cedente, fornecido pela CAIXA.
+  # Exemplo de como calcular o DV da Agência/Código do Cedente (Remessa):
+  # Agência/Código do Cedente: 0012.870.00000575-1
+  # Agência (sem DV): 0012
+  # Cedente (sem operação e sem DV) – tamanho 12 posições: 000000000575
+  # 0 0 1  2 0 0 0 0 0 0 0 0 0  5  7  5
+  # 9 8 7  6 5 4 3 2 9 8 7 6 5  4  3  2
+  # 0 0 7 12 0 0 0 0 0 0 0 0 0 20 21 10
+  # 1ª linha – Agência/Código do Cedente
+  # 2ª linha – índice multiplicação, preencher sequencialmente de 2 a 9 da direita para a esquerda
+  # 3ª linha – multiplicação coluna por coluna
+  # Soma-se os valores da 3ª linha: 0+0+7+12+0+0+0+0+0+0+0+0+0+20+21+10 = 70
+  # Dividir o resultado da soma por onze: 70/11 = 6 (RESTO 4)
+  # Subtrair onze pelo resto da divisão: 11 – 4 = 7
+  # O Dígito Verificador calculado para o Código de Cedente acima é 7
+  # Obs.: se o resultado da subtração for maior que 9 (nove) o dígito será 0 (zero)
+  pos: [37,37]
+  picture: '9(1)'
+
+uso_exclusivo_banco_01:
+  # Uso Exclusivo CAIXA
+  # Deixar em branco
+  pos: [38,46]
+  picture: 'X(9)'
+  default: ''
+
+nosso_numero:
+  # Identificação do Título no Banco
+  # Número adotado pelo Banco Cedente para identificar o Título.
+  # Para código de movimento igual a '01' (Entrada de Títulos), caso esteja preenchido com zeros, a
+  # numeração será atribuída pela CAIXA.
+  # Para montagem do Nosso Número, quando a emissão do título é feita pelo cliente (carteiras
+  # Cobrança Rápida, Sem Registro e SAD), solicitar especificação à Agência CAIXA de
+  # relacionamento.
+  # Obs: Nosso Número Sem Registro com 16 posições (arquivo Retorno) – posições 106 a 130 do
+  # Segmento T (ver Nota G072).
+  pos: [47,57]
+  picture: '9(11)'
+
+codigo_carteira:
+  # Código da Carteira
+  # Código adotado pela FEBRABAN, para identificar a característica dos títulos dentro das modalidades de
+  # cobrança existentes no banco.
+  # ‘1’ = Cobrança Simples
+  # ‘3’ = Cobrança Caucionada
+  # ‘4’ = Cobrança Descontada
+  # O Código ‘1’ Cobrança Simples deve ser obrigatoriamente informado nas modalidades Cobrança Simples
+  # e Cobrança Rápida.
+  pos: [58,58]
+  picture: '9(1)' 
+
+forma_cadastramento:
+  # Código adotado pela FEBRABAN, para indicar a existência de registro do título no banco.
+  # ‘1’ = Com Cadastramento (Cobrança Registrada)
+  # ‘2’ = Sem Cadastramento (Cobrança sem Registro)
+  pos: [59,59]
+  picture: '9(1)'
+
+tipo_documento:
+  # Código adotado pela FEBRABAN para identificar a existência material do documento no processo.
+  # Informar sempre ‘2’
+  # ‘1’ = Tradicional
+  # ‘2’ = Escritural
+  pos: [60,60]
+  picture: 'X(1)'
+  default: '2'
+
+identificacao_emissao:
+  # Código adotado pela FEBRABAN para identificar o responsável e a forma de emissão do bloqueto.
+  # ‘1’ = Banco Emite
+  # ‘2’ = Cliente Emite
+  # ‘4’ = Banco Reemite
+  # ‘5’ = Banco Não Reemite
+  # Os códigos ‘4’ e ‘5’ só serão aceitos para código de movimento para remessa ‘07’ e ‘31’
+  pos: [61,61]
+  picture: '9(1)'
+  default: '2'
+
+identificacao_distribuicao:
+  # Código adotado pela FEBRABAN para identificar o responsável pela distribuição do bloqueto.
+  # ‘1’ = Banco Distribui
+  # ‘2’ = Cliente Distribui
+  pos: [62,62]
+  picture: '9(1)'
+  default: '2'
+
+numero_documento:
+  # Número adotado e controlado pelo Cliente, para identificar o título de cobrança.
+  # Poderá conter número de duplicata, no caso de cobrança de duplicatas; número da apólice, no caso de
+  # cobrança de seguros, etc. Campo de preenchimento obrigatório.
+  pos: [63,73]
+  picture: 'X(11)'
+
+uso_exclusivo_banco_02:
+  # Deixar em branco
+  pos: [74,77]
+  picture: 'X(4)'
+  default: ''
+
+vencimento:
+  # Campo de informação da data de vencimento do título de cobrança.
+  # Utilizar o formato DDMMAAAA, onde : dd = dia, mm = mês, aa = ano
+  # “A Vista” Preencher com 11111111
+  pos: [78,85]
+  picture: '9(8)'
+  date_format: '%d%m%Y'
+
+valor_titulo:
+  # Valor original do Título. Quando o valor for expresso em moeda corrente, utilizar 2 casas decimais.
+  # Quando o valor for expresso em moeda variável, utilizar 5 decimais.
+  pos: [86, 100]
+  picture: '9(13)V9(2)'
+
+agencia_cobradora:
+  # Preencher com zeros - o sistema atribuirá a agência encarregada da cobrança pelo CEP do sacado.
+  # Código adotado pelo Banco responsável pela cobrança, para identificar o estabelecimento bancário
+  # responsável pela cobrança do título.
+  # Código e Dígito Verificador da Agência Encarregada da Cobrança são fornecidos pela CAIXA. Para
+  # essa informação solicitar a relação de agências cobradoras à agência CAIXA de relacionamento.
+  pos: [101, 105]
+  picture: '9(5)'
+  default: '0'
+
+agencia_cobradora_dv:
+  # Preencher com zeros - o sistema atribuirá a agência encarregada da cobrança pelo CEP do sacado.
+  # Código adotado pelo Banco responsável pela cobrança, para identificar o estabelecimento bancário
+  # responsável pela cobrança do título.
+  # Código e Dígito Verificador da Agência Encarregada da Cobrança são fornecidos pela CAIXA. Para
+  # essa informação solicitar a relação de agências cobradoras à agência CAIXA de relacionamento.
+  pos: [106, 106]
+  picture: '9(1)'
+  default: '0'
+
+especie:
+  # Espécie do Título
+  # Código adotado pela FEBRABAN para identificar o tipo de título de cobrança.
+  # Código ID Descrição
+  # ‘01’ CH Cheque
+  # ‘02’ DM Duplicata Mercantil
+  # ‘03’ DMI Duplicata Mercantil p/ Indicação
+  # ‘04’ DS Duplicata de Serviço
+  # ‘05’ DSI Duplicata de Serviço p/ Indicação
+  # ‘06’ DR Duplicata Rural
+  # ‘07’ LC Letra de Câmbio
+  # ‘08’ NCC Nota de Crédito Comercial
+  # ‘09’ NCE Nota de Crédito a Exportação
+  # ‘10’ NCI Nota de Crédito Industrial
+  # ‘11’ NCR Nota de Crédito Rural
+  # ‘12’ NP Nota Promissória
+  # ‘13’ NPR Nota Promissória Rural
+  # ‘14’ TM Triplicata Mercantil
+  # ‘15’ TS Triplicata de Serviço
+  # ‘16’ NS Nota de Seguro
+  # ‘17’ RC Recibo
+  # ‘18’ FAT Fatura
+  # ‘19’ ND Nota de Débito
+  # ‘20’ AP Apólice de Seguro
+  # ‘21’ ME Mensalidade Escolar
+  # ‘22’ PC Parcela de Consórcio
+  #‘99’ OU Outros
+  pos: [107,108]
+  picture: '9(2)'
+
+aceite:
+  # Identificação de Título Aceito / Não Aceito
+  # Código adotado pela FEBRABAN para identificar se o título de cobrança foi aceito (reconhecimento da
+  # dívida pelo Sacado).
+  # ‘A’ = Aceite
+  # ‘N’ = Não Aceite
+  pos: [109,109]
+  picture: 'X(1)'
+
+data_emissao:
+  pos: [110,117]
+  picture: '9(8)'
+  date_format: '%d%m%Y'
+
+codigo_juros_mora:
+  # ‘1’ = Valor por Dia
+  # ‘2’ = Taxa Mensal
+  # ‘3’ = Isento
+  pos: [118,118]
+  picture: 'X(1)'
+
+data_juros_mora:
+  pos: [119,126]
+  picture: '9(8)'
+  date_format: '%d%m%Y'
+
+valor_juros_mora:
+  # Valor ou porcentagem sobre o valor do título a ser cobrado de juros de mora.
+  pos: [127, 141]
+  picture: '9(13)V9(2)'
+
+codigo_desconto_1:
+  # ‘0’ = Sem Desconto ‘1’ = Valor Fixo até a data informada ‘2’ = Percentual até a data informada
+  pos: [142, 142]
+  picture: '9(1)'
+
+data_desconto_1:
+   pos: [143, 150]
+   picture: '9(8)'
+   date_format: '%d%m%Y'
+
+valor_desconto_1:
+  # Valor ou percentual de desconto a ser concedido sobre o título de cobrança.
+  pos: [151, 165]
+  picture: '9(13)V9(2)'
+
+valor_iof:
+  pos: [166, 180]
+  picture: '9(13)V9(2)'
+  default: '0'
+
+valor_abatimento:
+  pos: [181, 195]
+  picture: '9(13)V9(2)'
+
+uso_empresa:
+  pos: [196, 220]
+  picture: 'X(25)'
+
+codigo_protesto:
+  pos: [221, 221]
+  picture: '9(1)'
+
+prazo_protesto:
+  pos: [222, 223]
+  picture: '9(2)'
+
+codigo_baixa:
+  pos: [224, 224]
+  picture: '9(1)'
+
+prazo_baixa:
+  pos: [225, 227]
+  picture: '9(3)'
+
+codigo_moeda:
+  pos: [228, 229]
+  picture: '9(2)'
+  default: '09'
+
+uso_exclusivo_banco_03:
+  pos: [230, 239]
+  picture: '9(10)'
+  default: '0'
+
+uso_exclusivo_febraban_02:
+  pos: [240, 240]
+  picture: 'X(1)'
+  default: ''

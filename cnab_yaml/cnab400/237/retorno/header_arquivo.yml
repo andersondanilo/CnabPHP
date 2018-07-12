@@ -1,0 +1,36 @@
+# 237 = Bradesco
+
+codigo_cedente:
+  # Código da Empresa, Número da Empresa
+  pos: [27, 46]
+  picture: '9(20)'
+
+zeros01:
+  pos: [101, 108]
+  picture: '9(8)'
+  default: 0
+
+numero_aviso_bancario:
+  pos: [109, 113]
+  picture: '9(5)'
+
+brancos01:
+  pos: [114, 379]
+  picture: 'X(266)'
+  default: ''
+
+data_de_credito:
+  pos: [380, 385]
+  picture: '9(6)'
+  date_format: '%d%m%y'
+
+brancos02:
+  pos: [386, 394]
+  picture: 'X(9)'
+  default: ''
+
+numero_sequencial:
+  #Número Seqüencial Do Registro No Arquivo
+  pos: [395, 400]
+  picture: '9(06)'
+  default: 1

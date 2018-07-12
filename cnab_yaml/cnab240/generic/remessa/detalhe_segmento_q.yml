@@ -1,0 +1,92 @@
+# Registro Detalhe - Segmento Q (Obrigatório - Remessa)
+# Baseado na documentação da caixa
+codigo_banco:
+  pos: [1, 3]
+  picture: '9(3)'
+
+lote_servico:
+  pos: [4, 7]
+  picture: '9(4)'
+
+tipo_registro:
+  pos: [8, 8]
+  picture: '9(1)'
+  default: '3'
+
+numero_sequencial_lote:
+  pos: [9, 13]
+  picture: '9(5)'
+
+codigo_segmento:
+  pos: [14, 14]
+  picture: 'X(1)'
+  default: 'Q'
+
+uso_exclusivo_febraban_01:
+  pos: [15, 15]
+  picture: 'X(1)'
+  default: ''
+
+codigo_ocorrencia:
+  pos: [16, 17]
+  picture: '9(2)'
+
+sacado_codigo_inscricao:
+  pos: [18, 18]
+  picture: '9(1)'
+
+sacado_numero_inscricao:
+  pos: [19, 33]
+  picture: '9(15)'
+
+nome:
+  pos: [34, 73]
+  picture: 'X(40)'
+
+logradouro:
+  pos: [74, 113]
+  picture: 'X(40)'
+
+bairro:
+  pos: [114, 128]
+  picture: 'X(15)'
+
+cep:
+  pos: [129, 136]
+  picture: '9(8)'
+
+cidade:
+  pos: [137, 151]
+  picture: 'X(15)'
+
+estado:
+  pos: [152, 153]
+  picture: 'X(2)'
+
+sacador_codigo_inscricao:
+  pos: [154, 154]
+  picture: '9(1)'
+
+sacador_numero_inscricao:
+  pos: [155, 169]
+  picture: '9(15)'
+
+sacador_nome:
+  pos: [170, 209]
+  picture: 'X(40)'
+
+uso_exclusivo_febraban_02:
+  pos: [210, 212]
+  picture: 'X(3)'
+  default: ''
+
+uso_exclusivo_febraban_03:
+  pos: [213, 232]
+  picture: 'X(20)'
+  default: ''
+
+uso_exclusivo_febraban_04:
+  pos: [233, 240]
+  picture: 'X(8)'
+  default: ''
+  default: ''
