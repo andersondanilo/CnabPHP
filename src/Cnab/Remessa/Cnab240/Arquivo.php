@@ -335,8 +335,13 @@ class Arquivo implements \Cnab\Remessa\IArquivo
             $detalhe->segmento_p->codigo_baixa = 0;
             $detalhe->segmento_p->prazo_baixa = 0;
         } elseif ($this->codigo_banco == \Cnab\Banco::SANTANDER) {
-            $detalhe->segmento_p->codigo_baixa = 1;
-            $detalhe->segmento_p->prazo_baixa = 60;
+            if (!empty($boleto['codigo_baixa']) && !empty($boleto['prazo_baixa'])) {
+                $detalhe->segmento_p->codigo_baixa = $boleto['codigo_baixa'];
+                $detalhe->segmento_p->prazo_baixa = $boleto['prazo_baixa'];
+            } else {
+                $detalhe->segmento_p->codigo_baixa = 1;
+                $detalhe->segmento_p->prazo_baixa = 60;
+            }
         } else {
             if (isset($boleto['baixar_apos_dias'])) {
                 if ($boleto['baixar_apos_dias'] === false) {
