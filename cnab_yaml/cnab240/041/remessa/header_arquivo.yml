@@ -1,0 +1,93 @@
+##254580048
+codigo_convenio:
+  pos: [33, 52]
+  picture: 'X(20)'
+  default: '123'
+
+agencia:
+  pos: [53, 57]
+  picture: '9(5)'
+
+agencia_dv:
+  pos: [58, 58]
+  picture: 'X(1)'
+
+conta:
+  pos: [59, 70]
+  picture: '9(12)'
+
+conta_dv:
+  pos: [71, 71]
+  picture: '9(1)'
+
+agencia_mais_cedente_dv:
+  pos: [72, 72]
+  picture: 'X(1)'
+  default: ''
+
+hora_geracao:
+  pos: [152, 157]
+  picture: 'X(6)'
+  default: '000000'
+
+versao_layout_arquivo:
+  pos: [164, 166]
+  picture: '9(3)'
+  default: '040'
+
+densidade_gravacao_arquivo:
+  # Densidade de gravação (bpi), do arquivo encaminhado. Pode ser:
+  # 1600 BPI
+  # 6250 BPI
+  # Pode ser informado ‘0’. (Padrão)
+  pos: [167, 171]
+  picture: '9(5)'
+  default: '00000'
+
+uso_reservado_banco:
+  # Para Uso Reservado do Banco
+  # Texto de observações destinado para uso exclusivo da caixa econômica federal.
+  # Durante a fase de testes (simulado) deverá conter a literal ‘RETORNO-TESTE’
+  pos: [172, 179]
+  picture: 'X(8)'
+  default: ''
+
+uso_reservado_banco_remessa:
+  pos: [180, 181]
+  picture: 'X(2)'
+  default: 'BE'
+
+uso_resevado_BFQ/BBM:
+  pos: [182, 191]
+  picture: 'X(10)'
+  default: ''
+
+uso_resevado_empresa:
+  pos: [192, 211]
+  picture: 'X(20)'
+  default: ''
+
+cnab:
+  pos: [212, 222]
+  picture: 'X(11)'
+  default: ''
+
+identificacao_sem_papel:
+  pos: [223, 225]
+  picture: 'X(3)'
+  default: ''
+
+identificacao_vans:
+  pos: [226, 228]
+  picture: 'X(3)'
+  default: ''
+
+tipo_servico:
+  pos: [229, 230]
+  picture: 'X(2)'
+  default: ''
+
+uso_exclusivo_febraban_04:
+  pos: [231, 240]
+  picture: 'X(10)'
+  default: ''

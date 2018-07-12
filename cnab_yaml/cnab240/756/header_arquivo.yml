@@ -1,0 +1,38 @@
+# Com base na documentação do Sicoob
+# disponível em: http://www.bancoob.com.br/atendimentocobranca/CAS/2_Implanta%C3%A7%C3%A3o_do_Servi%C3%A7o/Sistema_Proprio/Layouts_para_troca_de_informa%C3%A7%C3%B5es.xls
+
+codigo_convenio:
+  # Padrão: deixar em branco
+  pos: [33, 52]
+  picture: 'X(20)'
+  default: ''
+
+agencia_dv:
+  pos: [58,58]
+  picture: 'X(1)'
+  default: ''
+
+agencia_mais_cedente_dv:
+  # Padrão: deixa em branco
+  pos: [72, 72]
+  picture: 'X(1)'
+  default: ''
+
+nome_banco:
+  pos: [103, 132]
+  picture: 'X(30)'
+  default: 'SICOOB'
+
+versao_layout_arquivo:
+  # Código adotado pela FEBRABAN para identificar qual a versão de layout do arquivo encaminhado. O
+  # 081, para SICOOB
+  pos: [164, 166]
+  picture: '9(3)'
+  default: '081'
+
+uso_reservado_empresa:
+  # Campo utilizado pelo cliente/cedente. Na fase de testes (simulado), deverá conter a literal
+  # ‘REMESSA-TESTE’ e na fase de produção deverá conter a literal ‘REMESSA-PRODUÇÃO’
+  pos: [192, 211]
+  picture: 'X(20)'
+  default: ''

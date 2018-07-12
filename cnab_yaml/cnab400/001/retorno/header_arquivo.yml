@@ -1,0 +1,36 @@
+# 001 = Banco do Brasil
+
+codigo_cedente:
+  pos: [27, 40]
+  picture: '9(14)'
+
+zeros01:
+  pos: [41, 46]
+  picture: '9(06)'
+  default: 0
+
+n_seq_arquivo_ret:
+  #Número Seqüencial Do Arquivo Retorno
+  pos: [101, 107]
+  picture: '9(07)'
+
+brancos01:
+  pos: [108, 149]
+  picture: 'X(042)'
+  default: ''
+
+numero_convenio:
+  pos: [150, 156]
+  picture: '9(07)'
+  default: 0
+
+brancos02:
+  pos: [157, 394]
+  picture: 'X(238)'
+  default: ''
+
+numero_sequencial:
+  #Número Seqüencial Do Registro No Arquivo
+  pos: [395, 400]
+  picture: '9(06)'
+  default: 1

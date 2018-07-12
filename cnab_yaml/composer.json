@@ -1,0 +1,19 @@
+{
+    "name": "andersondanilo/cnab_yaml",
+    "type": "library",
+    "description": "Especificação do formato Cnab240 e Cnab400 traduzida para Yaml",
+    "keywords": ["boleto", "remessa", "retorno", "cnab", "cnab240", "cnab400", "edi", "yaml"],
+    "licence": "MIT",
+    "authors": [
+        {
+            "name": "Anderson Danilo",
+            "email": "andersondanilo.souza@gmail.com"
+        },
+        {
+            "name": "Fernando Dutra neres",
+            "email": "fernando@inova2b.com.br"
+        }
+    ],
+    "require": {},
+    "config": {}
+}

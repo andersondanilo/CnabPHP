@@ -1,0 +1,100 @@
+agencia:
+  pos: [18, 21]
+  picture: '9(4)'
+
+agencia_dv:
+  # Dígito Verificador da Agência
+  pos: [22, 22]
+  picture: '9(1)'
+
+conta:
+  # Número da conta corrente
+  pos: [23, 31]
+  picture: '9(9)'
+
+conta_dv:
+  pos: [32, 32]
+  picture: '9(1)'
+
+conta_cobranca:
+  # Número da conta corrente
+  pos: [33, 41]
+  picture: '9(9)'
+
+conta_cobranca_dv:
+  pos: [42, 42]
+  picture: '9(1)'
+
+reservado_santander_01:
+  pos: [43, 44]
+  picture: 'X(2)'
+  default: ''
+
+nosso_numero:
+  pos: [45, 57]
+  picture: '9(13)'
+
+tipo_documento:
+  # ‘1’ = Tradicional
+  # ‘2’ = Escritural
+  pos: [60,60]
+  picture: 'X(1)'
+  default: '1'
+
+reservado_santander_02:
+  pos: [61, 61]
+  picture: 'X(1)'
+  default: ''
+
+reservado_santander_03:
+  pos: [62, 62]
+  picture: 'X(1)'
+  default: ''
+
+numero_documento:
+  pos: [63, 77]
+  picture: 'X(15)'
+
+agencia_cobradora:
+  pos: [101, 104]
+  picture: '9(4)'
+  default: '0'
+
+agencia_cobradora_dv:
+  pos: [105, 105]
+  picture: '9(1)'
+  default: '0'
+
+reservado_santander_04:
+  pos: [106, 106]
+  picture: 'X(1)'
+  default: ''
+
+valor_juros_mora:
+  # Valor ou porcentagem sobre o valor do título a ser cobrado de juros de mora.
+  pos: [127, 141]
+  picture: '9(13)V9(2)'
+
+reservado_santander_05:
+  pos: [225, 225]
+  picture: '9(1)'
+  default: '0'
+
+prazo_baixa:
+  pos: [226, 227]
+  picture: '9(2)'
+
+codigo_moeda:
+  pos: [228, 229]
+  picture: '9(2)'
+  default: '00'
+
+uso_exclusivo_banco_03:
+  pos: [230, 239]
+  picture: 'X(10)'
+  default: ''
+
+uso_exclusivo_febraban_02:
+  pos: [240, 240]
+  picture: 'X(1)'
+  default: ''

@@ -1,0 +1,25 @@
+# Registro Detalhe - Segmento P (Obrigatório - Remessa)
+# Baseado na documentação da Caixa
+# Disponível em: http://www.caixa.gov.br/downloads/cobranca-caixa-manuais/LEIAUTE_CNAB_240_SIGCB_COBRANCA_CAIXA.pdf
+
+codigo_cedente:
+  pos: [24, 29]
+  picture: '9(6)'
+
+uso_exclusivo_caixa_01:
+  pos: [30, 37]
+  picture: '9(8)'
+  default: '0'
+
+uso_exclusivo_caixa_02:
+  pos: [38, 40]
+  picture: '9(3)'
+  default: '0'
+
+modalidade_carteira:
+  pos: [41, 42]
+  picture: '9(2)'
+
+nosso_numero:
+  pos: [43, 57]
+  picture: '9(15)'

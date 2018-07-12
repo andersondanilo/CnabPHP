@@ -1,0 +1,97 @@
+agencia_mantenedora:
+  pos: [18, 21]
+  picture: '9(4)'
+
+agencia_dv:
+  pos: [22, 22]
+  picture: '9(1)'
+
+conta:
+  pos: [23, 31]
+  picture: '9(9)'
+
+conta_dv:
+  pos: [32, 32]
+  picture: '9(1)'
+
+uso_exclusivo_banco_01:
+  pos: [33, 40]
+  picture: 'X(8)'
+
+nosso_numero:
+  pos: [41, 53]
+  picture: '9(13)'
+
+codigo_carteira:
+  # Tipo de Cobrança
+  # 1 = Cobrança Simples (Sem Registro e Eletronica com registro)
+  # 2 = Cobrança Simples (Rápida com registro, Eletrônica com Registro e Convencional com Registro)
+  # 3 = Cobraça Caucionada (Eletrônica com registro e convencional com registro)
+  # 4 = Cobrança Descontada (Convencionlal com Registro / Eletrônica com registro)
+  # 5 = Cobrança Simples (Rápida com Registro)
+  # 6 = Cobrança Caucionada (Rápida com Registro) 
+  pos: [54, 54]
+  picture: '9(1)'
+
+numero_documento:
+  pos: [55, 69]
+  picture: 'X(15)'
+
+data_vencimento:
+  pos: [70, 77]
+  picture: '9(8)'
+  date_format: '%d%m%Y'
+
+valor_titulo:
+  pos: [78, 92]
+  picture: '9(13)V9(2)'
+
+numero_banco:
+  pos: [93, 95]
+  picture: '9(3)'
+
+agencia_cobradora:
+  pos: [96, 99]
+  picture: '9(4)'
+
+agencia_cobradora_dac:
+  # Também conhecido como digito verificador
+  pos: [100, 100]
+  picture: '9(1)'
+
+uso_empresa:
+  pos: [101, 125]
+  picture: 'X(25)'
+
+codigo_moeda:
+  pos: [126, 127]
+  picture: '9(2)'
+
+tipo_inscricao:
+  pos: [128, 128]
+  picture: '9(1)'
+
+numero_inscricao:
+  pos: [129, 143]
+  picture: '9(15)'
+
+nome_sacado:
+  pos: [144, 183]
+  picture: 'X(40)'
+
+conta_cobranca:
+  pos: [184, 193]
+  picture: 'X(10)'
+
+valor_tarifa:
+  pos: [194, 208]
+  picture: '9(13)V9(2)'
+
+identificacao_rejeicao:
+  pos: [209, 218]
+  picture: 'X(10)'
+
+uso_exclusivo_banco_03:
+  pos: [219, 240]
+  picture: 'X(22)'
+  default: ''

@@ -67,6 +67,7 @@ class Linha
             $lastField = null;
             foreach ($fields as $field) {
                 if ($lastField && $field->pos_start != $lastField->pos_end + 1) {
+
                     throw new \Exception("gap between {$lastField->nome} and {$field->nome}");
                 }
                 $dados .= $field->getEncoded();
@@ -94,7 +95,9 @@ class Linha
     public function validate()
     {
         foreach ($this->fields as $fieldNome => $field) {
+
             if ($field->getValue() === null || $field->getValue() === false) {
+
                 $this->last_error = "$fieldNome dont be null or false";
 
                 return false;

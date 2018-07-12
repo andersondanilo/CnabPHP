@@ -1,0 +1,45 @@
+codigo_banco:
+  # Código fornecido pelo Banco Central para identificação do Banco que está recebendo ou enviando o
+  # arquivo, com o qual se firmou o contrato de prestação de serviços.
+  # SICOOB = ‘756’
+  pos: [1, 3]
+  picture: '9(3)'
+  default: '756'
+
+lote_servico:
+  # Lote de Serviço: Número seqüencial para identificar univocamente um lote de serviço. 
+  # Criado e controlado pelo responsável pela geração magnética dos dados contidos no arquivo.
+  # Preencher com '0001' para o primeiro lote do arquivo. 
+  # Para os demais: número do lote anterior acrescido de 1. 
+  # O número não poderá ser repetido dentro do arquivo.
+  pos: [4, 7]
+  picture: '9(4)'
+
+forma_lancamento:
+  # Forma de Lançamento
+  # Uso Exclusivo FEBRABAN/CNAB, Padrão: Brancos
+  pos: [12, 13]
+  picture: 'X(2)'
+  default: ''
+
+codigo_convenio:
+  pos: [34, 49]
+  picture: 'X(16)'
+  default: ''
+
+agencia_dv:
+  pos: [59,59]
+  picture: 'X(1)'
+  default: ''
+
+agencia_mais_cedente_dv:
+  # Padrão: deixa em branco
+  pos: [73, 73]
+  picture: 'X(1)'
+  default: ''
+
+versao_layout_lote:
+  # Código adotado pela FEBRABAN para identificar qual a versão de layout do arquivo encaminhado.
+  pos: [14, 16]
+  picture: '9(3)'
+  default: '040'

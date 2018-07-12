@@ -1,0 +1,54 @@
+numero_inscricao:
+  # Informar o número de inscrição da Empresa (CNPJ) ou Pessoa Física (CPF).
+  pos: [19, 33]
+  picture: '9(15)'
+
+codigo_convenio:
+  # Código de convênio no Banco
+  # O código de convênio é composto pelo número do contrato do cliente junto
+  # ao Banco no sistema PAG com tamanho 9 e com '0' (Zeros) a esquerda e mais
+  # 11 espaços em branco.
+  #
+  # O contrato deve estar cadastrado no PAG (Pagamentos a terceiros) no 
+  # serviço 30 (Pagamentos de títulos do Banco do Brasil) e no serviço 31
+  # (Pagamentos de títulos de outros bancos).
+  pos: [34, 42]
+  picture: '9(9)'
+
+cobranca_cedente:
+  # Informar 0014 para cobrança cedente
+  pos: [43, 46]
+  picture: '9(4)'
+  default: 14
+
+carteira:
+  pos: [47, 48]
+  picture: '9(2)'
+
+variacao_carteira:
+  pos: [49, 51]
+  picture: '9(3)'
+
+remessa_teste:
+  pos: [52, 53]
+  picture: 'X(2)'
+  default: ''
+
+conta:
+  pos: [60, 71]
+  picture: '9(12)'
+
+conta_dv:
+  pos: [72, 72]
+  picture: 'X(1)'
+
+agencia_mais_conta_dv:
+  pos: [73, 73]
+  picture: 'X(1)'
+  default: ''
+
+data_credito_obsoleto:
+  # Campo não tradado pelo banco do brasil
+  pos: [200, 207]
+  picture: '9(8)'
+  default: '0'
