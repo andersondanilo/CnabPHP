@@ -58,7 +58,8 @@ class BancoDoBrasilTest extends \PHPUnit_Framework_TestCase
             'sacado_uf' => 'BA',
             'data_vencimento' => new \DateTime('2015-02-03'),
             'data_cadastro' => new \DateTime('2015-01-14'),
-            'juros_de_um_dia' => 0.10, // Valor do juros de 1 dia'
+            'codigo_juros_mora' => 2, //‘1’ = Valor por Dia, ‘2’ = Taxa Mensal, ‘3’ = Isento
+            'juros_de_um_dia' => 0.10, // Valor de 1 dia ou taxa do juros de 1 mês
             'data_desconto' => new \DateTime('2015-02-09'),
             'valor_desconto' => 10.0, // Valor do desconto
             'prazo' => 10, // prazo de dias para o cliente pagar após o vencimento
