@@ -2,7 +2,9 @@
 
 namespace Cnab\Retorno\Cnab400;
 
-class Header extends \Cnab\Format\Linha
+use \Cnab\Retorno\IHeaderArquivo;
+
+class Header  extends \Cnab\Format\Linha implements IHeaderArquivo
 {
     private $_codigo_banco = null;
 
@@ -41,4 +43,20 @@ class Header extends \Cnab\Format\Linha
             return $this->codigo_cedente;
         }
     }
+
+    public function getCodigoRetorno()
+    {
+        if ($this->existField('codigo_de_retorno')) {
+            return $this->codigo_de_retorno;
+        } else {
+            return;
+        }
+    }
+
+    public function getCodigoBanco()
+    {
+        //return $this->_codigo_banco;
+        return $this->codigo_do_banco;
+    }
+
 }

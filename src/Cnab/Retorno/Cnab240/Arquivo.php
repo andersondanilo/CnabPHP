@@ -2,13 +2,15 @@
 
 namespace Cnab\Retorno\Cnab240;
 
+use Cnab\Retorno\IHeaderArquivo;
 use Cnab\Retorno\Linha;
+use DateTime;
 
 class Arquivo implements \Cnab\Retorno\IArquivo
 {
     private $content;
 
-    public $header = false;
+    public $header = null;
     public $lotes = array();
     public $linhas = array();
     public $trailer = false;
@@ -116,6 +118,16 @@ class Arquivo implements \Cnab\Retorno\IArquivo
     }
 
     /**
+     * Retorna o Header do arquivo re retorno
+     *
+     * @return IHeaderArquivo
+     */
+    public function getHeader()
+    {
+        return $this->header;
+    }
+
+    /**
      * Retorna o digito de auto conferencia da conta.
      *
      * @return string
@@ -132,7 +144,17 @@ class Arquivo implements \Cnab\Retorno\IArquivo
      */
     public function getCodigoBanco()
     {
-        return $this->header->codigo_banco;
+        return $this->codigo_banco;
+    }
+
+    /**
+     * Retorna o Código da Remessa ou Retorno
+     *
+     * @return string
+     */
+    public function getCodigoRemessaRetorno()
+    {
+        return $this->header->codigo_remessa_retorno;
     }
 
     /**

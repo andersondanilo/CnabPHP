@@ -20,9 +20,13 @@ class Identifier
 
         $lines = \explode("\n", $contents);
 
+
+
         if (\count($lines) < 2) {
             return;
         }
+
+
 
         $length = 0;
         foreach ($lines as $line) {
@@ -36,6 +40,8 @@ class Identifier
         } else {
             return;
         }
+
+
 
         $layout_versao = null;
 
@@ -54,7 +60,9 @@ class Identifier
             $codigo_tipo = \substr($lines[0],  142, 1);
             $tipo = null;
 
-            // Pega a Versao do Layout da CEF 
+
+
+            // Pega a Versao do Layout da CEF
             if (\Cnab\Banco::CEF == $codigo_banco) {
                 $layout_versao = \substr($lines[0], 163, 3);
 
@@ -71,6 +79,12 @@ class Identifier
                 $tipo = 'remessa';
             } elseif (\strtoupper($codigo_tipo) == '2') {
                 $tipo = 'retorno';
+            } elseif (\strtoupper($codigo_tipo) == '3') {
+                $tipo = 'remessa_processada';
+            } elseif (\strtoupper($codigo_tipo) == '4') {
+                $tipo = 'remessa_processada_parcial';
+            } elseif (\strtoupper($codigo_tipo) == '5') {
+                $tipo = 'remessa_rejeitada';
             }
         } else {
             return;

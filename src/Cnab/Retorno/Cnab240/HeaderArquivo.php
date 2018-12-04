@@ -2,8 +2,11 @@
 
 namespace Cnab\Retorno\Cnab240;
 
-class HeaderArquivo extends \Cnab\Format\Linha
+use Cnab\Retorno\IHeaderArquivo;
+
+class HeaderArquivo extends \Cnab\Format\Linha implements IHeaderArquivo
 {
+
     public function __construct(\Cnab\Retorno\IArquivo $arquivo)
     {
         $yamlLoad = new \Cnab\Format\YamlLoad($arquivo->codigo_banco, $arquivo->layoutVersao);
@@ -36,4 +39,19 @@ class HeaderArquivo extends \Cnab\Format\Linha
             return;
         }
     }
+
+    public function getCodigoRetorno()
+    {
+        if ($this->existField('codigo_remessa_retorno')) {
+            return $this->codigo_remessa_retorno;
+        } else {
+            return;
+        }
+    }
+
+    public function getCodigoBanco()
+    {
+        return $this->codigo_banco;
+    }
+
 }

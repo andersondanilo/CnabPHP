@@ -2,6 +2,7 @@
 
 namespace Cnab\Retorno\Cnab400;
 
+use Cnab\Retorno\IHeaderArquivo;
 use Cnab\Retorno\Linha;
 
 class Arquivo implements \Cnab\Retorno\IArquivo
@@ -78,6 +79,16 @@ class Arquivo implements \Cnab\Retorno\IArquivo
     }
 
     /**
+     * Retorna o Header do arquivo re retorno
+     *
+     * @return IHeaderArquivo
+     */
+    public function getHeader()
+    {
+        return $this->header;
+    }
+
+    /**
      * Retorna o numero da conta.
      *
      * @return string
@@ -114,7 +125,7 @@ class Arquivo implements \Cnab\Retorno\IArquivo
      */
     public function getCodigoBanco()
     {
-        return $this->header->codigo_do_banco;
+        return $this->codigo_banco;
     }
 
     /**
