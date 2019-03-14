@@ -88,12 +88,19 @@ interface IDetalhe
      */
     public function getAgencia();
 
-    /** 
+    /**
      * Retorna o nosso número do boleto (sem o digito).
      *
      * @return string
      */
     public function getNossoNumero();
+
+    /**
+     * Retorna o nosso número do boleto (sem o digito).
+     *
+     * @return string
+     */
+    public function getNomeDoSacado();
 
     /**
      * Retorna o objeto DateTime da data de vencimento do boleto.
@@ -159,7 +166,7 @@ interface IDetalhe
     public function isBaixaRejeitada();
 
     /**
-     * Retorna o código de liquidação, normalmente usado para 
+     * Retorna o código de liquidação, normalmente usado para
      * saber onde o cliente efetuou o pagamento.
      *
      * @return string
@@ -167,7 +174,7 @@ interface IDetalhe
     public function getCodigoLiquidacao();
 
     /**
-     * Retorna a descrição do código de liquidação, normalmente usado para 
+     * Retorna a descrição do código de liquidação, normalmente usado para
      * saber onde o cliente efetuou o pagamento.
      *
      * @return string
