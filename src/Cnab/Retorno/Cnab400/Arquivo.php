@@ -114,7 +114,7 @@ class Arquivo implements \Cnab\Retorno\IArquivo
      */
     public function getCodigoBanco()
     {
-        return $this->header->codigo_do_banco;
+        return $this->header->codigo_banco;
     }
 
     /**
