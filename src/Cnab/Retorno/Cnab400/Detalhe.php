@@ -152,6 +152,16 @@ class Detalhe extends \Cnab\Format\Linha implements \Cnab\Retorno\IDetalhe
         return trim($this->numero_do_documento);
     }
 
+    /**
+     * Retorna o controle do participante
+     *
+     * @return string
+     */
+    public function getControleParticipante()
+    {
+        return $this->controle_participante;
+    }
+
     /** 
      * Retorna o nosso número do boleto (sem o digito).
      *
