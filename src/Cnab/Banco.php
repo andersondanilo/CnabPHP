@@ -9,6 +9,7 @@ class Banco
     const CEF = 104;
     const BRADESCO = 237;
     const ITAU = 341;
+    const UNICRED = 136;
 
     public static function getBanco($codigo)
     {
@@ -36,6 +37,11 @@ class Banco
             return array(
                 'codigo_do_banco' => self::BRADESCO,
                 'nome_do_banco' => 'BRADESCO',
+            );
+        } elseif ($codigo == self::UNICRED) {
+            return array(
+                'codigo_do_banco' => self::UNICRED,
+                'nome_do_banco' => 'UNICRED',
             );
         } else {
             return false;
